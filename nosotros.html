@@ -369,6 +369,49 @@ nav a:hover::after, nav a.active::after { transform: scaleX(1); }
   color: var(--gray-400); text-align: center; margin-bottom: 1rem;
 }
 
+/* ===== ORG TREE ===== */
+.org-tree{display:flex;flex-direction:column;align-items:center;max-width:820px;margin:0 auto;padding:.5rem 0}
+.ot-node{background:var(--green-dark);border:1.5px solid rgba(108,184,39,.4);border-radius:8px;padding:.6rem 1rem;text-align:center;font-family:'Sora',sans-serif;font-size:.8rem;font-weight:600;color:#fff;cursor:pointer;line-height:1.35;transition:all .25s var(--ease);min-width:110px;display:block}
+.ot-node:hover{background:var(--green-mid);border-color:var(--green);transform:translateY(-2px);box-shadow:0 5px 16px rgba(108,184,39,.25)}
+.ot-node.ot-top{background:linear-gradient(135deg,#1A3A08,#2B5C12);border-color:var(--green);font-size:.9rem;min-width:170px;padding:.75rem 1.3rem}
+.ot-node.ot-orange{background:linear-gradient(135deg,var(--orange),var(--orange-hover));border-color:var(--orange)}
+.ot-node.ot-ghost{background:rgba(108,184,39,.07);border-style:dashed}
+.ot-row{display:flex;justify-content:center;align-items:flex-start;gap:1rem;width:100%}
+.ot-v{width:2px;height:28px;background:rgba(108,184,39,.32)}
+.ot-b3{position:relative;width:100%;height:28px}
+.ot-b3::before{content:'';position:absolute;top:0;left:17%;right:17%;height:2px;background:rgba(108,184,39,.32)}
+.ot-b3 .d{position:absolute;top:0;width:2px;height:100%;background:rgba(108,184,39,.32)}
+.ot-b3 .d.l{left:17%}.ot-b3 .d.c{left:50%;transform:translateX(-50%)}.ot-b3 .d.r{right:17%}
+.ot-b4{position:relative;width:100%;height:28px}
+.ot-b4::before{content:'';position:absolute;top:0;left:8%;right:8%;height:2px;background:rgba(108,184,39,.32)}
+.ot-b4 .d{position:absolute;top:0;width:2px;height:100%;background:rgba(108,184,39,.32)}
+.ot-b4 .d.a{left:8%}.ot-b4 .d.b{left:35%}.ot-b4 .d.c{right:35%}.ot-b4 .d.d{right:8%}
+.ot-lateral{display:flex;justify-content:center;align-items:stretch;gap:0;width:100%}
+.ot-lateral-mid{flex:0 0 140px;position:relative;display:flex;align-items:center;justify-content:center}
+.ot-lateral-mid .lv{position:absolute;left:50%;transform:translateX(-50%);width:2px;height:100%;background:rgba(108,184,39,.32)}
+.ot-lateral-mid .lh{width:100%;height:0;border-top:2px dashed rgba(108,184,39,.38)}
+.modal-ov{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .28s var(--ease)}
+.modal-ov.open{opacity:1;pointer-events:auto}
+.modal-box{background:#fff;border-radius:var(--radius-lg);max-width:600px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.4);transform:translateY(22px);transition:transform .3s var(--ease)}
+.modal-ov.open .modal-box{transform:translateY(0)}
+.modal-hd{background:linear-gradient(135deg,var(--green-dark),var(--green-mid));padding:1.3rem 1.6rem;border-radius:var(--radius-lg) var(--radius-lg) 0 0;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.modal-title{font-family:'Sora',sans-serif;font-size:1rem;font-weight:700;color:#fff;line-height:1.3}
+.modal-close{width:32px;height:32px;background:rgba(255,255,255,.12);border:none;border-radius:50%;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.modal-close:hover{background:rgba(255,255,255,.22)}
+.modal-bd{padding:1.6rem}
+.modal-img{width:100%;border-radius:var(--radius);margin-bottom:1.3rem;object-fit:cover;max-height:240px}
+.modal-text{font-size:.9rem;color:var(--gray-600);line-height:1.72}
+.modal-text p{margin-bottom:.85rem}.modal-text p:last-child{margin-bottom:0}
+.modal-text ul{padding-left:1.2rem;display:flex;flex-direction:column;gap:.35rem;margin-top:.5rem}
+.modal-text li{list-style:disc;font-size:.86rem}
+@media(max-width:640px){
+  .ot-row{gap:.6rem}
+  .ot-node{font-size:.72rem;padding:.5rem .65rem;min-width:80px}
+  .ot-lateral-mid{flex:0 0 70px}
+  .ot-b3::before{left:10%;right:10%}.ot-b3 .d.l{left:10%}.ot-b3 .d.r{right:10%}
+  .ot-b4::before{left:5%;right:5%}.ot-b4 .d.a{left:5%}.ot-b4 .d.b{left:32%}.ot-b4 .d.c{right:32%}.ot-b4 .d.d{right:5%}
+}
+
 /* ===== FOOTER ===== */
 footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4rem 0 2rem; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 2.5rem; margin-bottom: 3rem; }
@@ -643,130 +686,67 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <p>Nuestra organización se rige bajo los principios del cooperativismo con una estructura democrática y participativa donde cada asociado tiene voz y voto.</p>
     </div>
 
-    <div class="org-full">
+    <div class="org-tree fade-up">
 
-      <!-- Nivel 1: Asamblea -->
-      <div style="text-align:center;" class="fade-up">
-        <div class="level-label">Máxima autoridad</div>
-        <div style="display:flex;justify-content:center;">
-          <div class="org-node org-node--top">
+      <!-- 1. Asamblea General -->
+      <div class="ot-row">
+        <button class="ot-node ot-top" data-modal="asamblea">
             <div class="org-node-icon">
-              <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </div>
-            <div class="org-node-title">Asamblea General de Delegados</div>
-            <div class="org-node-detail">Máxima autoridad de la cooperativa.<br>Decisiones por mayoría simple.</div>
-          </div>
-        </div>
+Asamblea General</button>
       </div>
 
-      <div class="org-connector fade-up" style="transition-delay:.1s"></div>
+      <div class="ot-v"></div>
 
-      <!-- Nivel 2: Consejo + Comité de Vigilancia -->
-      <div class="fade-up" style="transition-delay:.15s">
-        <div class="level-label">Órganos directivos</div>
-        <div class="org-row">
-          <div class="org-node org-node--primary">
-            <div class="org-node-icon">
-              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-              </svg>
-            </div>
-            <div class="org-node-title">Consejo de Administración</div>
-            <div class="org-node-detail">5 miembros propietarios + 2 suplentes<br>Período: 2 años<br>Sesiones ordinarias: 2 por mes</div>
-          </div>
-          <div class="org-node org-node--primary">
-            <div class="org-node-icon">
-              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-            </div>
-            <div class="org-node-title">Comité de Vigilancia</div>
-            <div class="org-node-detail">3 miembros electos + 2 suplentes<br>Período: 2 años<br>Revisión contable bimestral</div>
-          </div>
-        </div>
+      <!-- 2. Comisión Electoral -->
+      <div class="ot-row">
+        <button class="ot-node" data-modal="electoral">Comisión Electoral</button>
       </div>
 
-      <div class="org-connector fade-up" style="transition-delay:.2s"></div>
+      <!-- Branch 1→3 -->
+      <div class="ot-b3"><span class="d l"></span><span class="d c"></span><span class="d r"></span></div>
 
-      <!-- Nivel 3: Comités y Gerencia -->
-      <div class="fade-up" style="transition-delay:.25s">
-        <div class="level-label">Comités y gerencia</div>
-        <div class="org-row">
-          <div class="org-node org-node--secondary">
-            <div class="org-node-title">Comité de Educación y Bienestar Social</div>
-            <div class="org-node-detail">Mín. 3 miembros<br>Programas educativos y capacitación</div>
-          </div>
-          <div class="org-node org-node--gerencia">
-            <div class="org-node-icon">
-              <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/>
-              </svg>
-            </div>
-            <div class="org-node-title">Gerencia</div>
-            <div class="org-node-detail">Nombrada por el Consejo<br>Ejecuta acuerdos y gestiona operaciones</div>
-          </div>
-          <div class="org-node org-node--secondary">
-            <div class="org-node-title">Comisión de Crédito</div>
-            <div class="org-node-detail">Procesa solicitudes de crédito<br>Sigue reglamento crediticio</div>
-          </div>
-        </div>
+      <!-- 3. Comité Vigilancia | Consejo Admin | Comité Educación -->
+      <div class="ot-row">
+        <button class="ot-node" data-modal="vigilancia">Comité de<br>Vigilancia</button>
+        <button class="ot-node ot-top" data-modal="consejo">Consejo de<br>Administración</button>
+        <button class="ot-node" data-modal="educacion">Comité de Educación<br>y Bienestar Social</button>
       </div>
 
-      <div class="org-connector fade-up" style="transition-delay:.3s"></div>
+      <div class="ot-v"></div>
 
-      <!-- Nivel 4: Áreas especializadas -->
-      <div class="fade-up" style="transition-delay:.35s">
-        <div class="level-label">Áreas especializadas</div>
-        <div class="areas-grid" style="max-width:600px;grid-template-columns:repeat(2,1fr);">
-          <div class="area-card">
-            <div class="area-icon">
-              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-              </svg>
-            </div>
-            <div>
-              <div class="area-name">Contabilidad y Finanzas</div>
-              <div class="area-desc">Gestión financiera y registros contables</div>
-            </div>
-          </div>
-          <div class="area-card">
-            <div class="area-icon">
-              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-              </svg>
-            </div>
-            <div>
-              <div class="area-name">Mercadeo y Promoción</div>
-              <div class="area-desc">Comunicación con asociados y divulgación</div>
-            </div>
-          </div>
-          <div class="area-card">
-            <div class="area-icon">
-              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-              </svg>
-            </div>
-            <div>
-              <div class="area-name">Atención al Asociado</div>
-              <div class="area-desc">Orientación y servicios directos</div>
-            </div>
-          </div>
-          <div class="area-card">
-            <div class="area-icon">
-              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-              </svg>
-            </div>
-            <div>
-              <div class="area-name">CENECOOP</div>
-              <div class="area-desc">Capacitación y educación cooperativa</div>
-            </div>
-          </div>
+      <!-- 4. Auditoría ←dashed→ Comisión Cobro (con línea central que pasa) -->
+      <div class="ot-lateral">
+        <button class="ot-node ot-ghost" data-modal="auditoria">Auditoría<br>Externa</button>
+        <div class="ot-lateral-mid">
+          <div class="lv"></div>
+          <div class="lh"></div>
         </div>
+        <button class="ot-node" data-modal="cobro">Comisión de Cobro<br>Administrativo</button>
+      </div>
+
+      <div class="ot-v"></div>
+
+      <!-- 5. Gerencia -->
+      <div class="ot-row">
+        <button class="ot-node ot-orange" data-modal="gerencia">Gerencia</button>
+      </div>
+
+      <div class="ot-v"></div>
+
+      <!-- 6. Coordinación Administrativa -->
+      <div class="ot-row">
+        <button class="ot-node" data-modal="coordinacion">Coordinación<br>Administrativa</button>
+      </div>
+
+      <!-- Branch 1→4 -->
+      <div class="ot-b4"><span class="d a"></span><span class="d b"></span><span class="d c"></span><span class="d d"></span></div>
+
+      <!-- 7. Leaf nodes -->
+      <div class="ot-row">
+        <button class="ot-node" data-modal="contabilidad">Contabilidad</button>
+        <button class="ot-node" data-modal="credito">Crédito</button>
+        <button class="ot-node" data-modal="plataforma">Plataforma de<br>servicios</button>
+        <button class="ot-node" data-modal="promocion">Promoción</button>
       </div>
 
     </div>
@@ -802,7 +782,7 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <div class="footer-col">
         <h4>Contacto</h4>
         <ul>
-          <li><a href="https://wa.me/50622575226?text=Hola+Coopesipe+R.L.%2C+me+gustar%C3%ADa+obtener+informaci%C3%B3n+sobre+sus+servicios." class="footer-wa-link" target="_blank" rel="noopener noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> 2257-5226</a></li>
+          <li><a href="tel:22575226" style="font-size:.82rem;color:rgba(255,255,255,.45);">2257-5226</a></li>
           <li><a href="https://wa.me/50662690309?text=Hola+Coopesipe+R.L.%2C+me+gustar%C3%ADa+obtener+informaci%C3%B3n+sobre+sus+servicios." class="footer-wa-link" target="_blank" rel="noopener noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> 6269-0309</a></li>
           <li><a href="mailto:coopesipe@coopesipe.fi.cr">coopesipe@coopesipe.fi.cr</a></li>
           <li><a href="index.html#contacto">Formulario</a></li>
@@ -827,7 +807,119 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
   </div>
 </footer>
 
+<!-- MODAL -->
+<div class="modal-ov" id="modal-ov" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <span class="modal-title" id="modal-title"></span>
+      <button class="modal-close" id="modal-close" aria-label="Cerrar">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-bd">
+      <img id="modal-img" class="modal-img" src="" alt="">
+      <div class="modal-text" id="modal-text"></div>
+    </div>
+  </div>
+</div>
+
 <script>
+// ===== ORG MODAL =====
+const BASE = 'https://www.coopesipe.fi.cr';
+const modalData = {
+  asamblea: {
+    title: 'Asamblea General de Delegados',
+    img: BASE + '/images/AsambleaDelegados.jpeg',
+    html: '<p>La Asamblea General, formada por los delegados legalmente convocados y reunidos en pleno goce de sus derechos, es la <strong>autoridad máxima</strong> de la Cooperativa.</p><p>Funciones principales:</p><ul><li>Aprobar presupuestos anuales de ingresos y gastos</li><li>Nombrar a los miembros del Consejo de Administración y demás comités</li><li>Distribuir excedentes entre los asociados</li><li>Resolver expulsiones y conocer apelaciones</li><li>Aprobar y conocer los estados financieros anuales</li></ul>'
+  },
+  electoral: {
+    title: 'Comisión Electoral',
+    img: null,
+    html: '<p>La Comisión Electoral es el órgano encargado de organizar, dirigir y supervisar todos los procesos electorales internos de la cooperativa.</p><ul><li>Organizar las elecciones de delegados y representantes</li><li>Elaborar y mantener el padrón electoral de asociados</li><li>Garantizar la transparencia y legitimidad de los procesos</li><li>Proclamar oficialmente los resultados de las votaciones</li><li>Resolver impugnaciones relacionadas con el proceso electoral</li></ul>'
+  },
+  vigilancia: {
+    title: 'Comité de Vigilancia',
+    img: BASE + '/images/Comite_Vigilancia.png',
+    html: '<p>Compuesto por <strong>3 dirigentes electos más 2 suplentes</strong> por un período de 2 años. Se encarga del examen y fiscalización de todas las cuentas y transacciones de la Cooperativa.</p><ul><li>Verificar balances y estados financieros</li><li>Revisar la contabilidad cada dos meses</li><li>Supervisar el cumplimiento de leyes y del estatuto</li><li>Informar a la Asamblea General sobre sus hallazgos</li><li>Atender denuncias de los asociados</li></ul>'
+  },
+  consejo: {
+    title: 'Consejo de Administración',
+    img: BASE + '/images/Consejo_Administracion.png',
+    html: '<p>Compuesto por <strong>5 miembros propietarios más 2 suplentes</strong> elegidos por 2 años. Sesiona en forma ordinaria dos veces por mes.</p><p>Funciones:</p><ul><li>Establecer las políticas crediticias y de ahorro</li><li>Nombrar y remover al Gerente (con voto mínimo de 4 miembros)</li><li>Enviar informes periódicos a INFOCOOP y SUGEF</li><li>Aprobar el presupuesto y plan anual operativo</li><li>Supervisar la ejecución de acuerdos institucionales</li></ul>'
+  },
+  educacion: {
+    title: 'Comité de Educación y Bienestar Social',
+    img: BASE + '/images/Comite_Educacion.png',
+    html: '<p>Conformado por un <strong>mínimo de 3 dirigentes</strong> por período de 2 años (2 en años pares, 1 en años impares). Coordina los programas educativos y de bienestar para los asociados.</p><ul><li>Coordinar programas de capacitación cooperativa</li><li>Supervisar el uso correcto de la Reserva para Educación</li><li>Gestionar actividades de bienestar y solidaridad</li><li>Promover la cultura cooperativa entre los asociados</li><li>Organizar actividades formativas con CENECOOP</li></ul>'
+  },
+  auditoria: {
+    title: 'Auditoría Externa',
+    img: null,
+    html: '<p>La Auditoría Externa es una entidad independiente contratada para revisar y dictaminar sobre los estados financieros y el cumplimiento normativo de la cooperativa.</p><ul><li>Revisar y dictaminar los estados financieros anuales</li><li>Verificar el cumplimiento de normativas de SUGEF e INFOCOOP</li><li>Emitir informes independientes al Consejo de Administración</li><li>Garantizar la transparencia e integridad financiera</li><li>Recomendar mejoras en controles internos</li></ul>'
+  },
+  cobro: {
+    title: 'Comisión de Cobro Administrativo',
+    img: null,
+    html: '<p>La Comisión de Cobro Administrativo gestiona los procesos de recuperación de créditos en mora y coordina la atención a asociados con dificultades de pago.</p><ul><li>Gestionar la cartera de créditos en situación de mora</li><li>Negociar y establecer planes de arreglo de pago</li><li>Coordinar acciones de cobro conforme al reglamento</li><li>Reportar periódicamente al Consejo de Administración</li><li>Velar por la salud financiera de la cartera crediticia</li></ul>'
+  },
+  gerencia: {
+    title: 'Gerencia',
+    img: null,
+    html: '<p>La Gerencia es nombrada y removida por el Consejo de Administración con el voto mínimo de 4 miembros propietarios. Es el órgano ejecutivo de la cooperativa.</p><p>Principales deberes:</p><ul><li>Ejecutar los acuerdos del Consejo de Administración</li><li>Presentar informes mensuales de operaciones y finanzas</li><li>Supervisar los registros contables y el control interno</li><li>Firmar cheques y documentos autorizados por el Consejo</li><li>Gestionar el talento humano de la organización</li></ul>'
+  },
+  coordinacion: {
+    title: 'Coordinación Administrativa',
+    img: null,
+    html: '<p>La Coordinación Administrativa apoya a la Gerencia en la gestión operativa diaria de la cooperativa y articula el trabajo de todos los departamentos funcionales.</p><ul><li>Supervisar las operaciones administrativas cotidianas</li><li>Coordinar la comunicación entre departamentos</li><li>Gestionar procesos y procedimientos internos</li><li>Apoyar la implementación de políticas y directrices</li><li>Velar por el cumplimiento de metas operativas</li></ul>'
+  },
+  contabilidad: {
+    title: 'Contabilidad',
+    img: BASE + '/images/contabilidad.png',
+    html: '<p>El departamento de Contabilidad mantiene al día todos los registros financieros de la cooperativa y garantiza la exactitud de la información.</p><ul><li>Mantener los libros contables al día conforme a normativa</li><li>Realizar conciliaciones bancarias y verificar balances</li><li>Analizar solicitudes de crédito en el aspecto financiero</li><li>Controlar y reportar la cartera de morosidad</li><li>Preparar estados financieros mensuales y anuales</li></ul>'
+  },
+  credito: {
+    title: 'Crédito',
+    img: null,
+    html: '<p>El departamento de Crédito tramita y gestiona todas las solicitudes de crédito de los asociados conforme al Reglamento de Crédito vigente aprobado por el Consejo.</p><ul><li>Recibir, revisar y evaluar solicitudes de crédito</li><li>Verificar la capacidad de pago y referencias del asociado</li><li>Procesar los desembolsos aprobados por la Comisión</li><li>Dar seguimiento a los créditos vigentes y vencimientos</li><li>Atender consultas sobre saldos, tasas y condiciones</li></ul>'
+  },
+  plataforma: {
+    title: 'Plataforma de Servicios',
+    img: null,
+    html: '<p>La Plataforma de Servicios es el punto de contacto directo con los asociados para la atención de consultas, trámites y todas las operaciones de la cooperativa.</p><ul><li>Atender a los asociados en las instalaciones de la cooperativa</li><li>Procesar transacciones de ahorro, depósitos y retiros</li><li>Recibir y tramitar documentación para todos los servicios</li><li>Brindar información actualizada sobre productos disponibles</li><li>Gestionar la apertura y cierre de cuentas de asociados</li></ul>'
+  },
+  promocion: {
+    title: 'Promoción',
+    img: BASE + '/images/mercadeo.png',
+    html: '<p>El área de Promoción divulga los productos y servicios de Coopesipe R.L. entre los asociados actuales y potenciales del Ministerio de Justicia y Paz.</p><ul><li>Divulgar y promover productos de ahorro y crédito</li><li>Visitar centros penitenciarios y oficinas del Ministerio</li><li>Ofrecer servicios a domicilio en los centros de trabajo</li><li>Gestionar la comunicación institucional y redes sociales</li><li>Desarrollar campañas de captación de nuevos asociados</li></ul>'
+  }
+};
+
+const modalOv = document.getElementById('modal-ov');
+const modalTitle = document.getElementById('modal-title');
+const modalImg   = document.getElementById('modal-img');
+const modalText  = document.getElementById('modal-text');
+
+function openModal(key) {
+  const d = modalData[key]; if (!d) return;
+  modalTitle.textContent = d.title;
+  if (d.img) { modalImg.src = d.img; modalImg.style.display = 'block'; }
+  else { modalImg.style.display = 'none'; }
+  modalText.innerHTML = d.html;
+  modalOv.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  modalOv.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.ot-node[data-modal]').forEach(btn => {
+  btn.addEventListener('click', () => openModal(btn.dataset.modal));
+});
+document.getElementById('modal-close').addEventListener('click', closeModal);
+modalOv.addEventListener('click', e => { if (e.target === modalOv) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
 // Header scroll
 window.addEventListener('scroll', () => {
   document.getElementById('header').classList.toggle('scrolled', scrollY > 40);
