@@ -1,0 +1,13 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+*.swp
+*.swo
+
+# Agentes / Claude
+.agents/
+skills-lock.json

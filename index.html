@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coopesipe R.L. — Cooperativa de Ahorro y Crédito</title>
+<link rel="icon" type="image/png" href="icono.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--gray-800); background: var(--white); overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; }
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --orange:        #E84E0F;
+  --orange-hover:  #C83E0A;
+  --orange-pale:   #FFF2EC;
+  --green:         #6CB827;
+  --green-hover:   #5AA020;
+  --green-dark:    #1A3A08;
+  --green-mid:     #2B5C12;
+  --green-deep:    #0B1E05;
+  --green-pale:    #F2FAE8;
+  --white:         #FFFFFF;
+  --off-white:     #F8FAF5;
+  --gray-100:      #EFF2EC;
+  --gray-400:      #9BA89A;
+  --gray-600:      #576155;
+  --gray-800:      #1C291A;
+  --shadow-sm:     0 2px 8px rgba(0,0,0,0.07);
+  --shadow-md:     0 8px 32px rgba(0,0,0,0.11);
+  --shadow-lg:     0 24px 64px rgba(0,0,0,0.15);
+  --radius:        12px;
+  --radius-lg:     20px;
+  --ease:          cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.2; font-weight: 700; }
+
+/* ===== UTILITIES ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.85rem;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+.tag--green  { background: var(--green-pale); color: var(--green-mid); }
+.tag--orange { background: var(--orange-pale); color: var(--orange); }
+.tag--ghost  { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.78rem 1.75rem;
+  border-radius: 8px;
+  font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.88rem;
+  cursor: pointer; transition: all 0.28s var(--ease);
+  border: 2px solid transparent;
+}
+.btn-orange { background: var(--orange); color: #fff; }
+.btn-orange:hover { background: var(--orange-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,78,15,0.35); }
+.btn-green  { background: var(--green);  color: #fff; }
+.btn-green:hover  { background: var(--green-hover);  transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,184,39,0.35); }
+.btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,0.45); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.85); }
+
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== HEADER ===== */
+#header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 1rem 0;
+  transition: all 0.3s var(--ease);
+}
+#header.scrolled {
+  background: rgba(11, 30, 5, 0.96);
+  backdrop-filter: blur(14px);
+  padding: 0.65rem 0;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.28);
+}
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+
+.header-logo { display: flex; align-items: center; gap: 0.7rem; flex-shrink: 0; }
+.header-logo img { height: 40px; width: auto; }
+.header-logo-name {
+  font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.05rem;
+  color: #fff; line-height: 1.1;
+  display: flex; flex-direction: column;
+}
+.header-logo-name span { font-size: 0.6rem; font-weight: 400; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+
+nav { display: flex; align-items: center; }
+nav a {
+  color: rgba(255,255,255,0.75); font-size: 0.85rem; font-weight: 500;
+  padding: 0.45rem 0.9rem; border-radius: 6px;
+  transition: color 0.25s var(--ease);
+  position: relative;
+}
+nav a::after {
+  content: ''; position: absolute; bottom: 2px; left: 0.9rem; right: 0.9rem;
+  height: 1.5px; background: var(--green);
+  transform: scaleX(0); transition: transform 0.25s var(--ease);
+  transform-origin: left;
+}
+nav a:hover { color: #fff; }
+nav a:hover::after { transform: scaleX(1); }
+
+.header-actions { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+
+.btn-ingresar {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--orange); color: #fff;
+  padding: 0.58rem 1.25rem;
+  border-radius: 7px;
+  font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.85rem;
+  border: none; cursor: pointer;
+  transition: all 0.28s var(--ease);
+}
+.btn-ingresar:hover { background: var(--orange-hover); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(232,78,15,0.38); }
+
+.menu-toggle {
+  display: none; background: none; border: none; cursor: pointer;
+  padding: 0.4rem; flex-direction: column; gap: 5px; z-index: 1001;
+}
+.menu-toggle span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s var(--ease); }
+
+/* ===== HERO ===== */
+#hero {
+  min-height: 100vh;
+  background: var(--green-deep);
+  position: relative; display: flex; align-items: center; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 75% 45%, rgba(108,184,39,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 70% at 90% 15%, rgba(232,78,15,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(43,92,18,0.4) 0%, transparent 60%),
+    linear-gradient(135deg, #0B1E05 0%, #0F2507 50%, #091A04 100%);
+}
+
+/* Triangle decorative motif from logo */
+.hero-deco { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.tri { position: absolute; width: 0; height: 0; }
+.tri-a {
+  border-left: 220px solid transparent;
+  border-bottom: 380px solid var(--orange);
+  opacity: 0.055; right: 3%; top: 8%;
+  animation: drift 9s ease-in-out infinite;
+}
+.tri-b {
+  border-left: 130px solid transparent;
+  border-bottom: 225px solid var(--green);
+  opacity: 0.045; right: 20%; top: 58%;
+  animation: drift 11s ease-in-out infinite reverse;
+}
+.tri-c {
+  border-left: 70px solid transparent;
+  border-bottom: 121px solid var(--orange);
+  opacity: 0.035; left: 2%; bottom: 12%;
+  animation: drift 13s ease-in-out infinite;
+}
+.tri-d {
+  border-left: 40px solid transparent;
+  border-bottom: 70px solid var(--green);
+  opacity: 0.04; left: 30%; top: 15%;
+  animation: drift 15s ease-in-out infinite reverse;
+}
+@keyframes drift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33%       { transform: translateY(-18px) rotate(4deg); }
+  66%       { transform: translateY(10px) rotate(-3deg); }
+}
+
+.hero-inner {
+  position: relative; z-index: 1;
+  padding: 8rem 0 5rem;
+  display: grid; grid-template-columns: 1.05fr 0.95fr;
+  gap: 4rem; align-items: center;
+}
+
+/* Left: text */
+.hero-headline {
+  font-size: clamp(2.3rem, 4.2vw, 3.75rem);
+  font-weight: 800; color: #fff; line-height: 1.1;
+  margin-bottom: 1.4rem;
+}
+.hero-headline em { font-style: normal; color: var(--green); }
+.hero-sub {
+  font-size: 1rem; color: rgba(255,255,255,0.62); line-height: 1.72;
+  margin-bottom: 2.4rem; max-width: 460px; font-weight: 300;
+}
+.hero-ctas { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-bottom: 2.8rem; }
+
+.hero-metrics {
+  display: flex; gap: 2rem;
+  padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.09);
+}
+.hero-metric-val {
+  font-family: 'Sora', sans-serif; font-size: 1.75rem; font-weight: 800;
+  color: var(--green);
+}
+.hero-metric-lbl { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 0.15rem; }
+
+/* Right: product preview cards */
+.hero-cards { display: flex; flex-direction: column; gap: 1rem; }
+.hero-pcard {
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px; padding: 1.4rem 1.6rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s var(--ease);
+  display: flex; align-items: center; gap: 1.2rem;
+}
+.hero-pcard:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(108,184,39,0.3);
+  transform: translateX(6px);
+}
+.hero-pcard-icon {
+  width: 46px; height: 46px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.icon-orange { background: rgba(232,78,15,0.18); }
+.icon-green  { background: rgba(108,184,39,0.18); }
+.icon-teal   { background: rgba(56,189,168,0.18); }
+.hero-pcard-title { font-family: 'Sora', sans-serif; font-size: 0.92rem; font-weight: 700; color: #fff; margin-bottom: 0.35rem; }
+.hero-pcard-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.hero-tag {
+  font-size: 0.68rem; padding: 0.18rem 0.55rem;
+  border-radius: 4px; background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.55);
+}
+
+/* ===== STATS STRIP ===== */
+#stats {
+  background: linear-gradient(90deg, #E84E0F 0%, #C03A0C 100%);
+  padding: 2.2rem 0;
+}
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); }
+.stat-cell {
+  text-align: center; padding: 0.8rem 1.5rem;
+  border-right: 1px solid rgba(255,255,255,0.18);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-val {
+  font-family: 'Sora', sans-serif; font-size: 2.2rem; font-weight: 800;
+  color: #fff; line-height: 1;
+}
+.stat-lbl { font-size: 0.77rem; color: rgba(255,255,255,0.72); margin-top: 0.3rem; }
+
+/* ===== SECTION WRAPPER ===== */
+.section-hd { text-align: center; max-width: 580px; margin: 0 auto 3.5rem; }
+.section-title { font-size: clamp(1.75rem, 2.8vw, 2.4rem); color: var(--gray-800); margin-bottom: 0.9rem; }
+.section-desc  { font-size: 0.97rem; color: var(--gray-600); line-height: 1.72; }
+
+/* ===== PRODUCTS ===== */
+#productos { padding: 6rem 0; background: var(--white); }
+
+.products-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem; }
+
+.prod-card {
+  border-radius: var(--radius-lg); overflow: hidden;
+  border: 1px solid var(--gray-100);
+  transition: all 0.32s var(--ease); background: var(--white);
+}
+.prod-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
+
+.prod-top {
+  padding: 2rem; position: relative; overflow: hidden;
+}
+.prod-top-orange { background: linear-gradient(135deg, #E84E0F 0%, #C03A0C 100%); }
+.prod-top-green  { background: linear-gradient(135deg, #6CB827 0%, #52A01C 100%); }
+.prod-top-dark   { background: linear-gradient(135deg, #1A3A08 0%, #2B5C12 100%); }
+
+.prod-deco1 { position: absolute; right: -24px; bottom: -36px; width: 130px; height: 130px; border-radius: 50%; background: rgba(255,255,255,0.09); }
+.prod-deco2 { position: absolute; right: 36px; bottom: -56px; width: 90px; height: 90px; border-radius: 50%; background: rgba(255,255,255,0.06); }
+
+.prod-icon { width: 54px; height: 54px; background: rgba(255,255,255,0.18); border-radius: 13px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+.prod-name { font-size: 1.35rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
+.prod-sub  { font-size: 0.8rem; color: rgba(255,255,255,0.68); }
+
+.prod-body { padding: 1.6rem; }
+.prod-list { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.4rem; }
+.prod-list li {
+  display: flex; align-items: center; gap: 0.65rem;
+  font-size: 0.87rem; color: var(--gray-600);
+}
+.prod-list li::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.prod-card--orange .prod-list li::before { background: var(--orange); }
+.prod-card--green  .prod-list li::before { background: var(--green); }
+.prod-card--dark   .prod-list li::before { background: var(--green); }
+
+.prod-link {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.84rem;
+  transition: gap 0.25s var(--ease);
+}
+.prod-link:hover { gap: 0.85rem; }
+.prod-card--orange .prod-link { color: var(--orange); }
+.prod-card--green  .prod-link { color: var(--green-hover); }
+.prod-card--dark   .prod-link { color: var(--green); }
+
+/* ===== EXPANDABLE CARDS ===== */
+.prod-toggle {
+  background: none; border: none; cursor: pointer; padding: 0;
+  text-align: left; font-family: inherit; width: 100%;
+}
+.prod-toggle .tog-arrow { display: inline-block; transition: transform 0.32s var(--ease); flex-shrink: 0; }
+.prod-card.expanded .tog-arrow { transform: rotate(90deg); }
+.prod-card.expanded:hover { transform: none; box-shadow: var(--shadow-md); }
+
+.prod-expand {
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height 0.48s ease, opacity 0.32s ease, padding-top 0.28s ease;
+  padding-top: 0;
+}
+.prod-card.expanded .prod-expand { max-height: 1600px; opacity: 1; padding-top: 1.1rem; }
+.prod-expand-divider { height: 1px; background: rgba(0,0,0,0.08); margin-bottom: 1rem; }
+
+.prod-detail { display: flex; flex-direction: column; gap: 0.75rem; }
+.prod-detail-item {
+  padding: 0.85rem 0.95rem; background: var(--off-white);
+  border-radius: 8px; border-left: 3px solid var(--green);
+}
+.prod-card--orange .prod-detail-item { border-left-color: var(--orange); }
+
+.prod-detail-name {
+  font-family: 'Sora', sans-serif; font-size: 0.84rem; font-weight: 700;
+  color: var(--gray-800); margin-bottom: 0.18rem;
+}
+.prod-detail-badges { display: flex; flex-wrap: wrap; gap: 0.32rem; margin-bottom: 0.3rem; }
+.badge {
+  font-size: 0.66rem; padding: 0.12rem 0.46rem; border-radius: 4px;
+  background: rgba(0,0,0,0.07); color: var(--gray-600); font-weight: 600;
+}
+.prod-detail-desc { font-size: 0.79rem; color: var(--gray-600); line-height: 1.55; }
+
+/* ===== BIENESTAR ===== */
+#bienestar {
+  padding: 6rem 0;
+  background: var(--green-pale);
+  position: relative; overflow: hidden;
+}
+#bienestar::before {
+  content: ''; position: absolute; top: -70px; left: 0; right: 0; height: 140px;
+  background: var(--white);
+  clip-path: ellipse(55% 100% at 50% 0%);
+}
+.bienestar-layout { display: grid; grid-template-columns: 1fr 1.15fr; gap: 4rem; align-items: center; }
+.bienestar-text .section-hd { text-align: left; margin: 0 0 2rem; }
+.bienestar-text .section-title { text-align: left; }
+
+.bcard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.bcard {
+  background: var(--white); border-radius: var(--radius); padding: 1.4rem;
+  border: 1px solid rgba(108,184,39,0.1);
+  transition: all 0.3s var(--ease);
+}
+.bcard:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: rgba(108,184,39,0.28); }
+.bcard-icon {
+  width: 46px; height: 46px; background: var(--green-pale);
+  border-radius: 11px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.8rem;
+}
+.bcard-title { font-family: 'Sora', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.3rem; }
+.bcard-desc  { font-size: 0.79rem; color: var(--gray-600); line-height: 1.55; }
+
+/* ===== WHY ===== */
+#por-que {
+  padding: 6rem 0;
+  background: var(--green-dark);
+  position: relative; overflow: hidden;
+}
+#por-que::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 60% at 5% 50%, rgba(108,184,39,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 95% 10%, rgba(232,78,15,0.05) 0%, transparent 50%);
+}
+#por-que .section-title { color: #fff; }
+#por-que .section-desc  { color: rgba(255,255,255,0.55); }
+
+.why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.4rem; position: relative; z-index: 1; }
+.why-card {
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: var(--radius-lg); padding: 2.2rem;
+  transition: all 0.3s var(--ease); position: relative; overflow: hidden;
+}
+.why-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.why-card:nth-child(1)::before { background: linear-gradient(90deg, var(--green), transparent); }
+.why-card:nth-child(2)::before { background: linear-gradient(90deg, var(--orange), transparent); }
+.why-card:nth-child(3)::before { background: linear-gradient(90deg, var(--green), transparent); }
+.why-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-6px); }
+
+.why-num {
+  font-family: 'Sora', sans-serif; font-size: 3.2rem; font-weight: 800;
+  line-height: 1; margin-bottom: 1.1rem;
+}
+.why-card:nth-child(1) .why-num,
+.why-card:nth-child(3) .why-num {
+  background: linear-gradient(135deg, var(--green), rgba(108,184,39,0.35));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.why-card:nth-child(2) .why-num {
+  background: linear-gradient(135deg, var(--orange), rgba(232,78,15,0.35));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.why-title { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem; }
+.why-desc  { font-size: 0.86rem; color: rgba(255,255,255,0.5); line-height: 1.68; }
+
+/* ===== CONVENIOS ===== */
+#convenios { padding: 6rem 0; background: var(--white); }
+
+.convenios-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; }
+.conv-card {
+  background: var(--off-white); border-radius: var(--radius); padding: 1.6rem;
+  display: flex; align-items: flex-start; gap: 1.1rem;
+  border: 1px solid transparent;
+  transition: all 0.3s var(--ease);
+}
+.conv-card:hover { background: var(--white); border-color: var(--green); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.conv-icon {
+  width: 50px; height: 50px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-hover) 100%);
+  border-radius: 11px; display: flex; align-items: center; justify-content: center;
+}
+.conv-title { font-family: 'Sora', sans-serif; font-size: 0.93rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.35rem; }
+.conv-desc  { font-size: 0.8rem; color: var(--gray-600); line-height: 1.55; }
+
+/* ===== CONTACTO ===== */
+#contacto { padding: 6rem 0; background: var(--gray-100); }
+
+.contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3.5rem; align-items: start; }
+.contact-info h2 { font-size: 1.9rem; color: var(--gray-800); margin-bottom: 0.9rem; }
+.contact-info p  { font-size: 0.94rem; color: var(--gray-600); line-height: 1.7; margin-bottom: 2rem; }
+
+.cinfo-list { display: flex; flex-direction: column; gap: 1rem; }
+.cinfo-item { display: flex; align-items: center; gap: 1rem; }
+.cinfo-icon {
+  width: 44px; height: 44px; background: var(--white);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-sm); flex-shrink: 0;
+}
+.cinfo-lbl  { font-size: 0.7rem; color: var(--gray-400); font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; }
+.cinfo-val  { font-size: 0.9rem; color: var(--gray-800); font-weight: 500; margin-top: 0.1rem; }
+
+.contact-form {
+  background: var(--white); border-radius: var(--radius-lg);
+  padding: 2.4rem; box-shadow: var(--shadow-md);
+}
+.contact-form h3 { font-size: 1.25rem; color: var(--gray-800); margin-bottom: 1.5rem; }
+
+.form-row  { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { margin-bottom: 1.1rem; }
+.form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--gray-600); margin-bottom: 0.38rem; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; padding: 0.72rem 1rem;
+  border: 1.5px solid #E0E6DB; border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem; color: var(--gray-800);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  background: var(--white); outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(108,184,39,0.1); }
+.form-group textarea { resize: vertical; min-height: 95px; }
+
+/* ===== FOOTER ===== */
+footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4rem 0 2rem; }
+
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 2.5rem; margin-bottom: 3rem; }
+.footer-brand img { height: 80px; margin-bottom: 1.1rem; }
+.footer-brand p { font-size: 0.83rem; line-height: 1.7; color: rgba(255,255,255,0.42); max-width: 270px; }
+
+.footer-col h4 { font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700; color: #fff; margin-bottom: 1.2rem; }
+.footer-col ul { display: flex; flex-direction: column; gap: 0.55rem; }
+.footer-col ul li a { font-size: 0.82rem; color: rgba(255,255,255,0.45); transition: all 0.22s var(--ease); }
+.footer-col ul li a:hover { color: var(--green); padding-left: 4px; }
+
+.footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin-bottom: 1.5rem; }
+
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+.social-row { display: flex; gap: 0.6rem; }
+.social-btn {
+  width: 34px; height: 34px; border-radius: 7px;
+  background: rgba(255,255,255,0.07);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s var(--ease); cursor: pointer;
+}
+.social-btn:hover { background: var(--green); transform: translateY(-2px); }
+
+/* ===== WHATSAPP ===== */
+.wa-link {
+  display: inline-flex; align-items: center; gap: 0.42rem;
+  color: var(--gray-800); font-weight: 500; transition: color 0.22s var(--ease);
+}
+.wa-link:hover { color: #25D366; }
+.footer-wa-link {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.82rem; color: rgba(255,255,255,0.45); transition: color 0.22s var(--ease);
+}
+.footer-wa-link:hover { color: #25D366; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  nav a { font-size: 0.78rem; padding: 0.38rem 0.65rem; }
+}
+@media (max-width: 1024px) {
+  .products-grid   { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .stats-row       { grid-template-columns: repeat(2,1fr); }
+  .stat-cell:nth-child(2) { border-right: none; }
+  .footer-grid     { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 960px) {
+  nav a { font-size: 0.74rem; padding: 0.35rem 0.55rem; }
+}
+@media (max-width: 900px) {
+  .hero-inner      { grid-template-columns: 1fr; padding: 7rem 0 4rem; }
+  .hero-cards      { display: grid; grid-template-columns: repeat(3,1fr); }
+  .bienestar-layout { grid-template-columns: 1fr; }
+  .why-grid        { grid-template-columns: 1fr; }
+  .convenios-grid  { grid-template-columns: 1fr 1fr; }
+  .contact-layout  { grid-template-columns: 1fr; }
+}
+@media (max-width: 860px) {
+  nav {
+    display: none;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(11,30,5,0.98); backdrop-filter: blur(18px);
+    flex-direction: column; justify-content: center; align-items: center; gap: 0.3rem;
+    z-index: 999;
+  }
+  nav.open  { display: flex; }
+  nav a     { font-size: 1.1rem; padding: 0.9rem 2rem; width: 100%; text-align: center; }
+  nav a::after { display: none; }
+  .menu-toggle { display: flex; }
+}
+@media (max-width: 768px) {
+  .hero-cards  { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .products-grid { max-width: 100%; }
+  .convenios-grid { grid-template-columns: 1fr; }
+  .bcard-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 500px) {
+  .hero-ctas   { flex-direction: column; }
+  .hero-metrics { gap: 1.2rem; }
+  .stats-row   { grid-template-columns: 1fr 1fr; }
+  .form-row    { grid-template-columns: 1fr; }
+  .hero-title  { font-size: 2rem; }
+  .container   { padding: 0 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="header">
+  <div class="container">
+    <div class="header-inner">
+
+      <a href="#hero" class="header-logo">
+        <img src="icono.png" alt="Coopesipe">
+        <div class="header-logo-name">
+          Coopesipe R.L.
+          <span>Cooperativa de Ahorro y Crédito</span>
+        </div>
+      </a>
+
+      <nav id="main-nav">
+        <a href="#hero">Inicio</a>
+        <a href="#productos">Productos</a>
+        <a href="#bienestar">Bienestar</a>
+        <a href="#convenios">Convenios</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="galeria.html">Galería</a>
+        <a href="documentacion.html">Documentación</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#" class="btn-ingresar">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          Ingresar
+        </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-deco">
+    <div class="tri tri-a"></div>
+    <div class="tri tri-b"></div>
+    <div class="tri tri-c"></div>
+    <div class="tri tri-d"></div>
+  </div>
+  <div class="container">
+    <div class="hero-inner">
+
+      <!-- Text side -->
+      <div>
+        <span class="tag tag--ghost">Cooperativa de Ahorro y Crédito</span>
+        <h1 class="hero-headline">
+          Tu bienestar<br>financiero, en<br><em>manos confiables</em>
+        </h1>
+        <p class="hero-sub">
+          Somos la cooperativa al servicio de los empleados del Ministerio de Justicia y Paz de Costa Rica. Ahorá, creditá y protegé a tu familia con nosotros.
+        </p>
+        <div class="hero-ctas">
+          <a href="#productos" class="btn btn-green">
+            <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            Ver productos
+          </a>
+          <a href="#contacto" class="btn btn-outline">Ser asociado</a>
+        </div>
+        <div class="hero-metrics">
+          <div>
+            <div class="hero-metric-val">+290K</div>
+            <div class="hero-metric-lbl">Visitas registradas</div>
+          </div>
+          <div>
+            <div class="hero-metric-val">4</div>
+            <div class="hero-metric-lbl">Tipos de ahorro</div>
+          </div>
+          <div>
+            <div class="hero-metric-val">100%</div>
+            <div class="hero-metric-lbl">Cooperativa nacional</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards side -->
+      <div class="hero-cards">
+        <div class="hero-pcard">
+          <div class="hero-pcard-icon icon-green">
+            <svg width="22" height="22" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M7 10h2l2 5 2-10 2 5h2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="hero-pcard-title">Planes de Ahorro</div>
+            <div class="hero-pcard-tags">
+              <span class="hero-tag">Capital</span>
+              <span class="hero-tag">Navideño</span>
+              <span class="hero-tag">Vacaciones</span>
+              <span class="hero-tag">Marchamo</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-pcard">
+          <div class="hero-pcard-icon icon-orange">
+            <svg width="22" height="22" fill="none" stroke="#E84E0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+          </div>
+          <div>
+            <div class="hero-pcard-title">Líneas de Crédito</div>
+            <div class="hero-pcard-tags">
+              <span class="hero-tag">Especial</span>
+              <span class="hero-tag">Reestructuración</span>
+              <span class="hero-tag">Respaldo</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-pcard">
+          <div class="hero-pcard-icon icon-teal">
+            <svg width="22" height="22" fill="none" stroke="#38BDA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="hero-pcard-title">Pólizas de Seguro</div>
+            <div class="hero-pcard-tags">
+              <span class="hero-tag">Vida grupal</span>
+              <span class="hero-tag">Individual</span>
+              <span class="hero-tag">Defunción</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS STRIP ===== -->
+<section id="stats">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-cell fade-up">
+        <div class="stat-val">4+</div>
+        <div class="stat-lbl">Opciones de ahorro</div>
+      </div>
+      <div class="stat-cell fade-up" style="transition-delay:.1s">
+        <div class="stat-val">4</div>
+        <div class="stat-lbl">Líneas de crédito</div>
+      </div>
+      <div class="stat-cell fade-up" style="transition-delay:.2s">
+        <div class="stat-val">3</div>
+        <div class="stat-lbl">Pólizas de seguro</div>
+      </div>
+      <div class="stat-cell fade-up" style="transition-delay:.3s">
+        <div class="stat-val">6+</div>
+        <div class="stat-lbl">Categorías de convenios</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTOS ===== -->
+<section id="productos">
+  <div class="container">
+    <div class="section-hd fade-up">
+      <span class="tag tag--green">Servicios financieros</span>
+      <h2 class="section-title">Productos diseñados para tu crecimiento</h2>
+      <p class="section-desc">Soluciones de ahorro, crédito y protección adaptadas a tus necesidades como asociado de Coopesipe R.L.</p>
+    </div>
+    <div class="products-grid">
+
+      <!-- Ahorros -->
+      <div class="prod-card prod-card--orange fade-up">
+        <div class="prod-top prod-top-orange">
+          <div class="prod-deco1"></div><div class="prod-deco2"></div>
+          <div class="prod-icon">
+            <svg width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/><path d="M1 21h22"/>
+              <path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h3"/>
+            </svg>
+          </div>
+          <div class="prod-name">Ahorros</div>
+          <div class="prod-sub">Hacé crecer tu patrimonio</div>
+        </div>
+        <div class="prod-body">
+          <ul class="prod-list">
+            <li>Aportes de capital</li>
+            <li>Ahorro navideño</li>
+            <li>Ahorro de vacaciones</li>
+            <li>Ahorro para marchamo</li>
+          </ul>
+          <button class="prod-link prod-toggle">
+            Ver opciones
+            <svg class="tog-arrow" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <div class="prod-expand">
+            <div class="prod-expand-divider"></div>
+            <div class="prod-detail">
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Capital Social</div>
+                <div class="prod-detail-desc">Aporte sistemático de un porcentaje del salario bruto. Fortalece el patrimonio de la cooperativa y retorna al asociado únicamente al momento de su renuncia voluntaria.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Ahorro Navideño</div>
+                <div class="prod-detail-badges"><span class="badge">Voluntario</span><span class="badge">Mín. ₡2.000 / mes</span><span class="badge">Devolución: noviembre</span></div>
+                <div class="prod-detail-desc">Cuota mínima de dos mil colones mensuales. Los fondos acumulados se devuelven en noviembre de cada año, justo para la temporada navideña.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Ahorro Vacacional</div>
+                <div class="prod-detail-badges"><span class="badge">Devolución: enero y julio</span></div>
+                <div class="prod-detail-desc">Modalidad similar al navideño con dos fechas de devolución al año: enero y julio, coincidiendo con los períodos de vacaciones.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Ahorro Marchamo</div>
+                <div class="prod-detail-badges"><span class="badge">Reintegro: noviembre</span></div>
+                <div class="prod-detail-desc">Planifique con anticipación el pago del marchamo vehicular. Los fondos se reintegran en noviembre, antes del vencimiento.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Créditos -->
+      <div class="prod-card prod-card--green fade-up" style="transition-delay:.14s">
+        <div class="prod-top prod-top-green">
+          <div class="prod-deco1"></div><div class="prod-deco2"></div>
+          <div class="prod-icon">
+            <svg width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <rect x="2" y="5" width="20" height="14" rx="2"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+              <line x1="6" y1="15" x2="10" y2="15"/>
+              <line x1="14" y1="15" x2="18" y2="15"/>
+            </svg>
+          </div>
+          <div class="prod-name">Créditos</div>
+          <div class="prod-sub">Financiá tus proyectos</div>
+        </div>
+        <div class="prod-body">
+          <ul class="prod-list">
+            <li>Crédito especial</li>
+            <li>Reestructuración de deudas</li>
+            <li>Crédito con respaldo de ahorro</li>
+            <li>Crédito adicional</li>
+          </ul>
+          <button class="prod-link prod-toggle">
+            Ver líneas de crédito
+            <svg class="tog-arrow" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <div class="prod-expand">
+            <div class="prod-expand-divider"></div>
+            <div class="prod-detail">
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito de Refundición</div>
+                <div class="prod-detail-badges"><span class="badge">Plazo: 20 años</span></div>
+                <div class="prod-detail-desc">Consolida todas las deudas del asociado para mejorar su salario neto. Las deudas con terceros no pueden superar el 100% del total a consolidar.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito Sobre Ahorro</div>
+                <div class="prod-detail-badges"><span class="badge">Monto: 85% del capital</span><span class="badge">Plazo: variable</span></div>
+                <div class="prod-detail-desc">Acceso rápido basado en el capital social aportado. Retraso de 3 meses activa la garantía del capital social.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito Servicios Médicos</div>
+                <div class="prod-detail-badges"><span class="badge">₡2.000.000</span><span class="badge">Plazo: 10 años</span><span class="badge">Sin fiador</span></div>
+                <div class="prod-detail-desc">Para atender emergencias médicas en el momento que se necesite. Requiere factura pro forma del servicio médico.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito para el Hogar</div>
+                <div class="prod-detail-badges"><span class="badge">₡2.000.000</span><span class="badge">Plazo: 8 años</span></div>
+                <div class="prod-detail-desc">Adquisición de artículos del hogar en casas comerciales con convenio. Sin fiador hasta ₡1.000.000 (requiere 6 meses en propiedad).</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito de Educación</div>
+                <div class="prod-detail-badges"><span class="badge">₡1.500.000</span><span class="badge">Plazo: 8 años</span><span class="badge">Sin fiador</span></div>
+                <div class="prod-detail-desc">Para cancelar estudios en cualquier nivel educativo formal y adquirir equipos computacionales. Requiere facturas pro forma.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito Especial</div>
+                <div class="prod-detail-badges"><span class="badge">Plazo: 20 años</span><span class="badge">Inmediato hasta ₡150K</span></div>
+                <div class="prod-detail-desc">Acceso rápido y oportuno a crédito. Montos hasta ₡150.000 se entregan en efectivo de forma inmediata. Requiere 6 meses en propiedad.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito Ordinario</div>
+                <div class="prod-detail-badges"><span class="badge">Monto: 3× lo ahorrado</span><span class="badge">Plazo: 15 años</span><span class="badge">Con fiador</span></div>
+                <div class="prod-detail-desc">Monto equivalente a tres veces el capital ahorrado. Montos hasta ₡150.000 se entregan de forma inmediata.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito Revolutivo</div>
+                <div class="prod-detail-badges"><span class="badge">₡400.000</span><span class="badge">Plazo: 4 años</span><span class="badge">Sin fiador</span></div>
+                <div class="prod-detail-desc">Trámite único por el monto máximo renovable. Hasta ₡200.000 en efectivo. Solución ágil para necesidades recurrentes.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seguros -->
+      <div class="prod-card prod-card--dark fade-up" style="transition-delay:.28s">
+        <div class="prod-top prod-top-dark">
+          <div class="prod-deco1"></div><div class="prod-deco2"></div>
+          <div class="prod-icon">
+            <svg width="26" height="26" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+          </div>
+          <div class="prod-name">Seguros</div>
+          <div class="prod-sub">Protección cuando más se necesita</div>
+        </div>
+        <div class="prod-body">
+          <ul class="prod-list">
+            <li>Seguro de vida grupal</li>
+            <li>Póliza individual / natural</li>
+            <li>Seguro de defunción</li>
+          </ul>
+          <button class="prod-link prod-toggle">
+            Ver pólizas
+            <svg class="tog-arrow" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <div class="prod-expand">
+            <div class="prod-expand-divider"></div>
+            <div class="prod-detail">
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Póliza Colectiva de Vida</div>
+                <div class="prod-detail-badges"><span class="badge">INS N° 0116VIC000241-00</span></div>
+                <div class="prod-detail-desc">Cobertura por fallecimiento (₡3.000.000), doble indemnización por muerte accidental, desmembramiento, incapacidad total o permanente y enfermedad terminal (₡1.500.000). Protección para el asociado, cónyuge (50%) e hijos (25%).</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Fondo de Mutualidad</div>
+                <div class="prod-detail-badges"><span class="badge">INS 01 16 VTM 19 00</span></div>
+                <div class="prod-detail-desc">Provisión financiera solidaria que cubre el fallecimiento del asociado, cónyuge e hijos. Brinda apoyo económico inmediato a la familia en momentos difíciles.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Condiciones de cobertura</div>
+                <div class="prod-detail-desc">La cobertura es válida hasta los 74 años (muerte) y 69 años (enfermedad terminal). Finaliza en caso de término de relación laboral, falta de pago de prima o cancelación de póliza.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== BIENESTAR ===== -->
+<section id="bienestar">
+  <div class="container">
+    <div class="bienestar-layout">
+      <div class="bienestar-text fade-up">
+        <div class="section-hd">
+          <span class="tag tag--green">Programa social</span>
+          <h2 class="section-title">Bienestar integral para los asociados</h2>
+          <p class="section-desc">Más allá de los productos financieros, Coopesipe brinda apoyo económico directo en situaciones que impactan la salud y el hogar de nuestros asociados y sus familias.</p>
+        </div>
+        <a href="#contacto" class="btn btn-green">Consultar beneficios</a>
+      </div>
+      <div class="bcard-grid">
+        <div class="bcard fade-up">
+          <div class="bcard-icon">
+            <svg width="24" height="24" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/>
+              <line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/>
+              <line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <div class="bcard-title">Salud Visual</div>
+          <div class="bcard-desc">Apoyo económico para la compra de anteojos y tratamientos ópticos.</div>
+        </div>
+        <div class="bcard fade-up" style="transition-delay:.1s">
+          <div class="bcard-icon">
+            <svg width="24" height="24" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M12 2a3 3 0 0 0-3 3v1H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-3V5a3 3 0 0 0-3-3z"/>
+              <path d="M9 14h6M12 11v6"/>
+            </svg>
+          </div>
+          <div class="bcard-title">Salud Dental</div>
+          <div class="bcard-desc">Subsidio para tratamientos odontológicos y cuidado bucal.</div>
+        </div>
+        <div class="bcard fade-up" style="transition-delay:.2s">
+          <div class="bcard-icon">
+            <svg width="24" height="24" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M9 3H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/>
+              <rect x="9" y="1" width="6" height="4" rx="1"/>
+              <path d="M9 12h6M9 16h4"/>
+            </svg>
+          </div>
+          <div class="bcard-title">Medicamentos</div>
+          <div class="bcard-desc">Asistencia económica para la compra de medicamentos recetados.</div>
+        </div>
+        <div class="bcard fade-up" style="transition-delay:.3s">
+          <div class="bcard-icon">
+            <svg width="24" height="24" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <div class="bcard-title">Daños al Hogar</div>
+          <div class="bcard-desc">Apoyo por daños causados por inundaciones o eventos sísmicos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== POR QUÉ COOPESIPE ===== -->
+<section id="por-que">
+  <div class="container">
+    <div class="section-hd fade-up" style="position:relative;z-index:1;">
+      <span class="tag tag--ghost">¿Por qué elegirnos?</span>
+      <h2 class="section-title">Lo que nos hace diferentes</h2>
+      <p class="section-desc">Una cooperativa construida sobre solidaridad, transparencia y compromiso real con los asociados y sus familias.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <div class="why-num">01</div>
+        <div class="why-title">Sos dueño y asociado</div>
+        <div class="why-desc">Como miembro de Coopesipe sos co-propietario. Tus aportes construyen una institución que trabaja para vos y tu familia, no para accionistas externos.</div>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.14s">
+        <div class="why-num">02</div>
+        <div class="why-title">Excedentes para todos</div>
+        <div class="why-desc">Los resultados positivos se distribuyen entre los asociados. Tu cooperativa reinvierte sus ganancias en tu bienestar y en el fortalecimiento de los servicios.</div>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.28s">
+        <div class="why-num">03</div>
+        <div class="why-title">Atención personalizada</div>
+        <div class="why-desc">No sos un número. Contamos con personal comprometido del Ministerio de Justicia y Paz que brinda acompañamiento real a cada asociado.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONVENIOS ===== -->
+<section id="convenios">
+  <div class="container">
+    <div class="section-hd fade-up">
+      <span class="tag tag--orange">Red de alianzas</span>
+      <h2 class="section-title">Convenios comerciales y de servicios</h2>
+      <p class="section-desc">Como asociado tenés acceso a una red de establecimientos con tarifas y condiciones preferenciales en distintas categorías.</p>
+    </div>
+    <div class="convenios-grid">
+
+      <div class="conv-card fade-up">
+        <div class="conv-icon">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/>
+            <line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/>
+          </svg>
+        </div>
+        <div>
+          <div class="conv-title">Ópticas y salud visual</div>
+          <div class="conv-desc">Descuentos y facilidades de pago en ópticas asociadas a nivel nacional.</div>
+        </div>
+      </div>
+
+      <div class="conv-card fade-up" style="transition-delay:.08s">
+        <div class="conv-icon">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="conv-title">Clínicas médicas</div>
+          <div class="conv-desc">Red de centros de salud con tarifas preferenciales para asociados y familia.</div>
+        </div>
+      </div>
+
+      <div class="conv-card fade-up" style="transition-delay:.16s">
+        <div class="conv-icon">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="conv-title">Electrodomésticos</div>
+          <div class="conv-desc">Tecnología y línea blanca con planes de pago convenientes para asociados.</div>
+        </div>
+      </div>
+
+      <div class="conv-card fade-up" style="transition-delay:.04s">
+        <div class="conv-icon">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M22 10v6M2 10l10-5 10 5"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="conv-title">Universidades</div>
+          <div class="conv-desc">Educación superior con tarifas especiales y financiamiento para asociados.</div>
+        </div>
+      </div>
+
+      <div class="conv-card fade-up" style="transition-delay:.12s">
+        <div class="conv-icon">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </div>
+        <div>
+          <div class="conv-title">Comercios variados</div>
+          <div class="conv-desc">Alianzas con establecimientos comerciales en diferentes categorías de consumo.</div>
+        </div>
+      </div>
+
+      <div class="conv-card fade-up" style="transition-delay:.2s">
+        <div class="conv-icon">
+          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="conv-title">CENECOOP</div>
+          <div class="conv-desc">Acceso a la plataforma de capacitación del Centro Nacional de Educación Cooperativa.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACTO ===== -->
+<section id="contacto">
+  <div class="container">
+    <div class="contact-layout">
+
+      <div class="contact-info fade-up">
+        <span class="tag tag--green">Contacto</span>
+        <h2>Estamos aquí para ayudarte</h2>
+        <p>Nuestro equipo está disponible para orientarte sobre cualquier producto o servicio. Visitanos o escribinos.</p>
+        <div class="cinfo-list">
+          <div class="cinfo-item">
+            <div class="cinfo-icon">
+              <svg width="19" height="19" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 5.83 5.83l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="cinfo-lbl">Teléfonos</div>
+              <div class="cinfo-val" style="display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;">
+                <a href="https://wa.me/50622575226?text=Hola+Coopesipe+R.L.%2C+me+gustar%C3%ADa+obtener+informaci%C3%B3n+sobre+sus+productos+y+servicios.+%C2%BFMe+pueden+ayudar%3F" class="wa-link" target="_blank" rel="noopener noreferrer">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  2257-5226
+                </a>
+                <span style="color:var(--gray-400)">/</span>
+                <a href="https://wa.me/50662690309?text=Hola+Coopesipe+R.L.%2C+me+gustar%C3%ADa+obtener+informaci%C3%B3n+sobre+sus+productos+y+servicios.+%C2%BFMe+pueden+ayudar%3F" class="wa-link" target="_blank" rel="noopener noreferrer">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  6269-0309
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-icon">
+              <svg width="19" height="19" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="cinfo-lbl">Correo</div>
+              <div class="cinfo-val">coopesipe@coopesipe.fi.cr</div>
+            </div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-icon">
+              <svg width="19" height="19" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <div class="cinfo-lbl">Horario</div>
+              <div class="cinfo-val">Lun–Jue: 8:00–16:30 &nbsp;|&nbsp; Vie: 8:00–16:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form fade-up" style="transition-delay:.18s">
+        <h3>Envíanos un mensaje</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" placeholder="Juan Pérez López">
+          </div>
+          <div class="form-group">
+            <label for="cedula">Cédula</label>
+            <input type="text" id="cedula" placeholder="1-0000-0000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tel">Teléfono</label>
+            <input type="tel" id="tel" placeholder="8888-8888">
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" placeholder="correo@ejemplo.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="asunto">¿En qué podemos ayudarte?</label>
+          <select id="asunto">
+            <option value="">Seleccione un tema…</option>
+            <option>Información sobre ahorros</option>
+            <option>Solicitud de crédito</option>
+            <option>Información sobre seguros</option>
+            <option>Bienestar social</option>
+            <option>Quiero ser asociado</option>
+            <option>Convenios comerciales</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="msg">Mensaje</label>
+          <textarea id="msg" placeholder="Escriba su consulta aquí…"></textarea>
+        </div>
+        <button type="submit" class="btn btn-green" style="width:100%;justify-content:center;">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar mensaje
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo_coopesipe.png" alt="Coopesipe R.L.">
+        <p>Cooperativa de ahorro y crédito al servicio de los empleados del Ministerio de Justicia y Paz de Costa Rica. Fortaleciendo familias.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#productos">Ahorros</a></li>
+          <li><a href="#productos">Créditos</a></li>
+          <li><a href="#productos">Seguros</a></li>
+          <li><a href="#bienestar">Bienestar social</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Institución</h4>
+        <ul>
+          <li><a href="#">¿Quiénes somos?</a></li>
+          <li><a href="#">Transparencia</a></li>
+          <li><a href="#">Documentos</a></li>
+          <li><a href="#">CENECOOP</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>
+            <a href="https://wa.me/50622575226?text=Hola+Coopesipe+R.L.%2C+me+gustar%C3%ADa+obtener+informaci%C3%B3n+sobre+sus+servicios." class="footer-wa-link" target="_blank" rel="noopener noreferrer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              2257-5226
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/50662690309?text=Hola+Coopesipe+R.L.%2C+me+gustar%C3%ADa+obtener+informaci%C3%B3n+sobre+sus+servicios." class="footer-wa-link" target="_blank" rel="noopener noreferrer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              6269-0309
+            </a>
+          </li>
+          <li><a href="mailto:coopesipe@coopesipe.fi.cr">coopesipe@coopesipe.fi.cr</a></li>
+          <li><a href="#contacto">Formulario</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <p>© 2026 Coopesipe R.L. — Todos los derechos reservados. Supervisada por SUGEF.</p>
+      <div class="social-row">
+        <a href="https://www.facebook.com/profile.php?id=100023787157363" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+          <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="Instagram">
+          <svg width="15" height="15" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="LinkedIn">
+          <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+// Header scroll
+const hdr = document.getElementById('header');
+window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+// Mobile nav
+const toggle = document.getElementById('menu-toggle');
+const nav    = document.getElementById('main-nav');
+toggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  const [a, b, c] = toggle.querySelectorAll('span');
+  if (open) {
+    a.style.cssText = 'transform:rotate(45deg) translate(5px,5px)';
+    b.style.cssText = 'opacity:0';
+    c.style.cssText = 'transform:rotate(-45deg) translate(5px,-5px)';
+  } else {
+    [a,b,c].forEach(s => s.removeAttribute('style'));
+  }
+});
+nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  nav.classList.remove('open');
+  toggle.querySelectorAll('span').forEach(s => s.removeAttribute('style'));
+}));
+
+// Expandable product cards (accordion)
+document.querySelectorAll('.prod-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.prod-card');
+    const wasOpen = card.classList.contains('expanded');
+    // close all
+    document.querySelectorAll('.prod-card.expanded').forEach(c => c.classList.remove('expanded'));
+    // open clicked unless it was already open
+    if (!wasOpen) card.classList.add('expanded');
+  });
+});
+
+// Scroll-triggered fade-up
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -45px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

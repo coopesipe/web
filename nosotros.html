@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros — Coopesipe R.L.</title>
+<link rel="icon" type="image/png" href="icono.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--gray-800); background: var(--white); overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; }
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --orange:       #E84E0F;
+  --orange-hover: #C83E0A;
+  --orange-pale:  #FFF2EC;
+  --green:        #6CB827;
+  --green-hover:  #5AA020;
+  --green-dark:   #1A3A08;
+  --green-mid:    #2B5C12;
+  --green-deep:   #0B1E05;
+  --green-pale:   #F2FAE8;
+  --white:        #FFFFFF;
+  --off-white:    #F8FAF5;
+  --gray-100:     #EFF2EC;
+  --gray-400:     #9BA89A;
+  --gray-600:     #576155;
+  --gray-800:     #1C291A;
+  --shadow-sm:    0 2px 8px rgba(0,0,0,0.07);
+  --shadow-md:    0 8px 32px rgba(0,0,0,0.11);
+  --shadow-lg:    0 24px 64px rgba(0,0,0,0.15);
+  --radius:       12px;
+  --radius-lg:    20px;
+  --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.2; font-weight: 700; }
+
+/* ===== UTILITIES ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+.tag {
+  display: inline-block; font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.3rem 0.85rem; border-radius: 100px; margin-bottom: 1rem;
+}
+.tag--green  { background: var(--green-pale); color: var(--green-mid); }
+.tag--orange { background: var(--orange-pale); color: var(--orange); }
+.tag--ghost  { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.78rem 1.75rem; border-radius: 8px;
+  font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.88rem;
+  cursor: pointer; transition: all 0.28s var(--ease); border: 2px solid transparent;
+}
+.btn-orange { background: var(--orange); color: #fff; }
+.btn-orange:hover { background: var(--orange-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,78,15,0.35); }
+.btn-green  { background: var(--green); color: #fff; }
+.btn-green:hover  { background: var(--green-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(108,184,39,0.35); }
+.btn-outline-dark { background: transparent; color: var(--green-dark); border-color: var(--green-dark); }
+.btn-outline-dark:hover { background: var(--green-dark); color: #fff; }
+
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== HEADER ===== */
+#header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 1rem 0; background: rgba(11, 30, 5, 0.97);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.28);
+  transition: padding 0.3s var(--ease);
+}
+#header.scrolled { padding: 0.65rem 0; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+
+.header-logo { display: flex; align-items: center; gap: 0.7rem; flex-shrink: 0; }
+.header-logo img { height: 40px; width: auto; }
+.header-logo-name { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.05rem; color: #fff; line-height: 1.1; display: flex; flex-direction: column; }
+.header-logo-name span { font-size: 0.6rem; font-weight: 400; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+
+nav { display: flex; align-items: center; }
+nav a { color: rgba(255,255,255,0.75); font-size: 0.85rem; font-weight: 500; padding: 0.45rem 0.9rem; border-radius: 6px; transition: color 0.25s var(--ease); position: relative; }
+nav a::after { content: ''; position: absolute; bottom: 2px; left: 0.9rem; right: 0.9rem; height: 1.5px; background: var(--green); transform: scaleX(0); transition: transform 0.25s var(--ease); transform-origin: left; }
+nav a:hover, nav a.active { color: #fff; }
+nav a:hover::after, nav a.active::after { transform: scaleX(1); }
+
+.header-actions { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+.btn-ingresar {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--orange); color: #fff; padding: 0.58rem 1.25rem;
+  border-radius: 7px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.85rem;
+  border: none; cursor: pointer; transition: all 0.28s var(--ease);
+}
+.btn-ingresar:hover { background: var(--orange-hover); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(232,78,15,0.38); }
+
+.menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.4rem; flex-direction: column; gap: 5px; z-index: 1001; }
+.menu-toggle span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; transition: all 0.3s var(--ease); }
+
+/* ===== PAGE HERO ===== */
+.page-hero {
+  min-height: 380px; background: var(--green-deep); position: relative;
+  display: flex; align-items: flex-end; overflow: hidden;
+  padding: 7rem 0 3.5rem;
+}
+.page-hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 70% 40%, rgba(108,184,39,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(232,78,15,0.05) 0%, transparent 50%),
+    linear-gradient(135deg, #0B1E05 0%, #0F2507 60%, #091A04 100%);
+}
+.page-hero-deco { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.ph-tri {
+  position: absolute; width: 0; height: 0;
+  border-left: 140px solid transparent;
+  border-bottom: 242px solid var(--orange);
+  opacity: 0.045; right: 5%; top: 5%;
+  animation: drift 10s ease-in-out infinite;
+}
+.ph-tri2 {
+  position: absolute; width: 0; height: 0;
+  border-left: 80px solid transparent;
+  border-bottom: 138px solid var(--green);
+  opacity: 0.04; right: 22%; top: 55%;
+  animation: drift 13s ease-in-out infinite reverse;
+}
+@keyframes drift {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-15px) rotate(4deg); }
+}
+.page-hero-inner { position: relative; z-index: 1; }
+.breadcrumb { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
+.breadcrumb a { font-size: 0.8rem; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--green); }
+.breadcrumb span { font-size: 0.8rem; color: rgba(255,255,255,0.25); }
+.breadcrumb strong { font-size: 0.8rem; color: rgba(255,255,255,0.65); font-weight: 500; }
+.page-hero h1 { font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 800; color: #fff; margin-bottom: 0.8rem; }
+.page-hero p  { font-size: 1rem; color: rgba(255,255,255,0.58); max-width: 500px; line-height: 1.65; font-weight: 300; }
+
+/* In-page nav tabs */
+.page-tabs { background: var(--white); border-bottom: 1px solid var(--gray-100); position: sticky; top: 68px; z-index: 500; }
+.tabs-inner { display: flex; gap: 0; overflow-x: auto; }
+.tab-link {
+  padding: 1rem 1.4rem; font-family: 'Sora', sans-serif; font-size: 0.84rem; font-weight: 600;
+  color: var(--gray-600); white-space: nowrap; border-bottom: 2px solid transparent;
+  transition: all 0.25s var(--ease); cursor: pointer; background: none; border: none;
+  border-bottom: 2px solid transparent;
+}
+.tab-link:hover  { color: var(--green-mid); }
+.tab-link.active { color: var(--green-mid); border-bottom-color: var(--green); }
+
+/* ===== SECCIÓN: QUIÉNES SOMOS ===== */
+#quienes-somos { padding: 6rem 0; background: var(--white); }
+
+.qs-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: start; }
+
+.qs-intro-title { font-size: clamp(1.7rem, 2.8vw, 2.3rem); color: var(--gray-800); margin-bottom: 1.2rem; }
+.qs-intro-lead  { font-size: 1.05rem; color: var(--gray-600); line-height: 1.75; margin-bottom: 1.8rem; font-weight: 300; }
+.qs-intro-body  { font-size: 0.93rem; color: var(--gray-600); line-height: 1.75; }
+
+/* Timeline */
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+  width: 2px; background: linear-gradient(to bottom, var(--green), rgba(108,184,39,0.1));
+}
+.tl-item { position: relative; margin-bottom: 2rem; }
+.tl-dot {
+  position: absolute; left: -2rem; top: 4px;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--white); border: 2px solid var(--green);
+  display: flex; align-items: center; justify-content: center;
+}
+.tl-dot-inner { width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.tl-year { font-family: 'Sora', sans-serif; font-size: 0.72rem; font-weight: 700; color: var(--green); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.tl-title { font-family: 'Sora', sans-serif; font-size: 0.98rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.4rem; }
+.tl-desc  { font-size: 0.84rem; color: var(--gray-600); line-height: 1.6; }
+
+/* Stat highlight cards */
+.qs-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
+.qs-stat {
+  background: var(--green-pale); border-radius: var(--radius); padding: 1.2rem 1.4rem;
+  border-left: 3px solid var(--green); transition: all 0.28s var(--ease);
+}
+.qs-stat:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+.qs-stat-val { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--green-mid); line-height: 1; }
+.qs-stat-lbl { font-size: 0.78rem; color: var(--gray-600); margin-top: 0.3rem; }
+
+/* ===== SECCIÓN: MISIÓN Y VISIÓN ===== */
+#mision-vision {
+  padding: 6rem 0; background: var(--green-dark);
+  position: relative; overflow: hidden;
+}
+#mision-vision::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 50% 60% at 10% 50%, rgba(108,184,39,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 50% at 92% 10%, rgba(232,78,15,0.05) 0%, transparent 50%);
+}
+.mv-header { text-align: center; max-width: 560px; margin: 0 auto 4rem; position: relative; z-index: 1; }
+.mv-header h2 { color: #fff; font-size: clamp(1.75rem, 2.8vw, 2.4rem); margin-bottom: 0.9rem; }
+.mv-header p  { color: rgba(255,255,255,0.55); font-size: 0.96rem; line-height: 1.7; }
+
+.mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; position: relative; z-index: 1; margin-bottom: 3rem; }
+
+.mv-card {
+  border-radius: var(--radius-lg); padding: 2.4rem;
+  position: relative; overflow: hidden;
+  transition: transform 0.3s var(--ease);
+}
+.mv-card:hover { transform: translateY(-5px); }
+.mv-card--mission { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
+.mv-card--vision  { background: rgba(232,78,15,0.1);    border: 1px solid rgba(232,78,15,0.2); }
+
+.mv-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.mv-card--mission::before { background: linear-gradient(90deg, var(--green), transparent); }
+.mv-card--vision::before  { background: linear-gradient(90deg, var(--orange), transparent); }
+
+.mv-card-icon {
+  width: 52px; height: 52px; border-radius: 13px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 1.4rem;
+}
+.mv-card--mission .mv-card-icon { background: rgba(108,184,39,0.18); }
+.mv-card--vision  .mv-card-icon { background: rgba(232,78,15,0.2); }
+
+.mv-card-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.8rem; }
+.mv-card--mission .mv-card-label { color: var(--green); }
+.mv-card--vision  .mv-card-label { color: var(--orange); }
+
+.mv-card h3   { font-size: 1.35rem; color: #fff; margin-bottom: 1rem; font-weight: 800; }
+.mv-card p    { font-size: 0.9rem; color: rgba(255,255,255,0.62); line-height: 1.72; font-weight: 300; }
+
+/* Values row */
+.mv-values { position: relative; z-index: 1; }
+.mv-values-title { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700; color: rgba(255,255,255,0.7); text-align: center; margin-bottom: 1.5rem; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.78rem; }
+.values-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.value-pill {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px; padding: 0.65rem 1.4rem;
+  transition: all 0.28s var(--ease);
+}
+.value-pill:hover { background: rgba(108,184,39,0.15); border-color: rgba(108,184,39,0.3); transform: translateY(-2px); }
+.value-pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+.value-pill span { font-family: 'Sora', sans-serif; font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.75); }
+
+/* ===== SECCIÓN: ESTRUCTURA ADMINISTRATIVA ===== */
+#estructura { padding: 6rem 0; background: var(--off-white); }
+
+.est-header { text-align: center; max-width: 600px; margin: 0 auto 4rem; }
+.est-header h2   { font-size: clamp(1.75rem, 2.8vw, 2.4rem); color: var(--gray-800); margin-bottom: 0.9rem; }
+.est-header p    { font-size: 0.96rem; color: var(--gray-600); line-height: 1.7; }
+
+/* Org chart layout */
+.org-chart { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+.org-level { display: flex; justify-content: center; gap: 1.2rem; width: 100%; position: relative; padding: 1.5rem 0; }
+
+/* Connector line from parent to children */
+.org-level--children::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 2px; height: 1.5rem; background: linear-gradient(to bottom, var(--green), rgba(108,184,39,0.3));
+}
+
+/* Horizontal connector for siblings */
+.org-level--row::after {
+  content: ''; position: absolute; top: 1.5rem; left: 20%; right: 20%;
+  height: 2px; background: rgba(108,184,39,0.2);
+  z-index: 0;
+}
+
+.org-node {
+  background: var(--white); border-radius: var(--radius); padding: 1.4rem 1.6rem;
+  text-align: center; border: 1px solid var(--gray-100);
+  transition: all 0.28s var(--ease); position: relative; z-index: 1;
+  flex: 0 0 auto;
+}
+.org-node:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: rgba(108,184,39,0.3); }
+
+.org-node--top {
+  background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+  border-color: transparent; min-width: 280px;
+}
+.org-node--primary { min-width: 220px; }
+.org-node--secondary { min-width: 180px; }
+.org-node--tertiary { min-width: 155px; }
+.org-node--gerencia { background: linear-gradient(135deg, var(--orange), var(--orange-hover)); border-color: transparent; min-width: 200px; }
+
+.org-node-icon {
+  width: 40px; height: 40px; border-radius: 10px; margin: 0 auto 0.9rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.org-node--top     .org-node-icon { background: rgba(255,255,255,0.15); }
+.org-node--primary .org-node-icon { background: var(--green-pale); }
+.org-node--gerencia .org-node-icon { background: rgba(255,255,255,0.2); }
+
+.org-node-title {
+  font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+.org-node--top     .org-node-title { color: #fff; }
+.org-node--gerencia .org-node-title { color: #fff; }
+.org-node--primary  .org-node-title,
+.org-node--secondary .org-node-title,
+.org-node--tertiary .org-node-title { color: var(--gray-800); }
+
+.org-node-detail { font-size: 0.75rem; color: rgba(255,255,255,0.65); line-height: 1.45; }
+.org-node--primary  .org-node-detail,
+.org-node--secondary .org-node-detail,
+.org-node--tertiary .org-node-detail { color: var(--gray-400); }
+
+/* Connector vertical line between levels */
+.org-connector {
+  width: 2px; height: 2rem; background: linear-gradient(to bottom, rgba(108,184,39,0.5), rgba(108,184,39,0.15));
+  margin: 0 auto;
+}
+.org-connector--branch {
+  width: auto; height: 2px; background: rgba(108,184,39,0.2);
+  margin: 0; position: relative;
+}
+
+/* Org children section */
+.org-children {
+  display: flex; gap: 1.2rem; justify-content: center;
+  position: relative; flex-wrap: wrap;
+}
+.org-children::before {
+  content: ''; position: absolute; top: -1.5rem; left: 15%; right: 15%;
+  height: 2px; background: rgba(108,184,39,0.2);
+}
+
+/* Areas especializadas */
+.areas-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+  max-width: 500px; margin: 0 auto;
+}
+.area-card {
+  background: var(--white); border-radius: var(--radius); padding: 1.2rem 1.4rem;
+  display: flex; align-items: center; gap: 1rem;
+  border: 1px solid var(--gray-100); transition: all 0.28s var(--ease);
+}
+.area-card:hover { box-shadow: var(--shadow-sm); border-color: rgba(108,184,39,0.3); transform: translateY(-2px); }
+.area-icon {
+  width: 38px; height: 38px; flex-shrink: 0; border-radius: 9px;
+  background: var(--green-pale); display: flex; align-items: center; justify-content: center;
+}
+.area-name { font-family: 'Sora', sans-serif; font-size: 0.84rem; font-weight: 700; color: var(--gray-800); }
+.area-desc { font-size: 0.75rem; color: var(--gray-500); margin-top: 0.15rem; }
+
+/* Full org visual layout */
+.org-full { max-width: 900px; margin: 0 auto; }
+.org-row { display: flex; justify-content: center; align-items: flex-start; gap: 1.2rem; padding: 0 0 0 0; flex-wrap: wrap; }
+.org-row + .org-row { margin-top: 0; }
+
+.level-label {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gray-400); text-align: center; margin-bottom: 1rem;
+}
+
+/* ===== FOOTER ===== */
+footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4rem 0 2rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 2.5rem; margin-bottom: 3rem; }
+.footer-brand img { height: 80px; margin-bottom: 1.1rem; }
+.footer-wa-link {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-size: 0.82rem; color: rgba(255,255,255,0.45); transition: color 0.22s;
+}
+.footer-wa-link:hover { color: #25D366; }
+.footer-brand p { font-size: 0.83rem; line-height: 1.7; color: rgba(255,255,255,0.42); max-width: 270px; }
+.footer-col h4 { font-family: 'Sora', sans-serif; font-size: 0.88rem; font-weight: 700; color: #fff; margin-bottom: 1.2rem; }
+.footer-col ul { display: flex; flex-direction: column; gap: 0.55rem; }
+.footer-col ul li a { font-size: 0.82rem; color: rgba(255,255,255,0.45); transition: all 0.22s var(--ease); }
+.footer-col ul li a:hover { color: var(--green); padding-left: 4px; }
+.footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin-bottom: 1.5rem; }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+.social-row { display: flex; gap: 0.6rem; }
+.social-btn { width: 34px; height: 34px; border-radius: 7px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; transition: all 0.25s var(--ease); cursor: pointer; }
+.social-btn:hover { background: var(--green); transform: translateY(-2px); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .qs-layout  { grid-template-columns: 1fr; gap: 3rem; }
+  .mv-grid    { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .org-full   { padding: 0 1rem; }
+}
+@media (max-width: 1200px) {
+  nav a { font-size: 0.78rem; padding: 0.38rem 0.65rem; }
+}
+@media (max-width: 960px) {
+  nav a { font-size: 0.74rem; padding: 0.35rem 0.55rem; }
+}
+@media (max-width: 860px) {
+  nav {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(11,30,5,0.98); backdrop-filter: blur(18px);
+    flex-direction: column; justify-content: center; align-items: center; gap: 0.3rem;
+    z-index: 999;
+  }
+  nav.open  { display: flex; }
+  nav a     { font-size: 1.1rem; padding: 0.9rem 2rem; width: 100%; text-align: center; }
+  nav a::after { display: none; }
+  .menu-toggle { display: flex; }
+}
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .qs-stats    { grid-template-columns: 1fr 1fr; }
+  .values-row  { gap: 0.7rem; }
+  .org-children::before { display: none; }
+  .org-node--primary, .org-node--secondary, .org-node--tertiary { min-width: 140px; }
+  .areas-grid { grid-template-columns: 1fr; max-width: 340px; }
+}
+@media (max-width: 500px) {
+  .container { padding: 0 1.2rem; }
+  .page-hero h1 { font-size: 2rem; }
+  .org-row { flex-direction: column; align-items: center; }
+}
+@media (max-width: 500px) {
+  .qs-stats { grid-template-columns: 1fr; }
+  .org-row  { gap: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">
+        <img src="icono.png" alt="Coopesipe">
+        <div class="header-logo-name">
+          Coopesipe R.L.
+          <span>Cooperativa de Ahorro y Crédito</span>
+        </div>
+      </a>
+      <nav id="main-nav">
+        <a href="index.html">Inicio</a>
+        <a href="index.html#productos">Productos</a>
+        <a href="index.html#bienestar">Bienestar</a>
+        <a href="index.html#convenios">Convenios</a>
+        <a href="nosotros.html" class="active">Nosotros</a>
+        <a href="galeria.html">Galería</a>
+        <a href="documentacion.html">Documentación</a>
+        <a href="index.html#contacto">Contacto</a>
+      </nav>
+      <div class="header-actions">
+        <a href="#" class="btn-ingresar">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          Ingresar
+        </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-deco">
+    <div class="ph-tri"></div>
+    <div class="ph-tri2"></div>
+  </div>
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Inicio</a>
+        <span>/</span>
+        <strong>Nosotros</strong>
+      </div>
+      <h1>Sobre Coopesipe R.L.</h1>
+      <p>Más de seis décadas construyendo solidaridad financiera para los empleados del Ministerio de Justicia y Paz de Costa Rica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TABS ===== -->
+<div class="page-tabs">
+  <div class="container">
+    <div class="tabs-inner">
+      <a href="#quienes-somos" class="tab-link active">Quiénes somos</a>
+      <a href="#mision-vision" class="tab-link">Misión y Visión</a>
+      <a href="#estructura" class="tab-link">Estructura administrativa</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIÉNES SOMOS ===== -->
+<section id="quienes-somos">
+  <div class="container">
+    <div class="qs-layout">
+
+      <!-- Left: intro text -->
+      <div class="fade-up">
+        <span class="tag tag--green">Nuestra historia</span>
+        <h2 class="qs-intro-title">Una cooperativa nacida del trabajo y la solidaridad</h2>
+        <p class="qs-intro-lead">
+          Coopesipe R.L. es una Cooperativa de Ahorro y Crédito al servicio de los empleados del Ministerio de Justicia y Paz de Costa Rica y sus órganos adscritos.
+        </p>
+        <p class="qs-intro-body">
+          Nuestra organización nació de la iniciativa de trabajadores comprometidos con su bienestar colectivo. A lo largo de más de seis décadas hemos crecido junto a nuestros asociados, adaptándonos a sus necesidades y fortaleciendo nuestra capacidad para servirles mejor.
+        </p>
+        <p class="qs-intro-body" style="margin-top:1rem;">
+          Operamos bajo los principios del cooperativismo: democracia, equidad, solidaridad y beneficio mutuo. Cada asociado es co-propietario y co-beneficiario de los resultados de la cooperativa.
+        </p>
+        <div class="qs-stats" style="margin-top:2rem;">
+          <div class="qs-stat">
+            <div class="qs-stat-val">1964</div>
+            <div class="qs-stat-lbl">Año de fundación</div>
+          </div>
+          <div class="qs-stat">
+            <div class="qs-stat-val">~150</div>
+            <div class="qs-stat-lbl">Fundadores originales</div>
+          </div>
+          <div class="qs-stat">
+            <div class="qs-stat-val">60+</div>
+            <div class="qs-stat-lbl">Años de servicio</div>
+          </div>
+          <div class="qs-stat">
+            <div class="qs-stat-val">2018</div>
+            <div class="qs-stat-lbl">Edificio propio inaugurado</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: timeline -->
+      <div class="fade-up" style="transition-delay:.18s;">
+        <div class="timeline">
+
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-year">20 de febrero de 1964</div>
+            <div class="tl-title">Fundación como Coopecodeso R.L.</div>
+            <div class="tl-desc">Aproximadamente 150 empleados del Consejo de Defensa Social se unen para crear la cooperativa, bajo el nombre original de <em>Coopecodeso R.L.</em> Su fundación representó un hito en la solidaridad laboral del sector penitenciario nacional.</div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-year">1998 — 40ª Asamblea Ordinaria</div>
+            <div class="tl-title">Cambio de nombre a Coopesipe R.L.</div>
+            <div class="tl-desc">Durante la cuadragésima asamblea ordinaria de asociados se aprueba el cambio de denominación a <strong>Coopesipe R.L.</strong> — Cooperativa de Ahorro y Crédito del Sistema Penitenciario Nacional —, reflejando la identidad amplia de sus miembros.</div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+            <div class="tl-year">Diciembre de 2018</div>
+            <div class="tl-title">Inauguración del edificio propio</div>
+            <div class="tl-desc">La cooperativa inaugura su edificio propio en San José centro, entre la calle 1 y las avenidas 10 y 12. Las instalaciones incluyen modernas oficinas para la atención de asociados y una sala de capacitación para miembros y potenciales socios.</div>
+          </div>
+
+          <div class="tl-item">
+            <div class="tl-dot"><div class="tl-dot-inner" style="background:var(--orange)"></div></div>
+            <div class="tl-year" style="color:var(--orange)">Hoy</div>
+            <div class="tl-title">Crecimiento continuo al servicio de los asociados</div>
+            <div class="tl-desc">Continuamos expandiendo nuestros productos y beneficios para fortalecer el bienestar financiero y social de todos los empleados del Ministerio de Justicia y Paz y sus familias.</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== MISIÓN Y VISIÓN ===== -->
+<section id="mision-vision">
+  <div class="container">
+    <div class="mv-header fade-up">
+      <span class="tag tag--ghost">Identidad institucional</span>
+      <h2>Misión, Visión y Valores</h2>
+      <p>Los principios que guían cada decisión y cada servicio que ofrecemos a nuestros asociados.</p>
+    </div>
+
+    <div class="mv-grid">
+      <!-- Misión -->
+      <div class="mv-card mv-card--mission fade-up">
+        <div class="mv-card-icon">
+          <svg width="26" height="26" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+        </div>
+        <div class="mv-card-label">Misión</div>
+        <h3>¿Para qué existimos?</h3>
+        <p>
+          Brindar un servicio rápido y oportuno que nos permita ser una de las mejores cooperativas de ahorro y crédito a nivel nacional, apoyando el desarrollo integral de nuestros asociados mediante calidad, tecnología y eficiencia.
+        </p>
+      </div>
+
+      <!-- Visión -->
+      <div class="mv-card mv-card--vision fade-up" style="transition-delay:.15s">
+        <div class="mv-card-icon">
+          <svg width="26" height="26" fill="none" stroke="#E84E0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
+        <div class="mv-card-label">Visión</div>
+        <h3>¿Hacia dónde vamos?</h3>
+        <p>
+          Ser una cooperativa de ahorro y crédito capaz de brindar a cada asociado un servicio eficiente y eficaz, posicionándonos como referente de excelencia cooperativa dentro del Sistema Penitenciario Nacional de Costa Rica.
+        </p>
+      </div>
+    </div>
+
+    <div class="mv-values fade-up" style="transition-delay:.25s">
+      <div class="mv-values-title">Nuestros valores fundamentales</div>
+      <div class="values-row">
+        <div class="value-pill"><div class="value-pill-dot"></div><span>Solidaridad</span></div>
+        <div class="value-pill"><div class="value-pill-dot"></div><span>Bienestar del asociado</span></div>
+        <div class="value-pill"><div class="value-pill-dot"></div><span>Transparencia</span></div>
+        <div class="value-pill"><div class="value-pill-dot"></div><span>Eficiencia</span></div>
+        <div class="value-pill"><div class="value-pill-dot"></div><span>Compromiso</span></div>
+        <div class="value-pill"><div class="value-pill-dot"></div><span>Equidad</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ESTRUCTURA ADMINISTRATIVA ===== -->
+<section id="estructura">
+  <div class="container">
+    <div class="est-header fade-up">
+      <span class="tag tag--orange">Gobierno cooperativo</span>
+      <h2>Estructura Administrativa</h2>
+      <p>Nuestra organización se rige bajo los principios del cooperativismo con una estructura democrática y participativa donde cada asociado tiene voz y voto.</p>
+    </div>
+
+    <div class="org-full">
+
+      <!-- Nivel 1: Asamblea -->
+      <div style="text-align:center;" class="fade-up">
+        <div class="level-label">Máxima autoridad</div>
+        <div style="display:flex;justify-content:center;">
+          <div class="org-node org-node--top">
+            <div class="org-node-icon">
+              <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="org-node-title">Asamblea General de Delegados</div>
+            <div class="org-node-detail">Máxima autoridad de la cooperativa.<br>Decisiones por mayoría simple.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="org-connector fade-up" style="transition-delay:.1s"></div>
+
+      <!-- Nivel 2: Consejo + Comité de Vigilancia -->
+      <div class="fade-up" style="transition-delay:.15s">
+        <div class="level-label">Órganos directivos</div>
+        <div class="org-row">
+          <div class="org-node org-node--primary">
+            <div class="org-node-icon">
+              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+              </svg>
+            </div>
+            <div class="org-node-title">Consejo de Administración</div>
+            <div class="org-node-detail">5 miembros propietarios + 2 suplentes<br>Período: 2 años<br>Sesiones ordinarias: 2 por mes</div>
+          </div>
+          <div class="org-node org-node--primary">
+            <div class="org-node-icon">
+              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div class="org-node-title">Comité de Vigilancia</div>
+            <div class="org-node-detail">3 miembros electos + 2 suplentes<br>Período: 2 años<br>Revisión contable bimestral</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="org-connector fade-up" style="transition-delay:.2s"></div>
+
+      <!-- Nivel 3: Comités y Gerencia -->
+      <div class="fade-up" style="transition-delay:.25s">
+        <div class="level-label">Comités y gerencia</div>
+        <div class="org-row">
+          <div class="org-node org-node--secondary">
+            <div class="org-node-title">Comité de Educación y Bienestar Social</div>
+            <div class="org-node-detail">Mín. 3 miembros<br>Programas educativos y capacitación</div>
+          </div>
+          <div class="org-node org-node--gerencia">
+            <div class="org-node-icon">
+              <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/>
+              </svg>
+            </div>
+            <div class="org-node-title">Gerencia</div>
+            <div class="org-node-detail">Nombrada por el Consejo<br>Ejecuta acuerdos y gestiona operaciones</div>
+          </div>
+          <div class="org-node org-node--secondary">
+            <div class="org-node-title">Comisión de Crédito</div>
+            <div class="org-node-detail">Procesa solicitudes de crédito<br>Sigue reglamento crediticio</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="org-connector fade-up" style="transition-delay:.3s"></div>
+
+      <!-- Nivel 4: Áreas especializadas -->
+      <div class="fade-up" style="transition-delay:.35s">
+        <div class="level-label">Áreas especializadas</div>
+        <div class="areas-grid" style="max-width:600px;grid-template-columns:repeat(2,1fr);">
+          <div class="area-card">
+            <div class="area-icon">
+              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="area-name">Contabilidad y Finanzas</div>
+              <div class="area-desc">Gestión financiera y registros contables</div>
+            </div>
+          </div>
+          <div class="area-card">
+            <div class="area-icon">
+              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+            </div>
+            <div>
+              <div class="area-name">Mercadeo y Promoción</div>
+              <div class="area-desc">Comunicación con asociados y divulgación</div>
+            </div>
+          </div>
+          <div class="area-card">
+            <div class="area-icon">
+              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div class="area-name">Atención al Asociado</div>
+              <div class="area-desc">Orientación y servicios directos</div>
+            </div>
+          </div>
+          <div class="area-card">
+            <div class="area-icon">
+              <svg width="20" height="20" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="area-name">CENECOOP</div>
+              <div class="area-desc">Capacitación y educación cooperativa</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="logo_coopesipe.png" alt="Coopesipe R.L.">
+        <p>Cooperativa de ahorro y crédito al servicio de los empleados del Ministerio de Justicia y Paz de Costa Rica.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="index.html#productos">Ahorros</a></li>
+          <li><a href="index.html#productos">Créditos</a></li>
+          <li><a href="index.html#productos">Seguros</a></li>
+          <li><a href="index.html#bienestar">Bienestar social</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Institución</h4>
+        <ul>
+          <li><a href="#quienes-somos">Quiénes somos</a></li>
+          <li><a href="#mision-vision">Misión y Visión</a></li>
+          <li><a href="#estructura">Estructura</a></li>
+          <li><a href="index.html#convenios">Convenios</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://wa.me/50622575226?text=Hola+Coopesipe+R.L.%2C+me+gustar%C3%ADa+obtener+informaci%C3%B3n+sobre+sus+servicios." class="footer-wa-link" target="_blank" rel="noopener noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> 2257-5226</a></li>
+          <li><a href="https://wa.me/50662690309?text=Hola+Coopesipe+R.L.%2C+me+gustar%C3%ADa+obtener+informaci%C3%B3n+sobre+sus+servicios." class="footer-wa-link" target="_blank" rel="noopener noreferrer"><svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> 6269-0309</a></li>
+          <li><a href="mailto:coopesipe@coopesipe.fi.cr">coopesipe@coopesipe.fi.cr</a></li>
+          <li><a href="index.html#contacto">Formulario</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-bottom">
+      <p>© 2026 Coopesipe R.L. — Todos los derechos reservados. Supervisada por SUGEF.</p>
+      <div class="social-row">
+        <a href="https://www.facebook.com/profile.php?id=100023787157363" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+          <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="Instagram">
+          <svg width="15" height="15" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="LinkedIn">
+          <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Header scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', scrollY > 40);
+}, { passive: true });
+
+// Mobile nav
+const toggle = document.getElementById('menu-toggle');
+const nav    = document.getElementById('main-nav');
+toggle.addEventListener('click', () => {
+  const open = nav.classList.toggle('open');
+  const [a, b, c] = toggle.querySelectorAll('span');
+  if (open) {
+    a.style.cssText = 'transform:rotate(45deg) translate(5px,5px)';
+    b.style.cssText = 'opacity:0';
+    c.style.cssText = 'transform:rotate(-45deg) translate(5px,-5px)';
+  } else {
+    [a,b,c].forEach(s => s.removeAttribute('style'));
+  }
+});
+nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  nav.classList.remove('open');
+  toggle.querySelectorAll('span').forEach(s => s.removeAttribute('style'));
+}));
+
+// Scroll-triggered fade-up
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -45px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// Active tab on scroll
+const sections = ['quienes-somos', 'mision-vision', 'estructura'];
+const tabLinks  = document.querySelectorAll('.tab-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= 160) current = id;
+  });
+  tabLinks.forEach(t => {
+    t.classList.toggle('active', t.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
