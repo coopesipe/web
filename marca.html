@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libro de Marca — Coopesipe R.L.</title>
+<link rel="icon" type="image/png" href="icono.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#F2F4F0;color:#1C291A;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+:root{
+  --orange:#E84E0F;
+  --green:#6CB827;
+  --green-dark:#1A3A08;
+  --green-mid:#2B5C12;
+  --green-deep:#0B1E05;
+  --green-pale:#F2FAE8;
+  --off-white:#F8FAF5;
+  --gray-800:#1C291A;
+  --gray-600:#576155;
+  --gray-400:#9BA89A;
+  --white:#FFFFFF;
+  --r:12px;
+}
+h1,h2,h3,h4,h5{font-family:'Sora',sans-serif;line-height:1.2}
+.page{max-width:960px;margin:0 auto;padding:2rem}
+
+/* ── COVER ── */
+.cover{
+  background:var(--green-deep);
+  border-radius:20px;
+  padding:4rem 4rem 3.5rem;
+  position:relative;overflow:hidden;
+  margin-bottom:2rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;
+}
+.cover::before{
+  content:'';position:absolute;right:-60px;top:-60px;
+  width:280px;height:280px;border-radius:50%;
+  background:rgba(108,184,39,.07);
+}
+.cover::after{
+  content:'';position:absolute;right:80px;bottom:-80px;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(232,78,15,.06);
+}
+/* Triangle motif on cover */
+.cover-tri{position:absolute;width:0;height:0;opacity:.07}
+.tri1{border-left:160px solid transparent;border-bottom:277px solid var(--orange);right:5%;top:0}
+.tri2{border-left:80px solid transparent;border-bottom:138px solid var(--green);right:25%;bottom:0;opacity:.05}
+
+.cover-text{position:relative;z-index:1}
+.cover-eyebrow{font-family:'Sora',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1.2rem}
+.cover-title{font-size:2.8rem;font-weight:800;color:#fff;line-height:1.05;margin-bottom:1rem}
+.cover-title em{font-style:normal;color:var(--green)}
+.cover-sub{font-size:.9rem;color:rgba(255,255,255,.5);line-height:1.7;font-weight:300;max-width:320px}
+.cover-right{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-end;gap:1.5rem}
+.cover-logo{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:2rem 2.5rem;display:flex;flex-direction:column;align-items:center;gap:1rem}
+.cover-logo img{height:90px;width:auto}
+.cover-logo-label{font-family:'Sora',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.cover-version{font-size:.72rem;color:rgba(255,255,255,.25);font-weight:300}
+
+/* ── SECTION LABEL ── */
+.section-block{margin-bottom:2rem}
+.section-label{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:'Sora',sans-serif;font-size:.62rem;font-weight:700;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--green-mid);margin-bottom:1.2rem;
+}
+.section-label::before{content:'';width:28px;height:2px;background:var(--green)}
+.section-title{font-size:1.5rem;font-weight:700;color:var(--gray-800);margin-bottom:.4rem}
+.section-desc{font-size:.88rem;color:var(--gray-600);line-height:1.65;max-width:520px}
+
+/* ── GRID HELPERS ── */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.card{background:var(--white);border-radius:var(--r);padding:1.6rem;border:1px solid #E5EBE2}
+.card-sm{background:var(--white);border-radius:var(--r);padding:1.2rem;border:1px solid #E5EBE2}
+
+/* ── COLORS ── */
+.color-swatch{border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.swatch-top{height:100px;width:100%}
+.swatch-body{padding:1rem 1.1rem;background:#fff}
+.swatch-name{font-family:'Sora',sans-serif;font-size:.82rem;font-weight:700;color:var(--gray-800);margin-bottom:.2rem}
+.swatch-hex{font-size:.72rem;color:var(--gray-400);font-weight:500;font-family:'Sora',sans-serif;letter-spacing:.05em}
+.swatch-role{font-size:.72rem;color:var(--gray-600);margin-top:.3rem;line-height:1.4}
+
+/* Supporting colors row */
+.color-swatch-sm{border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.07)}
+.swatch-top-sm{height:60px;width:100%}
+.swatch-body-sm{padding:.7rem .85rem;background:#fff}
+.swatch-name-sm{font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;color:var(--gray-800)}
+.swatch-hex-sm{font-size:.65rem;color:var(--gray-400);font-family:'Sora',sans-serif}
+
+/* ── TYPOGRAPHY ── */
+.type-sample{background:var(--white);border-radius:var(--r);padding:2rem;border:1px solid #E5EBE2}
+.type-label{font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-400);margin-bottom:1rem}
+.type-h1{font-family:'Sora',sans-serif;font-size:2.4rem;font-weight:800;color:var(--gray-800);line-height:1.1}
+.type-h2{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:700;color:var(--gray-800);line-height:1.2}
+.type-h3{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gray-800)}
+.type-body{font-family:'Plus Jakarta Sans',sans-serif;font-size:.95rem;color:var(--gray-600);line-height:1.72;font-weight:400}
+.type-small{font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;color:var(--gray-400);line-height:1.6;font-weight:300}
+.type-caps{font-family:'Sora',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green-mid)}
+
+.font-card{background:var(--white);border-radius:var(--r);padding:1.8rem;border:1px solid #E5EBE2;overflow:hidden}
+.font-hero{font-size:4.5rem;font-weight:800;line-height:.9;color:var(--gray-800);margin-bottom:.8rem;letter-spacing:-.02em}
+.font-name{font-family:'Sora',sans-serif;font-size:.72rem;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.25rem}
+.font-desc{font-size:.8rem;color:var(--gray-600);line-height:1.55}
+.font-weights{display:flex;gap:.8rem;margin-top:1rem;flex-wrap:wrap}
+.weight-chip{font-size:.72rem;padding:.2rem .7rem;border-radius:100px;background:var(--green-pale);color:var(--green-mid);font-weight:600;font-family:'Sora',sans-serif}
+
+.font-card-2 .font-hero{font-family:'Plus Jakarta Sans',sans-serif;font-size:3.8rem;font-weight:600;color:var(--gray-800)}
+
+/* ── LOGO SECTION ── */
+.logo-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem}
+.logo-variant{border-radius:var(--r);padding:2rem;display:flex;flex-direction:column;align-items:center;gap:1rem;border:1px solid transparent}
+.logo-variant img{height:72px;width:auto}
+.logo-variant-label{font-family:'Sora',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:center}
+.logo-dark{background:var(--green-deep);border-color:rgba(255,255,255,.08)}
+.logo-dark .logo-variant-label{color:rgba(255,255,255,.5)}
+.logo-mid{background:var(--green-dark);border-color:rgba(255,255,255,.08)}
+.logo-mid .logo-variant-label{color:rgba(255,255,255,.5)}
+.logo-light{background:var(--off-white);border-color:#E5EBE2}
+.logo-light .logo-variant-label{color:var(--gray-400)}
+
+/* Logo rules */
+.logo-rule{display:flex;align-items:flex-start;gap:.8rem;padding:1rem;border-radius:8px}
+.logo-rule-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.logo-rule-ok{background:#DCFCE7}
+.logo-rule-no{background:#FEE2E2}
+.logo-rule-text{font-size:.82rem;color:var(--gray-600);line-height:1.55}
+.logo-rule-text strong{display:block;font-family:'Sora',sans-serif;font-size:.76rem;margin-bottom:.2rem}
+.ok-text strong{color:#166534}
+.no-text strong{color:#991B1B}
+
+/* ── MOTIF / ELEMENTS ── */
+.motif-card{background:var(--green-deep);border-radius:var(--r);padding:2rem;position:relative;overflow:hidden;min-height:160px}
+.motif-tri-a{position:absolute;width:0;height:0;border-left:120px solid transparent;border-bottom:208px solid var(--orange);opacity:.12;right:-10px;top:-20px}
+.motif-tri-b{position:absolute;width:0;height:0;border-left:70px solid transparent;border-bottom:121px solid var(--green);opacity:.09;right:80px;bottom:-20px}
+.motif-inner{position:relative;z-index:1}
+.motif-title{font-family:'Sora',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.6rem}
+.motif-desc{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.6}
+
+/* Spacing tokens */
+.spacing-row{display:flex;align-items:center;gap:1rem;padding:.6rem 0;border-bottom:1px solid #E5EBE2}
+.spacing-row:last-child{border-bottom:none}
+.spacing-box{background:var(--green);border-radius:4px;height:14px;flex-shrink:0}
+.spacing-label{font-family:'Sora',sans-serif;font-size:.75rem;font-weight:600;color:var(--gray-800);width:60px}
+.spacing-val{font-size:.75rem;color:var(--gray-400);flex:1}
+
+/* Radius tokens */
+.radius-row{display:flex;align-items:center;gap:1.2rem;padding:.7rem 0;border-bottom:1px solid #E5EBE2}
+.radius-row:last-child{border-bottom:none}
+.radius-demo{width:48px;height:32px;background:var(--green-dark);flex-shrink:0}
+.radius-label{font-family:'Sora',sans-serif;font-size:.75rem;font-weight:600;color:var(--gray-800);width:80px}
+.radius-val{font-size:.75rem;color:var(--gray-400)}
+
+/* Buttons preview */
+.btn-preview{display:inline-flex;align-items:center;gap:.5rem;padding:.72rem 1.5rem;border-radius:8px;font-family:'Sora',sans-serif;font-weight:700;font-size:.85rem;border:none;cursor:default}
+.btn-p-orange{background:var(--orange);color:#fff}
+.btn-p-green{background:var(--green);color:#fff}
+.btn-p-outline{background:transparent;color:var(--green-dark);border:1.5px solid var(--green-dark)}
+.btn-p-ghost{background:rgba(108,184,39,.1);color:var(--green-mid);border:1.5px solid rgba(108,184,39,.3)}
+
+/* ── VOICE/TONE ── */
+.tone-card{border-radius:var(--r);padding:1.4rem;border-left:3px solid}
+.tone-yes{background:#F0FDF4;border-color:var(--green)}
+.tone-no{background:#FFF5F5;border-color:#EF4444}
+.tone-title{font-family:'Sora',sans-serif;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.6rem}
+.tone-yes .tone-title{color:var(--green-mid)}
+.tone-no .tone-title{color:#B91C1C}
+.tone-list{display:flex;flex-direction:column;gap:.35rem}
+.tone-item{font-size:.82rem;line-height:1.5;display:flex;gap:.5rem;align-items:baseline}
+.tone-item::before{font-size:.7rem;flex-shrink:0}
+.tone-yes .tone-item::before{content:'✓';color:var(--green)}
+.tone-no .tone-item::before{content:'✗';color:#EF4444}
+
+/* ── FOOTER BAR ── */
+.brand-footer{
+  background:var(--green-deep);border-radius:12px;
+  padding:1.2rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-top:2rem;
+}
+.brand-footer img{height:32px;width:auto}
+.brand-footer-text{font-size:.72rem;color:rgba(255,255,255,.35);font-weight:300}
+.brand-footer-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.2)}
+
+/* ── PRINT ── */
+@media print{
+  body{background:#fff}
+  .page{padding:0;max-width:100%}
+  .cover,.card,.font-card,.type-sample{break-inside:avoid}
+  .section-block{break-inside:avoid}
+}
+@media(max-width:700px){
+  .cover{grid-template-columns:1fr}
+  .cover-right{align-items:flex-start}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr 1fr}
+  .logo-grid{grid-template-columns:1fr}
+  .cover-title{font-size:2rem}
+}
+@media(max-width:480px){
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .cover{padding:2rem}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ════════════════════════════
+       PORTADA
+  ════════════════════════════ -->
+  <div class="cover">
+    <div class="cover-tri tri1"></div>
+    <div class="cover-tri tri2"></div>
+
+    <div class="cover-text">
+      <div class="cover-eyebrow">Identidad Visual Corporativa</div>
+      <h1 class="cover-title">Libro de<br><em>Marca</em></h1>
+      <p class="cover-sub">Guía de uso de la identidad visual de Coopesipe R.L. — Estándares de color, tipografía, logotipo y elementos gráficos.</p>
+    </div>
+    <div class="cover-right">
+      <div class="cover-logo">
+        <img src="logo_coopesipe.png" alt="Coopesipe R.L.">
+        <div class="cover-logo-label">Logotipo Oficial</div>
+      </div>
+      <div class="cover-version">Versión 1.0 &nbsp;·&nbsp; 2026</div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════
+       1. LOGOTIPO
+  ════════════════════════════ -->
+  <div class="section-block">
+    <div class="section-label">01 — Logotipo</div>
+    <h2 class="section-title">El símbolo de la cooperativa</h2>
+    <p class="section-desc" style="margin-bottom:1.4rem">El logotipo de Coopesipe combina el símbolo CSP con el triángulo naranja que representa crecimiento y dirección. Debe utilizarse siempre en versiones aprobadas sobre fondos controlados.</p>
+
+    <div class="logo-grid" style="margin-bottom:1.2rem">
+      <div class="logo-variant logo-dark">
+        <img src="icono.png" alt="Ícono CSP">
+        <span class="logo-variant-label">Ícono — sobre oscuro</span>
+      </div>
+      <div class="logo-variant logo-light" style="border-color:#D1D9CC">
+        <img src="icono.png" alt="Ícono CSP">
+        <span class="logo-variant-label" style="color:var(--gray-600)">Ícono — sobre claro</span>
+      </div>
+      <div class="logo-variant logo-mid">
+        <img src="logo_coopesipe.png" alt="Coopesipe R.L." style="height:60px">
+        <span class="logo-variant-label">Logotipo completo</span>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card" style="display:flex;flex-direction:column;gap:.6rem">
+        <div class="logo-rule" style="background:#F0FDF4">
+          <div class="logo-rule-icon logo-rule-ok">
+            <svg width="14" height="14" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="logo-rule-text ok-text"><strong>Uso correcto</strong>Sobre fondos sólidos oscuros (#0B1E05, #1A3A08) o claros (#F8FAF5, #FFFFFF) con contraste suficiente.</div>
+        </div>
+        <div class="logo-rule" style="background:#F0FDF4">
+          <div class="logo-rule-icon logo-rule-ok">
+            <svg width="14" height="14" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="logo-rule-text ok-text"><strong>Espacio mínimo</strong>Dejar siempre un margen equivalente a la altura de la "C" del logo alrededor del isotipo.</div>
+        </div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:.6rem">
+        <div class="logo-rule" style="background:#FFF5F5">
+          <div class="logo-rule-icon logo-rule-no">
+            <svg width="14" height="14" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div class="logo-rule-text no-text"><strong>No distorsionar</strong>No estirar, comprimir, rotar ni modificar las proporciones del logotipo.</div>
+        </div>
+        <div class="logo-rule" style="background:#FFF5F5">
+          <div class="logo-rule-icon logo-rule-no">
+            <svg width="14" height="14" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </div>
+          <div class="logo-rule-text no-text"><strong>No cambiar colores</strong>No modificar los colores corporativos ni aplicar sombras, degradados no autorizados o filtros.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════
+       2. PALETA DE COLORES
+  ════════════════════════════ -->
+  <div class="section-block">
+    <div class="section-label">02 — Colores</div>
+    <h2 class="section-title">Paleta corporativa</h2>
+    <p class="section-desc" style="margin-bottom:1.4rem">Los colores primarios se extraen directamente del logotipo. El verde profundo establece solidez y confianza; el naranja aporta energía y llamada a la acción.</p>
+
+    <!-- Primary -->
+    <div style="margin-bottom:.6rem">
+      <div class="type-caps" style="margin-bottom:.8rem;color:var(--gray-400)">Colores primarios</div>
+      <div class="grid-3">
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#E84E0F"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Naranja Coopesipe</div>
+            <div class="swatch-hex">#E84E0F</div>
+            <div class="swatch-role">CTAs, botones de acción, acentos de energía y el triángulo del logo.</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#6CB827"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Verde Vitalidad</div>
+            <div class="swatch-hex">#6CB827</div>
+            <div class="swatch-role">Letras CSP del logo, íconos de confirmación, estados positivos.</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-top" style="background:#0B1E05"></div>
+          <div class="swatch-body">
+            <div class="swatch-name">Verde Profundo</div>
+            <div class="swatch-hex">#0B1E05</div>
+            <div class="swatch-role">Fondos hero, header, nav móvil, secciones oscuras principales.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary -->
+    <div style="margin-bottom:.6rem">
+      <div class="type-caps" style="margin-bottom:.8rem;color:var(--gray-400)">Colores secundarios y neutros</div>
+      <div class="grid-4">
+        <div class="color-swatch-sm">
+          <div class="swatch-top-sm" style="background:#1A3A08"></div>
+          <div class="swatch-body-sm">
+            <div class="swatch-name-sm">Verde Oscuro</div>
+            <div class="swatch-hex-sm">#1A3A08</div>
+          </div>
+        </div>
+        <div class="color-swatch-sm">
+          <div class="swatch-top-sm" style="background:#2B5C12"></div>
+          <div class="swatch-body-sm">
+            <div class="swatch-name-sm">Verde Medio</div>
+            <div class="swatch-hex-sm">#2B5C12</div>
+          </div>
+        </div>
+        <div class="color-swatch-sm">
+          <div class="swatch-top-sm" style="background:#F2FAE8"></div>
+          <div class="swatch-body-sm">
+            <div class="swatch-name-sm">Verde Pálido</div>
+            <div class="swatch-hex-sm">#F2FAE8</div>
+          </div>
+        </div>
+        <div class="color-swatch-sm">
+          <div class="swatch-top-sm" style="background:#FFF2EC"></div>
+          <div class="swatch-body-sm">
+            <div class="swatch-name-sm">Naranja Pálido</div>
+            <div class="swatch-hex-sm">#FFF2EC</div>
+          </div>
+        </div>
+        <div class="color-swatch-sm">
+          <div class="swatch-top-sm" style="background:#FFFFFF;border:1px solid #E5EBE2"></div>
+          <div class="swatch-body-sm">
+            <div class="swatch-name-sm">Blanco</div>
+            <div class="swatch-hex-sm">#FFFFFF</div>
+          </div>
+        </div>
+        <div class="color-swatch-sm">
+          <div class="swatch-top-sm" style="background:#F8FAF5"></div>
+          <div class="swatch-body-sm">
+            <div class="swatch-name-sm">Blanco Verdoso</div>
+            <div class="swatch-hex-sm">#F8FAF5</div>
+          </div>
+        </div>
+        <div class="color-swatch-sm">
+          <div class="swatch-top-sm" style="background:#576155"></div>
+          <div class="swatch-body-sm">
+            <div class="swatch-name-sm">Gris Texto</div>
+            <div class="swatch-hex-sm">#576155</div>
+          </div>
+        </div>
+        <div class="color-swatch-sm">
+          <div class="swatch-top-sm" style="background:#1C291A"></div>
+          <div class="swatch-body-sm">
+            <div class="swatch-name-sm">Negro Verde</div>
+            <div class="swatch-hex-sm">#1C291A</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Color combos -->
+    <div>
+      <div class="type-caps" style="margin-bottom:.8rem;color:var(--gray-400)">Combinaciones aprobadas</div>
+      <div class="grid-4">
+        <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+          <div style="background:#0B1E05;height:56px;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:'Sora',sans-serif;font-size:.8rem;font-weight:700;color:#fff">Texto blanco</span>
+          </div>
+          <div style="background:#fff;padding:.65rem .8rem">
+            <div style="font-family:'Sora',sans-serif;font-size:.65rem;font-weight:700;color:var(--gray-800)">#FFFFFF / #0B1E05</div>
+            <div style="font-size:.62rem;color:var(--gray-400)">Hero, header</div>
+          </div>
+        </div>
+        <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+          <div style="background:#E84E0F;height:56px;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:'Sora',sans-serif;font-size:.8rem;font-weight:700;color:#fff">Ingresar</span>
+          </div>
+          <div style="background:#fff;padding:.65rem .8rem">
+            <div style="font-family:'Sora',sans-serif;font-size:.65rem;font-weight:700;color:var(--gray-800)">#FFFFFF / #E84E0F</div>
+            <div style="font-size:.62rem;color:var(--gray-400)">Botones CTA</div>
+          </div>
+        </div>
+        <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+          <div style="background:#6CB827;height:56px;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:'Sora',sans-serif;font-size:.8rem;font-weight:700;color:#fff">Ver más</span>
+          </div>
+          <div style="background:#fff;padding:.65rem .8rem">
+            <div style="font-family:'Sora',sans-serif;font-size:.65rem;font-weight:700;color:var(--gray-800)">#FFFFFF / #6CB827</div>
+            <div style="font-size:.62rem;color:var(--gray-400)">Botones secundarios</div>
+          </div>
+        </div>
+        <div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+          <div style="background:#F2FAE8;height:56px;display:flex;align-items:center;justify-content:center">
+            <span style="font-family:'Sora',sans-serif;font-size:.8rem;font-weight:700;color:#2B5C12">Bienestar</span>
+          </div>
+          <div style="background:#fff;padding:.65rem .8rem">
+            <div style="font-family:'Sora',sans-serif;font-size:.65rem;font-weight:700;color:var(--gray-800)">#2B5C12 / #F2FAE8</div>
+            <div style="font-size:.62rem;color:var(--gray-400)">Tags y etiquetas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════
+       3. TIPOGRAFÍA
+  ════════════════════════════ -->
+  <div class="section-block">
+    <div class="section-label">03 — Tipografía</div>
+    <h2 class="section-title">Sistema tipográfico</h2>
+    <p class="section-desc" style="margin-bottom:1.4rem">La identidad tipográfica combina una fuente geométrica moderna para titulares con una fuente humanista y legible para el cuerpo del texto.</p>
+
+    <div class="grid-2" style="margin-bottom:1.2rem">
+      <div class="font-card">
+        <div class="font-name">Sora — Titulares</div>
+        <div class="font-hero" style="font-family:'Sora',sans-serif">Aa</div>
+        <div class="font-desc">Fuente geométrica de peso variable. Se usa en todos los titulares, botones, etiquetas y la identidad del encabezado. Transmite modernidad, claridad y confianza institucional.</div>
+        <div class="font-weights">
+          <span class="weight-chip" style="font-weight:300">Light 300</span>
+          <span class="weight-chip" style="font-weight:600">Semi 600</span>
+          <span class="weight-chip" style="font-weight:700">Bold 700</span>
+          <span class="weight-chip" style="font-weight:800">Extra 800</span>
+        </div>
+      </div>
+      <div class="font-card font-card-2">
+        <div class="font-name">Plus Jakarta Sans — Cuerpo</div>
+        <div class="font-hero">Aa</div>
+        <div class="font-desc">Fuente humanista con excelente legibilidad en pantalla. Se usa en párrafos, descripciones, formularios y cualquier texto de lectura continua. Warm y accesible.</div>
+        <div class="font-weights">
+          <span class="weight-chip" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:300">Light 300</span>
+          <span class="weight-chip" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:400">Regular 400</span>
+          <span class="weight-chip" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:500">Medium 500</span>
+          <span class="weight-chip" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:600">Semi 600</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Type scale -->
+    <div class="type-sample">
+      <div class="type-label">Escala tipográfica</div>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div style="display:flex;align-items:baseline;gap:1.5rem;padding-bottom:1rem;border-bottom:1px solid #EFF2EC">
+          <div style="width:120px;flex-shrink:0;font-size:.68rem;color:var(--gray-400);font-family:'Sora',sans-serif;font-weight:600">H1 · 800 · 3.75rem</div>
+          <div class="type-h1">Tu bienestar financiero</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:1.5rem;padding-bottom:1rem;border-bottom:1px solid #EFF2EC">
+          <div style="width:120px;flex-shrink:0;font-size:.68rem;color:var(--gray-400);font-family:'Sora',sans-serif;font-weight:600">H2 · 700 · 2.4rem</div>
+          <div class="type-h2">Productos y servicios</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:1.5rem;padding-bottom:1rem;border-bottom:1px solid #EFF2EC">
+          <div style="width:120px;flex-shrink:0;font-size:.68rem;color:var(--gray-400);font-family:'Sora',sans-serif;font-weight:600">H3 · 700 · 1.1rem</div>
+          <div class="type-h3">Ahorro navideño</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:1.5rem;padding-bottom:1rem;border-bottom:1px solid #EFF2EC">
+          <div style="width:120px;flex-shrink:0;font-size:.68rem;color:var(--gray-400);font-family:'Sora',sans-serif;font-weight:600">Body · 400 · 0.95rem</div>
+          <div class="type-body">Cooperativa de ahorro y crédito al servicio de los empleados del Ministerio de Justicia y Paz.</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:1.5rem;padding-bottom:1rem;border-bottom:1px solid #EFF2EC">
+          <div style="width:120px;flex-shrink:0;font-size:.68rem;color:var(--gray-400);font-family:'Sora',sans-serif;font-weight:600">Small · 300 · 0.8rem</div>
+          <div class="type-small">Lun–Jue: 8:00–16:30 &nbsp;|&nbsp; Vie: 8:00–16:00</div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:1.5rem">
+          <div style="width:120px;flex-shrink:0;font-size:.68rem;color:var(--gray-400);font-family:'Sora',sans-serif;font-weight:600">Caps · 700 · 0.65rem</div>
+          <div class="type-caps">Cooperativa de ahorro y crédito</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════
+       4. ELEMENTOS GRÁFICOS
+  ════════════════════════════ -->
+  <div class="section-block">
+    <div class="section-label">04 — Elementos gráficos</div>
+    <h2 class="section-title">Componentes y motivos visuales</h2>
+    <p class="section-desc" style="margin-bottom:1.4rem">Los elementos gráficos complementan la identidad y crean consistencia visual en todos los materiales digitales e impresos.</p>
+
+    <div class="grid-2" style="margin-bottom:1.2rem">
+      <!-- Triangle motif -->
+      <div class="motif-card">
+        <div class="motif-tri-a"></div>
+        <div class="motif-tri-b"></div>
+        <div class="motif-inner">
+          <div class="motif-title">Motivo triangular</div>
+          <div class="motif-desc">El triángulo naranja del logo es el motivo decorativo central. Aparece como elemento de fondo en secciones hero, portadas y materiales de comunicación. Representa crecimiento, dirección y solidez.</div>
+        </div>
+      </div>
+      <!-- Buttons -->
+      <div class="card">
+        <div class="type-caps" style="margin-bottom:1rem">Botones del sistema</div>
+        <div style="display:flex;flex-direction:column;gap:.8rem">
+          <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
+            <button class="btn-preview btn-p-orange">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              Ingresar
+            </button>
+            <span style="font-size:.72rem;color:var(--gray-400)">CTA primario</span>
+          </div>
+          <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
+            <button class="btn-preview btn-p-green">Ver productos</button>
+            <span style="font-size:.72rem;color:var(--gray-400)">Acción secundaria</span>
+          </div>
+          <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
+            <button class="btn-preview btn-p-outline">Ser asociado</button>
+            <span style="font-size:.72rem;color:var(--gray-400)">Outline / fantasma</span>
+          </div>
+          <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
+            <button class="btn-preview btn-p-ghost">Conocer más</button>
+            <span style="font-size:.72rem;color:var(--gray-400)">Sutil / terciario</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <!-- Radius tokens -->
+      <div class="card">
+        <div class="type-caps" style="margin-bottom:1rem">Radio de bordes</div>
+        <div class="radius-row">
+          <div class="radius-demo" style="border-radius:0px"></div>
+          <div class="radius-label">Ninguno</div>
+          <div class="radius-val">0px — Divisores</div>
+        </div>
+        <div class="radius-row">
+          <div class="radius-demo" style="border-radius:4px"></div>
+          <div class="radius-label">XS</div>
+          <div class="radius-val">4px — Badges</div>
+        </div>
+        <div class="radius-row">
+          <div class="radius-demo" style="border-radius:8px"></div>
+          <div class="radius-label">SM</div>
+          <div class="radius-val">8px — Botones</div>
+        </div>
+        <div class="radius-row">
+          <div class="radius-demo" style="border-radius:12px"></div>
+          <div class="radius-label">MD</div>
+          <div class="radius-val">12px — Tarjetas</div>
+        </div>
+        <div class="radius-row">
+          <div class="radius-demo" style="border-radius:20px"></div>
+          <div class="radius-label">LG</div>
+          <div class="radius-val">20px — Modales</div>
+        </div>
+        <div class="radius-row">
+          <div class="radius-demo" style="border-radius:999px;width:64px;height:28px"></div>
+          <div class="radius-label">Pill</div>
+          <div class="radius-val">999px — Etiquetas</div>
+        </div>
+      </div>
+
+      <!-- Spacing -->
+      <div class="card">
+        <div class="type-caps" style="margin-bottom:1rem">Espaciado base (4px)</div>
+        <div class="spacing-row">
+          <div class="spacing-box" style="width:4px"></div>
+          <div class="spacing-label">1 — xs</div>
+          <div class="spacing-val">0.25rem · 4px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-box" style="width:8px"></div>
+          <div class="spacing-label">2 — sm</div>
+          <div class="spacing-val">0.5rem · 8px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-box" style="width:16px"></div>
+          <div class="spacing-label">4 — md</div>
+          <div class="spacing-val">1rem · 16px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-box" style="width:24px"></div>
+          <div class="spacing-label">6 — lg</div>
+          <div class="spacing-val">1.5rem · 24px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-box" style="width:32px"></div>
+          <div class="spacing-label">8 — xl</div>
+          <div class="spacing-val">2rem · 32px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-box" style="width:48px"></div>
+          <div class="spacing-label">12 — 2xl</div>
+          <div class="spacing-val">3rem · 48px</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-box" style="width:64px"></div>
+          <div class="spacing-label">16 — 3xl</div>
+          <div class="spacing-val">4rem · 64px</div>
+        </div>
+      </div>
+
+      <!-- Shadows & effects -->
+      <div class="card">
+        <div class="type-caps" style="margin-bottom:1rem">Sombras y efectos</div>
+        <div style="display:flex;flex-direction:column;gap:1rem">
+          <div>
+            <div style="background:#fff;border-radius:10px;height:52px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:.5rem"></div>
+            <div style="font-family:'Sora',sans-serif;font-size:.7rem;font-weight:700;color:var(--gray-800)">Sombra SM</div>
+            <div style="font-size:.68rem;color:var(--gray-400)">0 2px 8px rgba(0,0,0,.07)</div>
+          </div>
+          <div>
+            <div style="background:#fff;border-radius:10px;height:52px;box-shadow:0 8px 32px rgba(0,0,0,.11);margin-bottom:.5rem"></div>
+            <div style="font-family:'Sora',sans-serif;font-size:.7rem;font-weight:700;color:var(--gray-800)">Sombra MD</div>
+            <div style="font-size:.68rem;color:var(--gray-400)">0 8px 32px rgba(0,0,0,.11)</div>
+          </div>
+          <div>
+            <div style="background:#fff;border-radius:10px;height:52px;box-shadow:0 24px 64px rgba(0,0,0,.15);margin-bottom:.5rem"></div>
+            <div style="font-family:'Sora',sans-serif;font-size:.7rem;font-weight:700;color:var(--gray-800)">Sombra LG</div>
+            <div style="font-size:.68rem;color:var(--gray-400)">0 24px 64px rgba(0,0,0,.15)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════
+       5. VOZ Y TONO
+  ════════════════════════════ -->
+  <div class="section-block">
+    <div class="section-label">05 — Voz y tono</div>
+    <h2 class="section-title">Cómo habla la marca</h2>
+    <p class="section-desc" style="margin-bottom:1.4rem">Coopesipe es cercana, confiable y empática. Habla de igual a igual con sus asociados, en lenguaje claro y positivo propio del cooperativismo costarricense.</p>
+
+    <div class="grid-2">
+      <div class="tone-card tone-yes">
+        <div class="tone-title">Sí usamos</div>
+        <div class="tone-list">
+          <div class="tone-item">Lenguaje cercano y en segunda persona: "tu", "vos", "te".</div>
+          <div class="tone-item">Verbos de acción positiva: ahorrá, creditá, protegé.</div>
+          <div class="tone-item">Mensajes de pertenencia: "sos dueño", "tu cooperativa".</div>
+          <div class="tone-item">Frases cortas, directas y concretas.</div>
+          <div class="tone-item">Terminología cooperativa: asociado, excedentes, asamblea.</div>
+        </div>
+      </div>
+      <div class="tone-card tone-no">
+        <div class="tone-title">No usamos</div>
+        <div class="tone-list">
+          <div class="tone-item">Tecnicismos financieros sin explicación previa.</div>
+          <div class="tone-item">Lenguaje impersonal o burocrático excesivo.</div>
+          <div class="tone-item">Promesas no sustentadas o superlativos vacíos.</div>
+          <div class="tone-item">Anglicismos innecesarios cuando existe equivalente en español.</div>
+          <div class="tone-item">Tono condescendiente o corporativo frío.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── FOOTER ── -->
+  <div class="brand-footer">
+    <img src="logo_coopesipe.png" alt="Coopesipe R.L.">
+    <div class="brand-footer-dot"></div>
+    <div class="brand-footer-text">Libro de Marca v1.0 &nbsp;·&nbsp; Coopesipe R.L. &nbsp;·&nbsp; Uso interno y proveedores autorizados</div>
+    <div class="brand-footer-dot"></div>
+    <div class="brand-footer-text">© 2026 Todos los derechos reservados</div>
+  </div>
+
+</div>
+</body>
+</html>
