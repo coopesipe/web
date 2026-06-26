@@ -412,6 +412,14 @@ nav a:hover::after, nav a.active::after { transform: scaleX(1); }
   .ot-b4::before{left:5%;right:5%}.ot-b4 .d.a{left:5%}.ot-b4 .d.b{left:32%}.ot-b4 .d.c{right:32%}.ot-b4 .d.d{right:5%}
 }
 
+/* ===== MEMBER CARDS (modales órganos) ===== */
+.member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(105px,1fr)); gap: 1rem; margin-bottom: 1.4rem; }
+.member-card { text-align: center; padding: 0.5rem; }
+.member-photo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 0.55rem; border: 3px solid var(--green-pale); display: block; }
+.member-name { font-family: 'Sora',sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--gray-800); line-height: 1.25; }
+.member-role { font-size: 0.73rem; color: var(--green-mid); font-weight: 600; margin-top: 0.2rem; }
+.modal-section-hd { font-size: 0.73rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); padding-top: 1.1rem; margin-bottom: 0.6rem; border-top: 1px solid var(--gray-100); }
+
 /* ===== FOOTER ===== */
 footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4rem 0 2rem; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 2.5rem; margin-bottom: 3rem; }
@@ -839,22 +847,22 @@ const modalData = {
   electoral: {
     title: 'Comisión Electoral',
     img: null,
-    html: '<p>La Comisión Electoral es el órgano encargado de organizar, dirigir y supervisar todos los procesos electorales internos de la cooperativa.</p><ul><li>Organizar las elecciones de delegados y representantes</li><li>Elaborar y mantener el padrón electoral de asociados</li><li>Garantizar la transparencia y legitimidad de los procesos</li><li>Proclamar oficialmente los resultados de las votaciones</li><li>Resolver impugnaciones relacionadas con el proceso electoral</li></ul>'
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Mujer2.png" class="member-photo" alt=""><div class="member-name">Laura Castillo Méndez</div><div class="member-role">Presidenta</div></div><div class="member-card"><img src="Referencias/Mujer1.png" class="member-photo" alt=""><div class="member-name">Ana Rodríguez Jiménez</div><div class="member-role">Secretaria</div></div><div class="member-card"><img src="Referencias/Hombre1.png" class="member-photo" alt=""><div class="member-name">Carlos Vargas Mora</div><div class="member-role">Vocal</div></div></div><div class="modal-section-hd">Funciones</div><p>La Comisión Electoral organiza, dirige y supervisa todos los procesos electorales internos de la cooperativa.</p><ul><li>Organizar las elecciones de delegados y representantes</li><li>Elaborar y mantener el padrón electoral de asociados</li><li>Garantizar la transparencia y legitimidad de los procesos</li><li>Proclamar oficialmente los resultados de las votaciones</li><li>Resolver impugnaciones relacionadas con el proceso electoral</li></ul>'
   },
   vigilancia: {
     title: 'Comité de Vigilancia',
-    img: BASE + '/images/Comite_Vigilancia.png',
-    html: '<p>Compuesto por <strong>3 dirigentes electos más 2 suplentes</strong> por un período de 2 años. Se encarga del examen y fiscalización de todas las cuentas y transacciones de la Cooperativa.</p><ul><li>Verificar balances y estados financieros</li><li>Revisar la contabilidad cada dos meses</li><li>Supervisar el cumplimiento de leyes y del estatuto</li><li>Informar a la Asamblea General sobre sus hallazgos</li><li>Atender denuncias de los asociados</li></ul>'
+    img: null,
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Hombre2.png" class="member-photo" alt=""><div class="member-name">Javier Solís Ramírez</div><div class="member-role">Presidente</div></div><div class="member-card"><img src="Referencias/Mujer2.png" class="member-photo" alt=""><div class="member-name">Laura Castillo Méndez</div><div class="member-role">Secretaria</div></div><div class="member-card"><img src="Referencias/Mujer1.png" class="member-photo" alt=""><div class="member-name">Ana Rodríguez Jiménez</div><div class="member-role">Vocal</div></div></div><div class="modal-section-hd">Funciones</div><p>Compuesto por <strong>3 dirigentes electos más 2 suplentes</strong> por un período de 2 años. Se encarga del examen y fiscalización de todas las cuentas y transacciones de la Cooperativa.</p><ul><li>Verificar balances y estados financieros</li><li>Revisar la contabilidad cada dos meses</li><li>Supervisar el cumplimiento de leyes y del estatuto</li><li>Informar a la Asamblea General sobre sus hallazgos</li><li>Atender denuncias de los asociados</li></ul>'
   },
   consejo: {
     title: 'Consejo de Administración',
-    img: BASE + '/images/Consejo_Administracion.png',
-    html: '<p>Compuesto por <strong>5 miembros propietarios más 2 suplentes</strong> elegidos por 2 años. Sesiona en forma ordinaria dos veces por mes.</p><p>Funciones:</p><ul><li>Establecer las políticas crediticias y de ahorro</li><li>Nombrar y remover al Gerente (con voto mínimo de 4 miembros)</li><li>Enviar informes periódicos a INFOCOOP y SUGEF</li><li>Aprobar el presupuesto y plan anual operativo</li><li>Supervisar la ejecución de acuerdos institucionales</li></ul>'
+    img: null,
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Hombre1.png" class="member-photo" alt=""><div class="member-name">Carlos Vargas Mora</div><div class="member-role">Presidente</div></div><div class="member-card"><img src="Referencias/Mujer1.png" class="member-photo" alt=""><div class="member-name">Ana Rodríguez Jiménez</div><div class="member-role">Vicepresidenta</div></div><div class="member-card"><img src="Referencias/Mujer2.png" class="member-photo" alt=""><div class="member-name">Laura Castillo Méndez</div><div class="member-role">Secretaria</div></div><div class="member-card"><img src="Referencias/Hombre2.png" class="member-photo" alt=""><div class="member-name">Javier Solís Ramírez</div><div class="member-role">Tesorero</div></div></div><div class="modal-section-hd">Funciones</div><p>Compuesto por <strong>5 miembros propietarios más 2 suplentes</strong> elegidos por 2 años. Sesiona en forma ordinaria dos veces por mes.</p><ul><li>Establecer las políticas crediticias y de ahorro</li><li>Nombrar y remover al Gerente (con voto mínimo de 4 miembros)</li><li>Enviar informes periódicos a INFOCOOP y SUGEF</li><li>Aprobar el presupuesto y plan anual operativo</li><li>Supervisar la ejecución de acuerdos institucionales</li></ul>'
   },
   educacion: {
     title: 'Comité de Educación y Bienestar Social',
-    img: BASE + '/images/Comite_Educacion.png',
-    html: '<p>Conformado por un <strong>mínimo de 3 dirigentes</strong> por período de 2 años (2 en años pares, 1 en años impares). Coordina los programas educativos y de bienestar para los asociados.</p><ul><li>Coordinar programas de capacitación cooperativa</li><li>Supervisar el uso correcto de la Reserva para Educación</li><li>Gestionar actividades de bienestar y solidaridad</li><li>Promover la cultura cooperativa entre los asociados</li><li>Organizar actividades formativas con CENECOOP</li></ul>'
+    img: null,
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Mujer1.png" class="member-photo" alt=""><div class="member-name">Ana Rodríguez Jiménez</div><div class="member-role">Coordinadora</div></div><div class="member-card"><img src="Referencias/Hombre1.png" class="member-photo" alt=""><div class="member-name">Carlos Vargas Mora</div><div class="member-role">Secretario</div></div><div class="member-card"><img src="Referencias/Hombre2.png" class="member-photo" alt=""><div class="member-name">Javier Solís Ramírez</div><div class="member-role">Vocal</div></div></div><div class="modal-section-hd">Funciones</div><p>Conformado por un <strong>mínimo de 3 dirigentes</strong> por período de 2 años (2 en años pares, 1 en años impares). Coordina los programas educativos y de bienestar para los asociados.</p><ul><li>Coordinar programas de capacitación cooperativa</li><li>Supervisar el uso correcto de la Reserva para Educación</li><li>Gestionar actividades de bienestar y solidaridad</li><li>Promover la cultura cooperativa entre los asociados</li><li>Organizar actividades formativas con CENECOOP</li></ul>'
   },
   auditoria: {
     title: 'Auditoría Externa',

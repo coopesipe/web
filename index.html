@@ -521,6 +521,40 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 }
 .footer-wa-link:hover { color: #25D366; }
 
+/* ===== ANUNCIOS CAROUSEL ===== */
+#anuncios { padding: 6rem 0; background: var(--green-deep); }
+#anuncios .section-title { color: #fff; }
+#anuncios .section-desc  { color: rgba(255,255,255,0.55); }
+#anuncios .tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+.carousel-wrap { position: relative; max-width: 860px; margin: 0 auto; }
+.carousel-viewport { overflow: hidden; border-radius: var(--radius-lg); background: #0a0a0a; }
+.carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+.carousel-slide { flex: 0 0 100%; }
+.carousel-slide img { width: 100%; height: 460px; object-fit: contain; cursor: zoom-in; display: block; }
+.carousel-btn {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,0.92); cursor: pointer; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.35); transition: all 0.22s var(--ease);
+}
+.carousel-btn:hover { background: var(--green); color: #fff; transform: translateY(-50%) scale(1.08); }
+.carousel-btn--prev { left: -22px; }
+.carousel-btn--next { right: -22px; }
+.carousel-dots { display: flex; justify-content: center; gap: 0.55rem; margin-top: 1.4rem; }
+.cdot { width: 8px; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.3); border: none; cursor: pointer; transition: all 0.3s var(--ease); padding: 0; }
+.cdot.active { width: 24px; background: var(--green); }
+#lb { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.93); display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+#lb.open { opacity: 1; pointer-events: auto; }
+#lb img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: var(--radius); box-shadow: 0 0 60px rgba(0,0,0,0.6); }
+#lb-close { position: absolute; top: 1.2rem; right: 1.2rem; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.12); border: none; cursor: pointer; color: #fff; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+#lb-close:hover { background: rgba(255,255,255,0.22); }
+@media (max-width: 860px) {
+  .carousel-btn--prev { left: 8px; }
+  .carousel-btn--next { right: 8px; }
+  .carousel-slide img { height: 240px; }
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1200px) {
   nav a { font-size: 0.78rem; padding: 0.38rem 0.65rem; }
@@ -1105,6 +1139,42 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
   </div>
 </section>
 
+<!-- ===== ANUNCIOS ===== -->
+<section id="anuncios">
+  <div class="container">
+    <div class="section-hd fade-up">
+      <span class="tag">Novedades</span>
+      <h2 class="section-title">Anuncios</h2>
+      <p class="section-desc">Mantenete informado con las últimas novedades y promociones de Coopesipe R.L.</p>
+    </div>
+    <div class="carousel-wrap fade-up" style="transition-delay:.15s">
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="car-track">
+          <div class="carousel-slide"><img src="Anuncios/Anuncio.jpg"  alt="Anuncio"></div>
+          <div class="carousel-slide"><img src="Anuncios/Anuncio1.jpg" alt="Anuncio 1"></div>
+          <div class="carousel-slide"><img src="Anuncios/Anuncio2.jpg" alt="Anuncio 2"></div>
+          <div class="carousel-slide"><img src="Anuncios/Anuncio3.jpg" alt="Anuncio 3"></div>
+          <div class="carousel-slide"><img src="Anuncios/Anuncio5.jpg" alt="Anuncio 5"></div>
+        </div>
+      </div>
+      <button class="carousel-btn carousel-btn--prev" id="car-prev" aria-label="Anterior">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="carousel-btn carousel-btn--next" id="car-next" aria-label="Siguiente">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="carousel-dots" id="car-dots"></div>
+    </div>
+  </div>
+</section>
+
+<div id="lb">
+  <button id="lb-close" aria-label="Cerrar">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <img id="lb-img" src="" alt="Anuncio ampliado">
+</div>
+
 <!-- ===== CONTACTO ===== -->
 <section id="contacto">
   <div class="container">
@@ -1307,6 +1377,59 @@ const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -45px 0px' });
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// ===== CAROUSEL =====
+(function(){
+  const track  = document.getElementById('car-track');
+  if (!track) return;
+  const slides = track.querySelectorAll('.carousel-slide');
+  const dotsEl = document.getElementById('car-dots');
+  let cur = 0, timer;
+
+  slides.forEach(function(_, i) {
+    const d = document.createElement('button');
+    d.className = 'cdot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Anuncio ' + (i + 1));
+    d.addEventListener('click', function(){ goTo(i); });
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(n) {
+    cur = ((n % slides.length) + slides.length) % slides.length;
+    track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+    dotsEl.querySelectorAll('.cdot').forEach(function(d, i){ d.classList.toggle('active', i === cur); });
+    clearInterval(timer);
+    timer = setInterval(function(){ goTo(cur + 1); }, 5000);
+  }
+
+  document.getElementById('car-prev').addEventListener('click', function(){ goTo(cur - 1); });
+  document.getElementById('car-next').addEventListener('click', function(){ goTo(cur + 1); });
+
+  // Lightbox
+  const lb    = document.getElementById('lb');
+  const lbImg = document.getElementById('lb-img');
+  function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  slides.forEach(function(s) {
+    s.querySelector('img').addEventListener('click', function(e) {
+      lbImg.src = e.target.src;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  document.getElementById('lb-close').addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){ if (e.target === lb) closeLb(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLb(); });
+
+  // Swipe
+  var tx = 0;
+  track.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    var diff = tx - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? cur + 1 : cur - 1);
+  }, {passive:true});
+
+  timer = setInterval(function(){ goTo(cur + 1); }, 5000);
+})();
 </script>
 </body>
 </html>
