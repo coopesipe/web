@@ -377,17 +377,20 @@ nav a:hover::after, nav a.active::after { transform: scaleX(1); }
 .ot-node.ot-orange{background:linear-gradient(135deg,var(--orange),var(--orange-hover));border-color:var(--orange)}
 .ot-node.ot-ghost{background:rgba(108,184,39,.07);border-style:dashed}
 .ot-row{display:flex;justify-content:center;align-items:flex-start;gap:1rem;width:100%}
-.ot-v{width:2px;height:28px;background:rgba(108,184,39,.32)}
+.ot-row-3{display:grid!important;grid-template-columns:repeat(3,1fr);justify-items:center;gap:1rem}
+.ot-row-4{display:grid!important;grid-template-columns:repeat(4,1fr);justify-items:center;gap:.75rem}
+.ot-v{width:2px;height:28px;background:rgba(108,184,39,.32);margin:0 auto}
 .ot-b3{position:relative;width:100%;height:28px}
-.ot-b3::before{content:'';position:absolute;top:0;left:17%;right:17%;height:2px;background:rgba(108,184,39,.32)}
+.ot-b3::before{content:'';position:absolute;top:0;left:16.67%;right:16.67%;height:2px;background:rgba(108,184,39,.32)}
 .ot-b3 .d{position:absolute;top:0;width:2px;height:100%;background:rgba(108,184,39,.32)}
-.ot-b3 .d.l{left:17%}.ot-b3 .d.c{left:50%;transform:translateX(-50%)}.ot-b3 .d.r{right:17%}
+.ot-b3 .d.l{left:16.67%}.ot-b3 .d.c{left:50%;transform:translateX(-50%)}.ot-b3 .d.r{right:16.67%}
 .ot-b4{position:relative;width:100%;height:28px}
-.ot-b4::before{content:'';position:absolute;top:0;left:8%;right:8%;height:2px;background:rgba(108,184,39,.32)}
+.ot-b4::before{content:'';position:absolute;top:0;left:12.5%;right:12.5%;height:2px;background:rgba(108,184,39,.32)}
 .ot-b4 .d{position:absolute;top:0;width:2px;height:100%;background:rgba(108,184,39,.32)}
-.ot-b4 .d.a{left:8%}.ot-b4 .d.b{left:35%}.ot-b4 .d.c{right:35%}.ot-b4 .d.d{right:8%}
-.ot-lateral{display:flex;justify-content:center;align-items:stretch;gap:0;width:100%}
-.ot-lateral-mid{flex:0 0 140px;position:relative;display:flex;align-items:center;justify-content:center}
+.ot-b4 .d.a{left:12.5%}.ot-b4 .d.b{left:37.5%}.ot-b4 .d.c{right:37.5%}.ot-b4 .d.d{right:12.5%}
+.ot-lateral{display:flex;align-items:stretch;gap:0;width:100%}
+.ot-lateral>.ot-node{flex:1 1 0;min-width:0;text-align:center}
+.ot-lateral-mid{flex:0 0 100px;position:relative;display:flex;align-items:center;justify-content:center}
 .ot-lateral-mid .lv{position:absolute;left:50%;transform:translateX(-50%);width:2px;height:100%;background:rgba(108,184,39,.32)}
 .ot-lateral-mid .lh{width:100%;height:0;border-top:2px dashed rgba(108,184,39,.38)}
 .modal-ov{position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.78);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .28s var(--ease)}
@@ -405,11 +408,12 @@ nav a:hover::after, nav a.active::after { transform: scaleX(1); }
 .modal-text ul{padding-left:1.2rem;display:flex;flex-direction:column;gap:.35rem;margin-top:.5rem}
 .modal-text li{list-style:disc;font-size:.86rem}
 @media(max-width:640px){
-  .ot-row{gap:.6rem}
+  .ot-row{gap:.5rem}
+  .ot-row-3,.ot-row-4{gap:.4rem}
   .ot-node{font-size:.72rem;padding:.5rem .65rem;min-width:80px}
-  .ot-lateral-mid{flex:0 0 70px}
-  .ot-b3::before{left:10%;right:10%}.ot-b3 .d.l{left:10%}.ot-b3 .d.r{right:10%}
-  .ot-b4::before{left:5%;right:5%}.ot-b4 .d.a{left:5%}.ot-b4 .d.b{left:32%}.ot-b4 .d.c{right:32%}.ot-b4 .d.d{right:5%}
+  .ot-lateral-mid{flex:0 0 60px}
+  .ot-b3::before{left:16.67%;right:16.67%}.ot-b3 .d.l{left:16.67%}.ot-b3 .d.r{right:16.67%}
+  .ot-b4::before{left:12.5%;right:12.5%}.ot-b4 .d.a{left:12.5%}.ot-b4 .d.b{left:37.5%}.ot-b4 .d.c{right:37.5%}.ot-b4 .d.d{right:12.5%}
 }
 
 /* ===== MEMBER CARDS (modales órganos) ===== */
@@ -718,7 +722,7 @@ Asamblea General</button>
       <div class="ot-b3"><span class="d l"></span><span class="d c"></span><span class="d r"></span></div>
 
       <!-- 3. Comité Vigilancia | Consejo Admin | Comité Educación -->
-      <div class="ot-row">
+      <div class="ot-row ot-row-3">
         <button class="ot-node" data-modal="vigilancia">Comité de<br>Vigilancia</button>
         <button class="ot-node ot-top" data-modal="consejo">Consejo de<br>Administración</button>
         <button class="ot-node" data-modal="educacion">Comité de Educación<br>y Bienestar Social</button>
@@ -754,7 +758,7 @@ Asamblea General</button>
       <div class="ot-b4"><span class="d a"></span><span class="d b"></span><span class="d c"></span><span class="d d"></span></div>
 
       <!-- 7. Leaf nodes -->
-      <div class="ot-row">
+      <div class="ot-row ot-row-4">
         <button class="ot-node" data-modal="contabilidad">Contabilidad</button>
         <button class="ot-node" data-modal="credito">Crédito</button>
         <button class="ot-node" data-modal="plataforma">Plataforma de<br>servicios</button>
