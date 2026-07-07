@@ -142,16 +142,16 @@ nav a:hover::after { transform: scaleX(1); }
 /* ===== HERO ===== */
 #hero {
   min-height: 100vh;
-  background: var(--green-deep);
+  background: url('Referencias/Banner1.png') center/cover no-repeat var(--green-deep);
   position: relative; display: flex; align-items: center; overflow: hidden;
 }
 .hero-bg {
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 70% 55% at 75% 45%, rgba(108,184,39,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 55% 70% at 90% 15%, rgba(232,78,15,0.05) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(43,92,18,0.4) 0%, transparent 60%),
-    linear-gradient(135deg, #0B1E05 0%, #0F2507 50%, #091A04 100%);
+    radial-gradient(ellipse 70% 55% at 75% 45%, rgba(108,184,39,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 70% at 90% 15%, rgba(232,78,15,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(43,92,18,0.3) 0%, transparent 60%),
+    linear-gradient(135deg, rgba(11,30,5,0.88) 0%, rgba(15,37,7,0.82) 50%, rgba(9,26,4,0.88) 100%);
 }
 
 /* Triangle decorative motif from logo */
@@ -384,12 +384,13 @@ nav a:hover::after { transform: scaleX(1); }
 /* ===== WHY ===== */
 #por-que {
   padding: 6rem 0;
-  background: var(--green-dark);
+  background: url('Referencias/Banner2.png') center/cover no-repeat var(--green-dark);
   position: relative; overflow: hidden;
 }
 #por-que::before {
   content: ''; position: absolute; inset: 0;
   background:
+    linear-gradient(135deg, rgba(26,58,8,0.90) 0%, rgba(43,92,18,0.86) 100%),
     radial-gradient(ellipse 55% 60% at 5% 50%, rgba(108,184,39,0.07) 0%, transparent 60%),
     radial-gradient(ellipse 40% 50% at 95% 10%, rgba(232,78,15,0.05) 0%, transparent 50%);
 }
@@ -522,10 +523,10 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 .footer-wa-link:hover { color: #25D366; }
 
 /* ===== ANUNCIOS CAROUSEL ===== */
-#anuncios { padding: 6rem 0; background: var(--green-deep); }
+#anuncios { padding: 3.5rem 0; background: #1a1a1a; }
 #anuncios .section-title { color: #fff; }
-#anuncios .section-desc  { color: rgba(255,255,255,0.55); }
-#anuncios .tag { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+#anuncios .section-desc  { color: rgba(255,255,255,0.5); }
+#anuncios .tag { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75); }
 .carousel-wrap { position: relative; max-width: 860px; margin: 0 auto; }
 .carousel-viewport { overflow: hidden; border-radius: var(--radius-lg); background: #0a0a0a; }
 .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
