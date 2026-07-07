@@ -151,7 +151,7 @@ nav a:hover::after { transform: scaleX(1); }
     radial-gradient(ellipse 70% 55% at 75% 45%, rgba(108,184,39,0.06) 0%, transparent 60%),
     radial-gradient(ellipse 55% 70% at 90% 15%, rgba(232,78,15,0.04) 0%, transparent 50%),
     radial-gradient(ellipse 40% 50% at 10% 80%, rgba(43,92,18,0.3) 0%, transparent 60%),
-    linear-gradient(135deg, rgba(11,30,5,0.88) 0%, rgba(15,37,7,0.82) 50%, rgba(9,26,4,0.88) 100%);
+    linear-gradient(135deg, rgba(11,30,5,0.94) 0%, rgba(15,37,7,0.90) 50%, rgba(9,26,4,0.94) 100%);
 }
 
 /* Triangle decorative motif from logo */
@@ -390,7 +390,7 @@ nav a:hover::after { transform: scaleX(1); }
 #por-que::before {
   content: ''; position: absolute; inset: 0;
   background:
-    linear-gradient(135deg, rgba(26,58,8,0.90) 0%, rgba(43,92,18,0.86) 100%),
+    linear-gradient(135deg, rgba(26,58,8,0.94) 0%, rgba(43,92,18,0.92) 100%),
     radial-gradient(ellipse 55% 60% at 5% 50%, rgba(108,184,39,0.07) 0%, transparent 60%),
     radial-gradient(ellipse 40% 50% at 95% 10%, rgba(232,78,15,0.05) 0%, transparent 50%);
 }
@@ -522,38 +522,41 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 }
 .footer-wa-link:hover { color: #25D366; }
 
-/* ===== ANUNCIOS CAROUSEL ===== */
-#anuncios { padding: 3.5rem 0; background: #1a1a1a; }
+/* ===== ANUNCIOS COVERFLOW ===== */
+#anuncios { padding: 2.5rem 0 3rem; background: #1a1a1a; }
+#anuncios .section-hd { margin-bottom: 1.6rem; }
 #anuncios .section-title { color: #fff; }
 #anuncios .section-desc  { color: rgba(255,255,255,0.5); }
 #anuncios .tag { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75); }
-.carousel-wrap { position: relative; max-width: 860px; margin: 0 auto; }
-.carousel-viewport { overflow: hidden; border-radius: var(--radius-lg); background: #0a0a0a; }
-.carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
-.carousel-slide { flex: 0 0 100%; }
-.carousel-slide img { width: 100%; height: 460px; object-fit: contain; cursor: zoom-in; display: block; }
-.carousel-btn {
-  position: absolute; top: 50%; transform: translateY(-50%);
-  width: 44px; height: 44px; border-radius: 50%; border: none;
-  background: rgba(255,255,255,0.92); cursor: pointer; z-index: 2;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.35); transition: all 0.22s var(--ease);
-}
-.carousel-btn:hover { background: var(--green); color: #fff; transform: translateY(-50%) scale(1.08); }
-.carousel-btn--prev { left: -22px; }
-.carousel-btn--next { right: -22px; }
-.carousel-dots { display: flex; justify-content: center; gap: 0.55rem; margin-top: 1.4rem; }
-.cdot { width: 8px; height: 8px; border-radius: 4px; background: rgba(255,255,255,0.3); border: none; cursor: pointer; transition: all 0.3s var(--ease); padding: 0; }
-.cdot.active { width: 24px; background: var(--green); }
-#lb { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.93); display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
-#lb.open { opacity: 1; pointer-events: auto; }
-#lb img { max-width: 92vw; max-height: 92vh; object-fit: contain; border-radius: var(--radius); box-shadow: 0 0 60px rgba(0,0,0,0.6); }
-#lb-close { position: absolute; top: 1.2rem; right: 1.2rem; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.12); border: none; cursor: pointer; color: #fff; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-#lb-close:hover { background: rgba(255,255,255,0.22); }
-@media (max-width: 860px) {
-  .carousel-btn--prev { left: 8px; }
-  .carousel-btn--next { right: 8px; }
-  .carousel-slide img { height: 240px; }
+.cs-wrap { position: relative; max-width: 1100px; margin: 0 auto; }
+.cs-stage { position: relative; height: 360px; overflow: hidden; }
+.cs-slide { position: absolute; top: 50%; transition: all 0.55s cubic-bezier(0.4,0,0.2,1); }
+.cs-slide img { width: 100%; height: 100%; object-fit: contain; display: block; border-radius: var(--radius-lg); }
+.cs-slide[data-pos="0"]  { width:52%; left:50%; transform:translateX(-50%) translateY(-50%); z-index:10; filter:none; opacity:1; cursor:zoom-in; }
+.cs-slide[data-pos="1"]  { width:42%; left:64%; transform:translateY(-50%); z-index:5; filter:blur(5px) brightness(0.3); opacity:1; cursor:pointer; }
+.cs-slide[data-pos="-1"] { width:42%; left:-6%; transform:translateY(-50%); z-index:5; filter:blur(5px) brightness(0.3); opacity:1; cursor:pointer; }
+.cs-slide[data-pos="2"]  { width:30%; left:90%; transform:translateY(-50%); z-index:2; filter:blur(10px) brightness(0.12); opacity:0.7; }
+.cs-slide[data-pos="-2"] { width:30%; left:-20%; transform:translateY(-50%); z-index:2; filter:blur(10px) brightness(0.12); opacity:0.7; }
+.carousel-btn { position:absolute; top:50%; transform:translateY(-50%); width:44px; height:44px; border-radius:50%; border:none; background:rgba(255,255,255,0.92); cursor:pointer; z-index:20; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 16px rgba(0,0,0,0.35); transition:all 0.22s var(--ease); }
+.carousel-btn:hover { background:var(--green); color:#fff; transform:translateY(-50%) scale(1.08); }
+.carousel-btn--prev { left:0; }
+.carousel-btn--next { right:0; }
+.carousel-dots { display:flex; justify-content:center; gap:0.55rem; margin-top:1.2rem; }
+.cdot { width:8px; height:8px; border-radius:4px; background:rgba(255,255,255,0.3); border:none; cursor:pointer; transition:all 0.3s var(--ease); padding:0; }
+.cdot.active { width:24px; background:var(--green); }
+#lb { position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.93); display:flex; align-items:center; justify-content:center; padding:1rem; opacity:0; pointer-events:none; transition:opacity 0.25s; }
+#lb.open { opacity:1; pointer-events:auto; }
+#lb img { max-width:92vw; max-height:92vh; object-fit:contain; border-radius:var(--radius); box-shadow:0 0 60px rgba(0,0,0,0.6); }
+#lb-close { position:absolute; top:1.2rem; right:1.2rem; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.12); border:none; cursor:pointer; color:#fff; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+#lb-close:hover { background:rgba(255,255,255,0.22); }
+@media (max-width: 768px) {
+  .cs-stage { height: 220px; }
+  .cs-slide[data-pos="0"]  { width: 78%; }
+  .cs-slide[data-pos="1"]  { width: 52%; left: 72%; }
+  .cs-slide[data-pos="-1"] { width: 52%; left: -24%; }
+  .cs-slide[data-pos="2"], .cs-slide[data-pos="-2"] { opacity: 0; pointer-events: none; }
+  .carousel-btn--prev { left: 2px; }
+  .carousel-btn--next { right: 2px; }
 }
 
 /* ===== RESPONSIVE ===== */
@@ -1148,15 +1151,13 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <h2 class="section-title">Anuncios</h2>
       <p class="section-desc">Mantenete informado con las últimas novedades y promociones de Coopesipe R.L.</p>
     </div>
-    <div class="carousel-wrap fade-up" style="transition-delay:.15s">
-      <div class="carousel-viewport">
-        <div class="carousel-track" id="car-track">
-          <div class="carousel-slide"><img src="Anuncios/Anuncio.jpg"  alt="Anuncio"></div>
-          <div class="carousel-slide"><img src="Anuncios/Anuncio1.jpg" alt="Anuncio 1"></div>
-          <div class="carousel-slide"><img src="Anuncios/Anuncio2.jpg" alt="Anuncio 2"></div>
-          <div class="carousel-slide"><img src="Anuncios/Anuncio3.jpg" alt="Anuncio 3"></div>
-          <div class="carousel-slide"><img src="Anuncios/Anuncio5.jpg" alt="Anuncio 5"></div>
-        </div>
+    <div class="cs-wrap fade-up" style="transition-delay:.15s">
+      <div class="cs-stage" id="cs-stage">
+        <div class="cs-slide" data-index="0"><img src="Anuncios/Anuncio.jpg"  alt="Anuncio"></div>
+        <div class="cs-slide" data-index="1"><img src="Anuncios/Anuncio1.jpg" alt="Anuncio 1"></div>
+        <div class="cs-slide" data-index="2"><img src="Anuncios/Anuncio2.jpg" alt="Anuncio 2"></div>
+        <div class="cs-slide" data-index="3"><img src="Anuncios/Anuncio3.jpg" alt="Anuncio 3"></div>
+        <div class="cs-slide" data-index="4"><img src="Anuncios/Anuncio5.jpg" alt="Anuncio 5"></div>
       </div>
       <button class="carousel-btn carousel-btn--prev" id="car-prev" aria-label="Anterior">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
@@ -1379,26 +1380,37 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.1, rootMargin: '0px 0px -45px 0px' });
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-// ===== CAROUSEL =====
+// ===== COVERFLOW CAROUSEL =====
 (function(){
-  const track  = document.getElementById('car-track');
-  if (!track) return;
-  const slides = track.querySelectorAll('.carousel-slide');
-  const dotsEl = document.getElementById('car-dots');
-  let cur = 0, timer;
+  var stage  = document.getElementById('cs-stage');
+  if (!stage) return;
+  var slides = Array.prototype.slice.call(stage.querySelectorAll('.cs-slide'));
+  var total  = slides.length;
+  var dotsEl = document.getElementById('car-dots');
+  var cur = 0, timer;
 
   slides.forEach(function(_, i) {
-    const d = document.createElement('button');
+    var d = document.createElement('button');
     d.className = 'cdot' + (i === 0 ? ' active' : '');
     d.setAttribute('aria-label', 'Anuncio ' + (i + 1));
     d.addEventListener('click', function(){ goTo(i); });
     dotsEl.appendChild(d);
   });
 
+  function updatePos() {
+    slides.forEach(function(slide, i) {
+      var pos = (i - cur + total) % total;
+      if (pos > Math.floor(total / 2)) pos -= total;
+      slide.setAttribute('data-pos', pos);
+    });
+    dotsEl.querySelectorAll('.cdot').forEach(function(d, i) {
+      d.classList.toggle('active', i === cur);
+    });
+  }
+
   function goTo(n) {
-    cur = ((n % slides.length) + slides.length) % slides.length;
-    track.style.transform = 'translateX(-' + (cur * 100) + '%)';
-    dotsEl.querySelectorAll('.cdot').forEach(function(d, i){ d.classList.toggle('active', i === cur); });
+    cur = ((n % total) + total) % total;
+    updatePos();
     clearInterval(timer);
     timer = setInterval(function(){ goTo(cur + 1); }, 5000);
   }
@@ -1406,15 +1418,19 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
   document.getElementById('car-prev').addEventListener('click', function(){ goTo(cur - 1); });
   document.getElementById('car-next').addEventListener('click', function(){ goTo(cur + 1); });
 
-  // Lightbox
-  const lb    = document.getElementById('lb');
-  const lbImg = document.getElementById('lb-img');
+  // Click slide activo → lightbox; slide lateral → navegar a él
+  var lb    = document.getElementById('lb');
+  var lbImg = document.getElementById('lb-img');
   function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
-  slides.forEach(function(s) {
+  slides.forEach(function(s, idx) {
     s.querySelector('img').addEventListener('click', function(e) {
-      lbImg.src = e.target.src;
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      if (s.getAttribute('data-pos') === '0') {
+        lbImg.src = e.target.src;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      } else {
+        goTo(idx);
+      }
     });
   });
   document.getElementById('lb-close').addEventListener('click', closeLb);
@@ -1423,12 +1439,13 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
   // Swipe
   var tx = 0;
-  track.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
-  track.addEventListener('touchend', function(e){
+  stage.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+  stage.addEventListener('touchend', function(e){
     var diff = tx - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 40) goTo(diff > 0 ? cur + 1 : cur - 1);
   }, {passive:true});
 
+  updatePos();
   timer = setInterval(function(){ goTo(cur + 1); }, 5000);
 })();
 </script>
