@@ -417,7 +417,7 @@ nav a:hover::after, nav a.active::after { transform: scaleX(1); }
 /* ===== MEMBER CARDS (modales órganos) ===== */
 .member-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(105px,1fr)); gap: 1rem; margin-bottom: 1.4rem; }
 .member-card { text-align: center; padding: 0.5rem; }
-.member-photo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; margin: 0 auto 0.55rem; border: 3px solid var(--green-pale); display: block; }
+.member-photo { width: 110px; height: 118px; border-radius: 50%; object-fit: cover; object-position: center top; margin: 0 auto 0.55rem; display: block; }
 .member-name { font-family: 'Sora',sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--gray-800); line-height: 1.25; }
 .member-role { font-size: 0.73rem; color: var(--green-mid); font-weight: 600; margin-top: 0.2rem; }
 .modal-section-hd { font-size: 0.73rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); padding-top: 1.1rem; margin-bottom: 0.6rem; border-top: 1px solid var(--gray-100); }
@@ -494,6 +494,26 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 .wa-fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.45);transition:transform .2s,box-shadow .2s;animation:wa-pulse 2.5s ease-in-out infinite;text-decoration:none}
 .wa-fab:hover{transform:scale(1.08);box-shadow:0 6px 22px rgba(37,211,102,.6);animation:none}
 @keyframes wa-pulse{0%,100%{box-shadow:0 4px 16px rgba(37,211,102,.45)}50%{box-shadow:0 4px 24px rgba(37,211,102,.7),0 0 0 8px rgba(37,211,102,.1)}}
+/* Buscador */
+.search-btn{background:none;border:1.5px solid rgba(255,255,255,.28);color:rgba(255,255,255,.8);width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0}
+.search-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.6);color:#fff}
+.search-overlay{position:fixed;inset:0;z-index:2000;background:rgba(11,30,5,.97);display:flex;align-items:flex-start;justify-content:center;padding-top:6rem;opacity:0;pointer-events:none;transition:opacity .25s}
+.search-overlay.open{opacity:1;pointer-events:all}
+.search-box{width:100%;max-width:640px;padding:0 1.5rem}
+.search-input-wrap{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:12px;padding:.85rem 1.1rem;margin-bottom:1rem}
+.search-input-wrap>svg{flex-shrink:0;color:rgba(255,255,255,.35)}
+#search-input{flex:1;background:none;border:none;outline:none;font-size:1.1rem;color:#fff;caret-color:#6CB827;font-family:'Plus Jakarta Sans',sans-serif}
+#search-input::placeholder{color:rgba(255,255,255,.28)}
+.search-close{background:none;border:none;color:rgba(255,255,255,.45);cursor:pointer;display:flex;padding:0;transition:color .2s}
+.search-close:hover{color:#fff}
+.search-results{display:flex;flex-direction:column;gap:.35rem}
+.search-result-item{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem;border-radius:10px;text-decoration:none;color:#fff;transition:background .2s}
+.search-result-item:hover{background:rgba(108,184,39,.14)}
+.search-result-icon{width:36px;height:36px;border-radius:8px;background:rgba(108,184,39,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.search-result-title{font-family:'Sora',sans-serif;font-weight:700;font-size:.93rem;color:#fff}
+.search-result-desc{font-size:.79rem;color:rgba(255,255,255,.45);margin-top:.1rem}
+.search-no-results{text-align:center;padding:2.5rem;color:rgba(255,255,255,.35);font-size:.9rem}
+.search-hint{text-align:center;padding:1.5rem;color:rgba(255,255,255,.25);font-size:.82rem}
 </style>
 </head>
 <body>
@@ -512,7 +532,6 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <nav id="main-nav">
         <a href="index.html">Inicio</a>
         <a href="index.html#productos">Productos</a>
-        <a href="index.html#bienestar">Bienestar</a>
         <a href="index.html#convenios">Convenios</a>
         <a href="nosotros.html" class="active">Nosotros</a>
         <a href="galeria.html">Galería</a>
@@ -520,6 +539,9 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         <a href="index.html#contacto">Contacto</a>
       </nav>
       <div class="header-actions">
+        <button class="search-btn" id="search-btn" aria-label="Buscar">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
         <a href="#" class="btn-ingresar">
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
             <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
@@ -853,22 +875,22 @@ const modalData = {
   electoral: {
     title: 'Comisión Electoral',
     img: null,
-    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Mujer2.png" class="member-photo" alt=""><div class="member-name">Laura Castillo Méndez</div><div class="member-role">Presidenta</div></div><div class="member-card"><img src="Referencias/Mujer1.png" class="member-photo" alt=""><div class="member-name">Ana Rodríguez Jiménez</div><div class="member-role">Secretaria</div></div><div class="member-card"><img src="Referencias/Hombre1.png" class="member-photo" alt=""><div class="member-name">Carlos Vargas Mora</div><div class="member-role">Vocal</div></div></div><div class="modal-section-hd">Funciones</div><p>La Comisión Electoral organiza, dirige y supervisa todos los procesos electorales internos de la cooperativa.</p><ul><li>Organizar las elecciones de delegados y representantes</li><li>Elaborar y mantener el padrón electoral de asociados</li><li>Garantizar la transparencia y legitimidad de los procesos</li><li>Proclamar oficialmente los resultados de las votaciones</li><li>Resolver impugnaciones relacionadas con el proceso electoral</li></ul>'
+    html: '<div class="member-grid"><div class="member-card"><div class="member-name">Por definir</div><div class="member-role">Presidenta/e</div></div><div class="member-card"><div class="member-name">Por definir</div><div class="member-role">Secretaria/o</div></div><div class="member-card"><div class="member-name">Por definir</div><div class="member-role">Vocal</div></div></div><div class="modal-section-hd">Funciones</div><p>La Comisión Electoral organiza, dirige y supervisa todos los procesos electorales internos de la cooperativa.</p><ul><li>Organizar las elecciones de delegados y representantes</li><li>Elaborar y mantener el padrón electoral de asociados</li><li>Garantizar la transparencia y legitimidad de los procesos</li><li>Proclamar oficialmente los resultados de las votaciones</li><li>Resolver impugnaciones relacionadas con el proceso electoral</li></ul>'
   },
   vigilancia: {
     title: 'Comité de Vigilancia',
     img: null,
-    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Hombre2.png" class="member-photo" alt=""><div class="member-name">Javier Solís Ramírez</div><div class="member-role">Presidente</div></div><div class="member-card"><img src="Referencias/Mujer2.png" class="member-photo" alt=""><div class="member-name">Laura Castillo Méndez</div><div class="member-role">Secretaria</div></div><div class="member-card"><img src="Referencias/Mujer1.png" class="member-photo" alt=""><div class="member-name">Ana Rodríguez Jiménez</div><div class="member-role">Vocal</div></div></div><div class="modal-section-hd">Funciones</div><p>Compuesto por <strong>3 dirigentes electos más 2 suplentes</strong> por un período de 2 años. Se encarga del examen y fiscalización de todas las cuentas y transacciones de la Cooperativa.</p><ul><li>Verificar balances y estados financieros</li><li>Revisar la contabilidad cada dos meses</li><li>Supervisar el cumplimiento de leyes y del estatuto</li><li>Informar a la Asamblea General sobre sus hallazgos</li><li>Atender denuncias de los asociados</li></ul>'
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Hombre1.png" class="member-photo" alt=""><div class="member-name">Jorge Flores Gutiérrez</div><div class="member-role">Presidente</div></div><div class="member-card"><img src="Referencias/Hombre2.png" class="member-photo" alt=""><div class="member-name">Oscar Brenes</div><div class="member-role">Vicepresidente</div></div><div class="member-card"><img src="Referencias/rolando-fonseca.png" class="member-photo" alt="Rolando Fonseca Gutiérrez"><div class="member-name">Rolando Fonseca Gutiérrez</div><div class="member-role">Secretario</div></div></div><div class="modal-section-hd">Funciones</div><p>Compuesto por <strong>3 dirigentes electos más 2 suplentes</strong> por un período de 2 años. Se encarga del examen y fiscalización de todas las cuentas y transacciones de la Cooperativa.</p><ul><li>Verificar balances y estados financieros</li><li>Revisar la contabilidad cada dos meses</li><li>Supervisar el cumplimiento de leyes y del estatuto</li><li>Informar a la Asamblea General sobre sus hallazgos</li><li>Atender denuncias de los asociados</li></ul>'
   },
   consejo: {
     title: 'Consejo de Administración',
     img: null,
-    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Hombre1.png" class="member-photo" alt=""><div class="member-name">Carlos Vargas Mora</div><div class="member-role">Presidente</div></div><div class="member-card"><img src="Referencias/Mujer1.png" class="member-photo" alt=""><div class="member-name">Ana Rodríguez Jiménez</div><div class="member-role">Vicepresidenta</div></div><div class="member-card"><img src="Referencias/Mujer2.png" class="member-photo" alt=""><div class="member-name">Laura Castillo Méndez</div><div class="member-role">Secretaria</div></div><div class="member-card"><img src="Referencias/Hombre2.png" class="member-photo" alt=""><div class="member-name">Javier Solís Ramírez</div><div class="member-role">Tesorero</div></div></div><div class="modal-section-hd">Funciones</div><p>Compuesto por <strong>5 miembros propietarios más 2 suplentes</strong> elegidos por 2 años. Sesiona en forma ordinaria dos veces por mes.</p><ul><li>Establecer las políticas crediticias y de ahorro</li><li>Nombrar y remover al Gerente (con voto mínimo de 4 miembros)</li><li>Enviar informes periódicos a INFOCOOP y SUGEF</li><li>Aprobar el presupuesto y plan anual operativo</li><li>Supervisar la ejecución de acuerdos institucionales</li></ul>'
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/ronald-varela.png" class="member-photo" alt="Ronald Varela Salas"><div class="member-name">Ronald Varela Salas</div><div class="member-role">Presidente</div></div><div class="member-card"><img src="Referencias/ana-alvarado.png" class="member-photo" alt="Ana Victoria Alvarado Quesada"><div class="member-name">Ana Victoria Alvarado Quesada</div><div class="member-role">Vicepresidenta</div></div><div class="member-card"><img src="Referencias/melvin-soto.png" class="member-photo" alt="Melvin Soto Villegas"><div class="member-name">Melvin Soto Villegas</div><div class="member-role">Vocal 1</div></div><div class="member-card"><img src="Referencias/vanessa-solano.png" class="member-photo" alt="Vanessa Solano Trejos"><div class="member-name">Vanessa Solano Trejos</div><div class="member-role">Secretaria</div></div><div class="member-card"><img src="Referencias/mayela-gamboa.png" class="member-photo" alt="Mayela Gamboa Monge"><div class="member-name">Mayela Gamboa Monge</div><div class="member-role">Vocal 2</div></div></div><div class="modal-section-hd">Funciones</div><p>Compuesto por <strong>5 miembros propietarios más 2 suplentes</strong> elegidos por 2 años. Sesiona en forma ordinaria dos veces por mes.</p><ul><li>Establecer las políticas crediticias y de ahorro</li><li>Nombrar y remover al Gerente (con voto mínimo de 4 miembros)</li><li>Enviar informes periódicos a INFOCOOP y SUGEF</li><li>Aprobar el presupuesto y plan anual operativo</li><li>Supervisar la ejecución de acuerdos institucionales</li></ul>'
   },
   educacion: {
     title: 'Comité de Educación y Bienestar Social',
     img: null,
-    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Mujer1.png" class="member-photo" alt=""><div class="member-name">Ana Rodríguez Jiménez</div><div class="member-role">Coordinadora</div></div><div class="member-card"><img src="Referencias/Hombre1.png" class="member-photo" alt=""><div class="member-name">Carlos Vargas Mora</div><div class="member-role">Secretario</div></div><div class="member-card"><img src="Referencias/Hombre2.png" class="member-photo" alt=""><div class="member-name">Javier Solís Ramírez</div><div class="member-role">Vocal</div></div></div><div class="modal-section-hd">Funciones</div><p>Conformado por un <strong>mínimo de 3 dirigentes</strong> por período de 2 años (2 en años pares, 1 en años impares). Coordina los programas educativos y de bienestar para los asociados.</p><ul><li>Coordinar programas de capacitación cooperativa</li><li>Supervisar el uso correcto de la Reserva para Educación</li><li>Gestionar actividades de bienestar y solidaridad</li><li>Promover la cultura cooperativa entre los asociados</li><li>Organizar actividades formativas con CENECOOP</li></ul>'
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/maylee-sanchez.png" class="member-photo" alt="Maylee Sánchez Murillo"><div class="member-name">Maylee Sánchez Murillo</div><div class="member-role">Presidenta</div></div><div class="member-card"><img src="Referencias/jocksan-obando.png" class="member-photo" alt="Jocksan Obando Bonilla"><div class="member-name">Jocksan Obando Bonilla</div><div class="member-role">Vicepresidente</div></div><div class="member-card"><img src="Referencias/Mujer2.png" class="member-photo" alt=""><div class="member-name">Sonia Vargas</div><div class="member-role">Secretaria</div></div></div><div class="modal-section-hd">Funciones</div><p>Conformado por un <strong>mínimo de 3 dirigentes</strong> por período de 2 años (2 en años pares, 1 en años impares). Coordina los programas educativos y de bienestar para los asociados.</p><ul><li>Coordinar programas de capacitación cooperativa</li><li>Supervisar el uso correcto de la Reserva para Educación</li><li>Gestionar actividades de bienestar y solidaridad</li><li>Promover la cultura cooperativa entre los asociados</li><li>Organizar actividades formativas con CENECOOP</li></ul>'
   },
   auditoria: {
     title: 'Auditoría Externa',
@@ -883,7 +905,7 @@ const modalData = {
   gerencia: {
     title: 'Gerencia',
     img: null,
-    html: '<p>La Gerencia es nombrada y removida por el Consejo de Administración con el voto mínimo de 4 miembros propietarios. Es el órgano ejecutivo de la cooperativa.</p><p>Principales deberes:</p><ul><li>Ejecutar los acuerdos del Consejo de Administración</li><li>Presentar informes mensuales de operaciones y finanzas</li><li>Supervisar los registros contables y el control interno</li><li>Firmar cheques y documentos autorizados por el Consejo</li><li>Gestionar el talento humano de la organización</li></ul>'
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Mujer1.png" class="member-photo" alt=""><div class="member-name">Marcela Zúñiga Chavarría</div><div class="member-role">Gerenta General</div></div></div><div class="modal-section-hd">Funciones</div><p>La Gerencia es nombrada y removida por el Consejo de Administración con el voto mínimo de 4 miembros propietarios. Es el órgano ejecutivo de la cooperativa.</p><ul><li>Ejecutar los acuerdos del Consejo de Administración</li><li>Presentar informes mensuales de operaciones y finanzas</li><li>Supervisar los registros contables y el control interno</li><li>Firmar cheques y documentos autorizados por el Consejo</li><li>Gestionar el talento humano de la organización</li></ul>'
   },
   coordinacion: {
     title: 'Coordinación Administrativa',
@@ -892,7 +914,7 @@ const modalData = {
   },
   contabilidad: {
     title: 'Contabilidad',
-    img: BASE + '/images/contabilidad.png',
+    img: null,
     html: '<p>El departamento de Contabilidad mantiene al día todos los registros financieros de la cooperativa y garantiza la exactitud de la información.</p><ul><li>Mantener los libros contables al día conforme a normativa</li><li>Realizar conciliaciones bancarias y verificar balances</li><li>Analizar solicitudes de crédito en el aspecto financiero</li><li>Controlar y reportar la cartera de morosidad</li><li>Preparar estados financieros mensuales y anuales</li></ul>'
   },
   credito: {
@@ -907,7 +929,7 @@ const modalData = {
   },
   promocion: {
     title: 'Promoción',
-    img: BASE + '/images/mercadeo.png',
+    img: null,
     html: '<p>El área de Promoción divulga los productos y servicios de Coopesipe R.L. entre los asociados actuales y potenciales del Ministerio de Justicia y Paz.</p><ul><li>Divulgar y promover productos de ahorro y crédito</li><li>Visitar centros penitenciarios y oficinas del Ministerio</li><li>Ofrecer servicios a domicilio en los centros de trabajo</li><li>Gestionar la comunicación institucional y redes sociales</li><li>Desarrollar campañas de captación de nuevos asociados</li></ul>'
   }
 };
@@ -981,6 +1003,66 @@ window.addEventListener('scroll', () => {
     t.classList.toggle('active', t.getAttribute('href') === '#' + current);
   });
 }, { passive: true });
+</script>
+<!-- Buscador overlay -->
+<div class="search-overlay" id="search-overlay" aria-hidden="true">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="Buscar en Coopesipe…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="search-close" aria-label="Cerrar búsqueda">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="search-results" id="search-results"><p class="search-hint">Escribí para buscar secciones y páginas…</p></div>
+  </div>
+</div>
+<script>
+(function(){
+  var DATA=[
+    {title:'Inicio',desc:'Página principal de Coopesipe R.L.',link:'index.html#hero'},
+    {title:'Productos financieros',desc:'Ahorros, créditos, seguros y servicios para asociados',link:'index.html#productos'},
+    {title:'Ahorros',desc:'Tipos de ahorro disponibles para los asociados',link:'index.html#productos'},
+    {title:'Créditos',desc:'Créditos personales y con respaldo de ahorro',link:'index.html#productos'},
+    {title:'Seguros',desc:'Seguros de vida y protección familiar para asociados',link:'index.html#productos'},
+    {title:'Anuncios',desc:'Novedades y promociones de Coopesipe R.L.',link:'index.html#anuncios'},
+    {title:'Convenios comerciales',desc:'Empresas aliadas con descuentos exclusivos para asociados',link:'index.html#convenios'},
+    {title:'Contacto',desc:'Teléfonos, correo electrónico, horario y formulario',link:'index.html#contacto'},
+    {title:'Nosotros',desc:'Historia, misión, visión y estructura de Coopesipe R.L.',link:'nosotros.html'},
+    {title:'Quiénes somos',desc:'Historia y trayectoria de Coopesipe R.L.',link:'nosotros.html#quienes-somos'},
+    {title:'Misión, Visión y Valores',desc:'Propósito, dirección y principios de la cooperativa',link:'nosotros.html#mision-vision'},
+    {title:'Estructura Administrativa',desc:'Órganos directivos y comités de Coopesipe',link:'nosotros.html#estructura'},
+    {title:'Galería',desc:'Fotos y eventos de Coopesipe R.L.',link:'galeria.html'},
+    {title:'Documentación',desc:'Estatutos, reglamentos, leyes y formularios descargables',link:'documentacion.html'},
+    {title:'Estados Financieros',desc:'Informes financieros anuales de la cooperativa',link:'documentacion.html#estados'},
+    {title:'Estatutos y Reglamentos',desc:'Documentos oficiales de regulación interna',link:'documentacion.html#estatutos'},
+    {title:'Leyes',desc:'Leyes cooperativas de Costa Rica aplicables a Coopesipe',link:'documentacion.html#leyes'},
+    {title:'Formularios',desc:'Boletas y formularios para trámites de los asociados',link:'documentacion.html#formularios'},
+    {title:'Estatuto Social de Coopesipe R.L. — Versión 2019',desc:'Estatuto oficial de la cooperativa, versión 2019',link:'documentacion.html#estatutos'},
+    {title:'Estatuto Social Coopesipe — Versión 2023',desc:'Versión actualizada del Estatuto Social de Coopesipe',link:'documentacion.html#estatutos'},
+    {title:'Reglamento para uso de la Reserva de Educación',desc:'Normativa interna para el fondo de educación cooperativa',link:'documentacion.html#estatutos'},
+    {title:'Ley de Asociación de Cooperativas',desc:'Marco legal costarricense para asociaciones cooperativas',link:'documentacion.html#leyes'},
+    {title:'Ley de Regulación de la Actividad de Intermediación Financiera',desc:'Ley que regula la intermediación financiera de organizaciones cooperativas',link:'documentacion.html#leyes'},
+    {title:'Ley de Asociaciones Cooperativas',desc:'Legislación cooperativa de Costa Rica',link:'documentacion.html#leyes'},
+    {title:'Boleta de Afiliación para Autoconsulta',desc:'Formulario para afiliación y autoconsulta de datos',link:'documentacion.html#formularios'},
+    {title:'Boleta de Ahorro Navideño',desc:'Formulario para inscripción en el ahorro navideño',link:'documentacion.html#formularios'},
+    {title:'Boleta de Ahorro Vacacional',desc:'Formulario para el plan de ahorro vacacional',link:'documentacion.html#formularios'},
+    {title:'Boleta de Ahorro de Marchamo',desc:'Formulario para el ahorro destinado al pago de marchamo',link:'documentacion.html#formularios'},
+  ];
+  var overlay=document.getElementById('search-overlay'),inp=document.getElementById('search-input'),res=document.getElementById('search-results'),btn=document.getElementById('search-btn'),cls=document.getElementById('search-close');
+  function open(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');setTimeout(function(){inp.focus();},60);}
+  function close(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');inp.value='';res.innerHTML='<p class="search-hint">Escribí para buscar secciones y páginas…</p>';}
+  btn.addEventListener('click',open);cls.addEventListener('click',close);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close();if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();open();}});
+  inp.addEventListener('input',function(){
+    var q=this.value.trim().toLowerCase();
+    if(!q){res.innerHTML='<p class="search-hint">Escribí para buscar secciones y páginas…</p>';return;}
+    var m=DATA.filter(function(d){return d.title.toLowerCase().includes(q)||d.desc.toLowerCase().includes(q);});
+    if(!m.length){res.innerHTML='<p class="search-no-results">Sin resultados para "'+q+'"</p>';return;}
+    res.innerHTML=m.map(function(d){return '<a href="'+d.link+'" class="search-result-item"><div class="search-result-icon"><svg width="15" height="15" fill="none" stroke="#6CB827" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div><div class="search-result-title">'+d.title+'</div><div class="search-result-desc">'+d.desc+'</div></div></a>';}).join('');
+  });
+})();
 </script>
 <!-- WhatsApp FAB -->
 <a href="https://wa.me/50662690309?text=Hola+Coopesipe+R.L.%2C+me+gustar%C3%ADa+obtener+informaci%C3%B3n+sobre+sus+productos+y+servicios.+%C2%BFMe+pueden+ayudar%3F" class="wa-fab" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">

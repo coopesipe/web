@@ -11,3 +11,9 @@ desktop.ini
 # Agentes / Claude
 .agents/
 skills-lock.json
+
+# Fotos originales de pasaporte (no publicar)
+Fotos pasaporte/
+
+# Archivos de workspace
+*.code-workspace

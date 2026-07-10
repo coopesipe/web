@@ -620,6 +620,36 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 /* Mapa de contacto */
 .contact-map{margin-top:1.5rem;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm);height:220px;width:100%}
 #contact-leaflet{height:100%;width:100%}
+/* Buscador */
+.search-btn{background:none;border:1.5px solid rgba(255,255,255,.28);color:rgba(255,255,255,.8);width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0}
+.search-btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.6);color:#fff}
+.search-overlay{position:fixed;inset:0;z-index:2000;background:rgba(11,30,5,.97);display:flex;align-items:flex-start;justify-content:center;padding-top:6rem;opacity:0;pointer-events:none;transition:opacity .25s}
+.search-overlay.open{opacity:1;pointer-events:all}
+.search-box{width:100%;max-width:640px;padding:0 1.5rem}
+.search-input-wrap{display:flex;align-items:center;gap:.75rem;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.15);border-radius:12px;padding:.85rem 1.1rem;margin-bottom:1rem}
+.search-input-wrap>svg{flex-shrink:0;color:rgba(255,255,255,.35)}
+#search-input{flex:1;background:none;border:none;outline:none;font-size:1.1rem;color:#fff;caret-color:#6CB827;font-family:'Plus Jakarta Sans',sans-serif}
+#search-input::placeholder{color:rgba(255,255,255,.28)}
+.search-close{background:none;border:none;color:rgba(255,255,255,.45);cursor:pointer;display:flex;padding:0;transition:color .2s}
+.search-close:hover{color:#fff}
+.search-results{display:flex;flex-direction:column;gap:.35rem}
+.search-result-item{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem;border-radius:10px;text-decoration:none;color:#fff;transition:background .2s}
+.search-result-item:hover{background:rgba(108,184,39,.14)}
+.search-result-icon{width:36px;height:36px;border-radius:8px;background:rgba(108,184,39,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.search-result-title{font-family:'Sora',sans-serif;font-weight:700;font-size:.93rem;color:#fff}
+.search-result-desc{font-size:.79rem;color:rgba(255,255,255,.45);margin-top:.1rem}
+.search-no-results{text-align:center;padding:2.5rem;color:rgba(255,255,255,.35);font-size:.9rem}
+.search-hint{text-align:center;padding:1.5rem;color:rgba(255,255,255,.25);font-size:.82rem}
+/* Formulario Web3Forms */
+.form-success{display:none;flex-direction:column;align-items:center;gap:1rem;padding:2.5rem 1rem;text-align:center}
+.form-success.show{display:flex}
+.form-success-icon{width:56px;height:56px;border-radius:50%;background:rgba(108,184,39,.12);display:flex;align-items:center;justify-content:center}
+.form-success h4{font-family:'Sora',sans-serif;font-size:1.1rem;color:var(--gray-800);margin:0}
+.form-success p{font-size:.88rem;color:var(--gray-600);margin:0}
+.form-error-msg{display:none;padding:.75rem 1rem;border-radius:8px;background:rgba(192,57,43,.08);color:#c0392b;font-size:.83rem;margin-top:.4rem;text-align:center}
+.form-error-msg.show{display:block}
+.btn-sending{opacity:.65;pointer-events:none;cursor:not-allowed}
+@keyframes spin{to{transform:rotate(360deg)}}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
 </head>
@@ -641,7 +671,6 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <nav id="main-nav">
         <a href="#hero">Inicio</a>
         <a href="#productos">Productos</a>
-        <a href="#bienestar">Bienestar</a>
         <a href="#convenios">Convenios</a>
         <a href="nosotros.html">Nosotros</a>
         <a href="galeria.html">Galería</a>
@@ -650,6 +679,9 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       </nav>
 
       <div class="header-actions">
+        <button class="search-btn" id="search-btn" aria-label="Buscar">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
         <a href="#" class="btn-ingresar">
           <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
             <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
@@ -1244,47 +1276,66 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 
       <div class="contact-form fade-up" style="transition-delay:.18s">
         <h3>Envíanos un mensaje</h3>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" placeholder="Juan Pérez López">
+
+        <!-- Mensaje de éxito -->
+        <div class="form-success" id="form-success">
+          <div class="form-success-icon">
+            <svg width="28" height="28" fill="none" stroke="#6CB827" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h4>¡Mensaje enviado!</h4>
+          <p>Gracias por contactarnos. Recibirás una confirmación en tu correo y te responderemos a la brevedad.</p>
+        </div>
+
+        <form id="contact-form" novalidate>
+          <!-- Web3Forms config -->
+          <input type="hidden" name="access_key" value="aaf21b17-585a-40b9-9371-8ee84889a083">
+          <input type="hidden" name="subject" value="Consulta desde el sitio web de Coopesipe R.L.">
+          <input type="hidden" name="from_name" value="Sitio Web Coopesipe">
+          <input type="checkbox" name="botcheck" style="display:none">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Juan Pérez López" required>
+            </div>
+            <div class="form-group">
+              <label for="cedula">Cédula</label>
+              <input type="text" id="cedula" name="cedula" placeholder="1-0000-0000">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tel">Teléfono</label>
+              <input type="tel" id="tel" name="telefono" placeholder="8888-8888">
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+            </div>
           </div>
           <div class="form-group">
-            <label for="cedula">Cédula</label>
-            <input type="text" id="cedula" placeholder="1-0000-0000">
+            <label for="asunto">¿En qué podemos ayudarte?</label>
+            <select id="asunto" name="asunto">
+              <option value="">Seleccione un tema…</option>
+              <option>Información sobre ahorros</option>
+              <option>Solicitud de crédito</option>
+              <option>Información sobre seguros</option>
+              <option>Bienestar social</option>
+              <option>Quiero ser asociado</option>
+              <option>Convenios comerciales</option>
+              <option>Otro</option>
+            </select>
           </div>
-        </div>
-        <div class="form-row">
           <div class="form-group">
-            <label for="tel">Teléfono</label>
-            <input type="tel" id="tel" placeholder="8888-8888">
+            <label for="msg">Mensaje</label>
+            <textarea id="msg" name="mensaje" placeholder="Escriba su consulta aquí…"></textarea>
           </div>
-          <div class="form-group">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" placeholder="correo@ejemplo.com">
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="asunto">¿En qué podemos ayudarte?</label>
-          <select id="asunto">
-            <option value="">Seleccione un tema…</option>
-            <option>Información sobre ahorros</option>
-            <option>Solicitud de crédito</option>
-            <option>Información sobre seguros</option>
-            <option>Bienestar social</option>
-            <option>Quiero ser asociado</option>
-            <option>Convenios comerciales</option>
-            <option>Otro</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="msg">Mensaje</label>
-          <textarea id="msg" placeholder="Escriba su consulta aquí…"></textarea>
-        </div>
-        <button type="submit" class="btn btn-green" style="width:100%;justify-content:center;">
-          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          Enviar mensaje
-        </button>
+          <div class="form-error-msg" id="form-error">Ocurrió un error al enviar. Por favor intentá de nuevo.</div>
+          <button type="submit" id="form-submit" class="btn btn-green" style="width:100%;justify-content:center;">
+            <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Enviar mensaje
+          </button>
+        </form>
       </div>
 
     </div>
@@ -1458,6 +1509,128 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
   updatePos();
   timer = setInterval(function(){ goTo(cur + 1); }, 5000);
+})();
+</script>
+<!-- Web3Forms AJAX -->
+<script>
+(function(){
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  var btn    = document.getElementById('form-submit');
+  var success= document.getElementById('form-success');
+  var errMsg = document.getElementById('form-error');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    errMsg.classList.remove('show');
+
+    // Validación básica
+    var nombre = form.querySelector('[name="nombre"]').value.trim();
+    var email  = form.querySelector('[name="email"]').value.trim();
+    if (!nombre || !email) {
+      errMsg.textContent = 'Por favor completá al menos tu nombre y correo electrónico.';
+      errMsg.classList.add('show');
+      return;
+    }
+
+    // Estado de carga
+    btn.classList.add('btn-sending');
+    btn.innerHTML = '<svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="animation:spin 1s linear infinite"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Enviando…';
+
+    var data = {};
+    new FormData(form).forEach(function(v, k){ data[k] = v; });
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(json) {
+      if (json.success) {
+        form.style.display = 'none';
+        success.classList.add('show');
+      } else {
+        throw new Error(json.message || 'Error');
+      }
+    })
+    .catch(function() {
+      btn.classList.remove('btn-sending');
+      btn.innerHTML = '<svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Enviar mensaje';
+      errMsg.textContent = 'Ocurrió un error al enviar. Por favor intentá de nuevo.';
+      errMsg.classList.add('show');
+    });
+  });
+})();
+</script>
+<!-- Buscador overlay -->
+<div class="search-overlay" id="search-overlay" aria-hidden="true">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search-input" placeholder="Buscar en Coopesipe…" autocomplete="off" spellcheck="false">
+      <button class="search-close" id="search-close" aria-label="Cerrar búsqueda">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="search-results" id="search-results"><p class="search-hint">Escribí para buscar secciones y páginas…</p></div>
+  </div>
+</div>
+<script>
+(function(){
+  var DATA=[
+    {title:'Inicio',desc:'Página principal de Coopesipe R.L.',link:'index.html#hero'},
+    {title:'Productos financieros',desc:'Ahorros, créditos, seguros y servicios para asociados',link:'index.html#productos'},
+    {title:'Ahorros',desc:'Tipos de ahorro disponibles para los asociados',link:'index.html#productos'},
+    {title:'Créditos',desc:'Créditos personales y con respaldo de ahorro',link:'index.html#productos'},
+    {title:'Seguros',desc:'Seguros de vida y protección familiar para asociados',link:'index.html#productos'},
+    {title:'Anuncios',desc:'Novedades y promociones de Coopesipe R.L.',link:'index.html#anuncios'},
+    {title:'Convenios comerciales',desc:'Empresas aliadas con descuentos exclusivos para asociados',link:'index.html#convenios'},
+    {title:'Contacto',desc:'Teléfonos, correo electrónico, horario y formulario',link:'index.html#contacto'},
+    {title:'Nosotros',desc:'Historia, misión, visión y estructura de Coopesipe R.L.',link:'nosotros.html'},
+    {title:'Quiénes somos',desc:'Historia y trayectoria de Coopesipe R.L.',link:'nosotros.html#quienes-somos'},
+    {title:'Misión, Visión y Valores',desc:'Propósito, dirección y principios de la cooperativa',link:'nosotros.html#mision-vision'},
+    {title:'Estructura Administrativa',desc:'Órganos directivos y comités de Coopesipe',link:'nosotros.html#estructura'},
+    {title:'Galería',desc:'Fotos y eventos de Coopesipe R.L.',link:'galeria.html'},
+    {title:'Documentación',desc:'Estatutos, reglamentos, leyes y formularios descargables',link:'documentacion.html'},
+    {title:'Estados Financieros',desc:'Informes financieros anuales de la cooperativa',link:'documentacion.html#estados'},
+    {title:'Estatutos y Reglamentos',desc:'Documentos oficiales de regulación interna',link:'documentacion.html#estatutos'},
+    {title:'Leyes',desc:'Leyes cooperativas de Costa Rica aplicables a Coopesipe',link:'documentacion.html#leyes'},
+    {title:'Formularios',desc:'Boletas y formularios para trámites de los asociados',link:'documentacion.html#formularios'},
+    {title:'Estatuto Social de Coopesipe R.L. — Versión 2019',desc:'Estatuto oficial de la cooperativa, versión 2019',link:'documentacion.html#estatutos'},
+    {title:'Estatuto Social Coopesipe — Versión 2023',desc:'Versión actualizada del Estatuto Social de Coopesipe',link:'documentacion.html#estatutos'},
+    {title:'Reglamento para uso de la Reserva de Educación',desc:'Normativa interna para el fondo de educación cooperativa',link:'documentacion.html#estatutos'},
+    {title:'Ley de Asociación de Cooperativas',desc:'Marco legal costarricense para asociaciones cooperativas',link:'documentacion.html#leyes'},
+    {title:'Ley de Regulación de la Actividad de Intermediación Financiera',desc:'Ley que regula la intermediación financiera de organizaciones cooperativas',link:'documentacion.html#leyes'},
+    {title:'Ley de Asociaciones Cooperativas',desc:'Legislación cooperativa de Costa Rica',link:'documentacion.html#leyes'},
+    {title:'Boleta de Afiliación para Autoconsulta',desc:'Formulario para afiliación y autoconsulta de datos',link:'documentacion.html#formularios'},
+    {title:'Boleta de Ahorro Navideño',desc:'Formulario para inscripción en el ahorro navideño',link:'documentacion.html#formularios'},
+    {title:'Boleta de Ahorro Vacacional',desc:'Formulario para el plan de ahorro vacacional',link:'documentacion.html#formularios'},
+    {title:'Boleta de Ahorro de Marchamo',desc:'Formulario para el ahorro destinado al pago de marchamo',link:'documentacion.html#formularios'},
+  ];
+  var overlay=document.getElementById('search-overlay');
+  var inp=document.getElementById('search-input');
+  var res=document.getElementById('search-results');
+  var btn=document.getElementById('search-btn');
+  var cls=document.getElementById('search-close');
+  function open(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');setTimeout(function(){inp.focus();},60);}
+  function close(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');inp.value='';res.innerHTML='<p class="search-hint">Escribí para buscar secciones y páginas…</p>';}
+  btn.addEventListener('click',open);
+  cls.addEventListener('click',close);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)close();});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape')close();
+    if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();open();}
+  });
+  inp.addEventListener('input',function(){
+    var q=this.value.trim().toLowerCase();
+    if(!q){res.innerHTML='<p class="search-hint">Escribí para buscar secciones y páginas…</p>';return;}
+    var m=DATA.filter(function(d){return d.title.toLowerCase().includes(q)||d.desc.toLowerCase().includes(q);});
+    if(!m.length){res.innerHTML='<p class="search-no-results">Sin resultados para "'+q+'"</p>';return;}
+    res.innerHTML=m.map(function(d){
+      return '<a href="'+d.link+'" class="search-result-item"><div class="search-result-icon"><svg width="15" height="15" fill="none" stroke="#6CB827" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div><div class="search-result-title">'+d.title+'</div><div class="search-result-desc">'+d.desc+'</div></div></a>';
+    }).join('');
+  });
 })();
 </script>
 <!-- WhatsApp FAB -->
