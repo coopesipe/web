@@ -341,15 +341,15 @@ nav a:hover::after { transform: scaleX(1); }
 .prod-card--orange .prod-detail-item { border-left-color: var(--orange); }
 
 .prod-detail-name {
-  font-family: 'Sora', sans-serif; font-size: 0.84rem; font-weight: 700;
+  font-family: 'Sora', sans-serif; font-size: 0.97rem; font-weight: 700;
   color: var(--gray-800); margin-bottom: 0.18rem;
 }
 .prod-detail-badges { display: flex; flex-wrap: wrap; gap: 0.32rem; margin-bottom: 0.3rem; }
 .badge {
-  font-size: 0.66rem; padding: 0.12rem 0.46rem; border-radius: 4px;
+  font-size: 0.79rem; padding: 0.12rem 0.46rem; border-radius: 4px;
   background: rgba(0,0,0,0.07); color: var(--gray-600); font-weight: 600;
 }
-.prod-detail-desc { font-size: 0.79rem; color: var(--gray-600); line-height: 1.55; }
+.prod-detail-desc { font-size: 0.92rem; color: var(--gray-600); line-height: 1.55; }
 
 /* ===== BIENESTAR ===== */
 #bienestar {
@@ -444,6 +444,34 @@ nav a:hover::after { transform: scaleX(1); }
 }
 .conv-title { font-family: 'Sora', sans-serif; font-size: 0.93rem; font-weight: 700; color: var(--gray-800); margin-bottom: 0.35rem; }
 .conv-desc  { font-size: 0.8rem; color: var(--gray-600); line-height: 1.55; }
+
+/* ===== LOGOS CONVENIOS CARRUSEL ===== */
+.logos-track-wrap { overflow: hidden; margin-top: 2.5rem; position: relative; }
+.logos-track-wrap::before,
+.logos-track-wrap::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
+}
+.logos-track-wrap::before { left: 0; background: linear-gradient(to right, var(--white), transparent); }
+.logos-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--white), transparent); }
+.logos-track {
+  display: flex; gap: 1.2rem; width: max-content;
+  animation: logos-scroll 30s linear infinite;
+}
+.logos-track:hover { animation-play-state: paused; }
+@keyframes logos-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.logo-card {
+  flex-shrink: 0; width: 140px; height: 90px;
+  background: var(--white); border: 1px solid var(--gray-100);
+  border-radius: var(--radius); display: flex; align-items: center; justify-content: center;
+  padding: 0.9rem; box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.logo-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.logo-card img { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(40%); transition: filter 0.25s; }
+.logo-card:hover img { filter: grayscale(0%); }
 
 /* ===== CONTACTO ===== */
 #contacto { padding: 6rem 0; background: var(--gray-100); }
@@ -778,9 +806,8 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
           <div>
             <div class="hero-pcard-title">Planes de Ahorro</div>
             <div class="hero-pcard-tags">
-              <span class="hero-tag">Capital</span>
+              <span class="hero-tag">Capital social</span>
               <span class="hero-tag">Navideño</span>
-              <span class="hero-tag">Vacaciones</span>
               <span class="hero-tag">Marchamo</span>
             </div>
           </div>
@@ -795,8 +822,8 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
             <div class="hero-pcard-title">Líneas de Crédito</div>
             <div class="hero-pcard-tags">
               <span class="hero-tag">Especial</span>
-              <span class="hero-tag">Reestructuración</span>
-              <span class="hero-tag">Respaldo</span>
+              <span class="hero-tag">Refundición</span>
+              <span class="hero-tag">Sobre ahorro</span>
             </div>
           </div>
         </div>
@@ -809,9 +836,9 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
           <div>
             <div class="hero-pcard-title">Pólizas de Seguro</div>
             <div class="hero-pcard-tags">
-              <span class="hero-tag">Vida grupal</span>
-              <span class="hero-tag">Individual</span>
-              <span class="hero-tag">Defunción</span>
+              <span class="hero-tag">Fondo Mutual</span>
+              <span class="hero-tag">Vida Colectiva</span>
+              <span class="hero-tag">Saldos Deudores</span>
             </div>
           </div>
         </div>
@@ -923,10 +950,10 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         </div>
         <div class="prod-body">
           <ul class="prod-list">
-            <li>Crédito especial</li>
-            <li>Reestructuración de deudas</li>
-            <li>Crédito con respaldo de ahorro</li>
-            <li>Crédito adicional</li>
+            <li>Crédito Especial</li>
+            <li>Crédito sobre el Ahorro</li>
+            <li>Crédito Refundición</li>
+            <li>Crédito para el Hogar</li>
           </ul>
           <button class="prod-link prod-toggle">
             Ver líneas de crédito
@@ -936,44 +963,44 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
             <div class="prod-expand-divider"></div>
             <div class="prod-detail">
               <div class="prod-detail-item">
-                <div class="prod-detail-name">Crédito de Refundición</div>
-                <div class="prod-detail-badges"><span class="badge">Plazo: 20 años</span></div>
-                <div class="prod-detail-desc">Consolida todas las deudas del asociado para mejorar su salario neto. Las deudas con terceros no pueden superar el 100% del total a consolidar.</div>
-              </div>
-              <div class="prod-detail-item">
-                <div class="prod-detail-name">Crédito Sobre Ahorro</div>
-                <div class="prod-detail-badges"><span class="badge">Monto: 85% del capital</span><span class="badge">Plazo: variable</span></div>
+                <div class="prod-detail-name">Crédito sobre el Ahorro</div>
+                <div class="prod-detail-badges"><span class="badge">Plazo: 10 años</span></div>
                 <div class="prod-detail-desc">Acceso rápido basado en el capital social aportado. Retraso de 3 meses activa la garantía del capital social.</div>
               </div>
               <div class="prod-detail-item">
-                <div class="prod-detail-name">Crédito Servicios Médicos</div>
-                <div class="prod-detail-badges"><span class="badge">₡2.000.000</span><span class="badge">Plazo: 10 años</span><span class="badge">Sin fiador</span></div>
-                <div class="prod-detail-desc">Para atender emergencias médicas en el momento que se necesite. Requiere factura pro forma del servicio médico.</div>
-              </div>
-              <div class="prod-detail-item">
-                <div class="prod-detail-name">Crédito para el Hogar</div>
-                <div class="prod-detail-badges"><span class="badge">₡2.000.000</span><span class="badge">Plazo: 8 años</span></div>
-                <div class="prod-detail-desc">Adquisición de artículos del hogar en casas comerciales con convenio. Sin fiador hasta ₡1.000.000 (requiere 6 meses en propiedad).</div>
-              </div>
-              <div class="prod-detail-item">
-                <div class="prod-detail-name">Crédito de Educación</div>
-                <div class="prod-detail-badges"><span class="badge">₡1.500.000</span><span class="badge">Plazo: 8 años</span><span class="badge">Sin fiador</span></div>
-                <div class="prod-detail-desc">Para cancelar estudios en cualquier nivel educativo formal y adquirir equipos computacionales. Requiere facturas pro forma.</div>
-              </div>
-              <div class="prod-detail-item">
                 <div class="prod-detail-name">Crédito Especial</div>
-                <div class="prod-detail-badges"><span class="badge">Plazo: 20 años</span><span class="badge">Inmediato hasta ₡150K</span></div>
+                <div class="prod-detail-badges"><span class="badge">Plazo: 15 años</span></div>
                 <div class="prod-detail-desc">Acceso rápido y oportuno a crédito. Montos hasta ₡150.000 se entregan en efectivo de forma inmediata. Requiere 6 meses en propiedad.</div>
               </div>
               <div class="prod-detail-item">
-                <div class="prod-detail-name">Crédito Ordinario</div>
-                <div class="prod-detail-badges"><span class="badge">Monto: 3× lo ahorrado</span><span class="badge">Plazo: 15 años</span><span class="badge">Con fiador</span></div>
-                <div class="prod-detail-desc">Monto equivalente a tres veces el capital ahorrado. Montos hasta ₡150.000 se entregan de forma inmediata.</div>
+                <div class="prod-detail-name">Crédito sobre Ahorro Navideño</div>
+                <div class="prod-detail-badges"><span class="badge">Se cancela con el ahorro navideño</span></div>
+                <div class="prod-detail-desc">Crédito respaldado por el saldo de ahorro navideño acumulado. Se liquida automáticamente con la devolución del ahorro en noviembre.</div>
               </div>
               <div class="prod-detail-item">
                 <div class="prod-detail-name">Crédito Revolutivo</div>
-                <div class="prod-detail-badges"><span class="badge">₡400.000</span><span class="badge">Plazo: 4 años</span><span class="badge">Sin fiador</span></div>
+                <div class="prod-detail-badges"><span class="badge">Plazo máximo: 4 años</span></div>
                 <div class="prod-detail-desc">Trámite único por el monto máximo renovable. Hasta ₡200.000 en efectivo. Solución ágil para necesidades recurrentes.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito para el Hogar</div>
+                <div class="prod-detail-badges"><span class="badge">Plazo: 8 años</span></div>
+                <div class="prod-detail-desc">Adquisición de artículos del hogar en casas comerciales con convenio. Sin fiador hasta ₡1.000.000 (requiere 6 meses en propiedad).</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito Educación</div>
+                <div class="prod-detail-badges"><span class="badge">Plazo máximo: 8 años</span></div>
+                <div class="prod-detail-desc">Para cancelar estudios en cualquier nivel educativo formal y adquirir equipos computacionales. Requiere facturas pro forma.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito Gastos Médicos</div>
+                <div class="prod-detail-badges"><span class="badge">Plazo: 8 años</span></div>
+                <div class="prod-detail-desc">Para atender emergencias médicas en el momento que se necesite. Requiere factura pro forma del servicio médico.</div>
+              </div>
+              <div class="prod-detail-item">
+                <div class="prod-detail-name">Crédito Refundición</div>
+                <div class="prod-detail-badges"><span class="badge">Plazo: 15 años</span></div>
+                <div class="prod-detail-desc">Consolida todas las deudas del asociado para mejorar su salario neto. Las deudas con terceros no pueden superar el 100% del total a consolidar.</div>
               </div>
             </div>
           </div>
@@ -1206,6 +1233,44 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       </div>
 
     </div>
+
+    <!-- Logos carrusel -->
+    <div class="logos-track-wrap fade-up">
+      <div class="logos-track" id="logos-track">
+        <div class="logo-card"><img src="Convenios/asembis.png" alt="Asembis"></div>
+        <div class="logo-card"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
+        <div class="logo-card"><img src="Convenios/Monge.jpg" alt="Monge"></div>
+        <div class="logo-card"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
+        <div class="logo-card"><img src="Convenios/polini.jpg" alt="Polini"></div>
+        <div class="logo-card"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
+        <div class="logo-card"><img src="Convenios/uia.png" alt="UIA"></div>
+        <div class="logo-card"><img src="Convenios/cococo.png" alt="Cococo"></div>
+        <div class="logo-card"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
+        <div class="logo-card"><img src="Convenios/Clinica mana.jpg" alt="Clínica Maná"></div>
+        <div class="logo-card"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
+        <div class="logo-card"><img src="Convenios/mapache renta car.jpg" alt="Mapache Renta Car"></div>
+        <div class="logo-card"><img src="Convenios/castro carazo.png" alt="Castro Carazo"></div>
+        <div class="logo-card"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
+        <div class="logo-card"><img src="Convenios/El verdugo.png" alt="El Verdugo"></div>
+        <!-- Duplicado para loop continuo -->
+        <div class="logo-card"><img src="Convenios/asembis.png" alt="Asembis"></div>
+        <div class="logo-card"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
+        <div class="logo-card"><img src="Convenios/Monge.jpg" alt="Monge"></div>
+        <div class="logo-card"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
+        <div class="logo-card"><img src="Convenios/polini.jpg" alt="Polini"></div>
+        <div class="logo-card"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
+        <div class="logo-card"><img src="Convenios/uia.png" alt="UIA"></div>
+        <div class="logo-card"><img src="Convenios/cococo.png" alt="Cococo"></div>
+        <div class="logo-card"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
+        <div class="logo-card"><img src="Convenios/Clinica mana.jpg" alt="Clínica Maná"></div>
+        <div class="logo-card"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
+        <div class="logo-card"><img src="Convenios/mapache renta car.jpg" alt="Mapache Renta Car"></div>
+        <div class="logo-card"><img src="Convenios/castro carazo.png" alt="Castro Carazo"></div>
+        <div class="logo-card"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
+        <div class="logo-card"><img src="Convenios/El verdugo.png" alt="El Verdugo"></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
