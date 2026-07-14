@@ -220,6 +220,7 @@ nav a:hover::after { transform: scaleX(1); }
 /* Right: product preview cards */
 .hero-cards { display: flex; flex-direction: column; gap: 1rem; }
 .hero-pcard {
+  text-decoration: none;
   background: rgba(255,255,255,0.045);
   border: 1px solid rgba(255,255,255,0.09);
   border-radius: 16px; padding: 1.4rem 1.6rem;
@@ -475,6 +476,29 @@ nav a:hover::after { transform: scaleX(1); }
 }
 .logo-card img { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(40%); transition: filter 0.3s; }
 .logo-card:hover img { filter: grayscale(0%); }
+.logo-card.hidden { display: none; }
+
+/* ===== CONV FILTROS ===== */
+.conv-filters {
+  display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-bottom: 2rem;
+}
+.conv-filter {
+  display: flex; align-items: center; gap: 0.55rem;
+  padding: 0.6rem 1.2rem; border-radius: 2rem;
+  border: 1.5px solid var(--gray-100);
+  background: var(--white); color: var(--gray-500);
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; transition: all 0.22s var(--ease);
+}
+.conv-filter svg { flex-shrink: 0; }
+.conv-filter:hover { border-color: var(--green); color: var(--green); background: rgba(108,184,39,0.07); }
+.conv-filter.active { background: var(--green); border-color: var(--green); color: #fff; }
+.conv-filter.active svg { stroke: #fff; }
+.logos-empty {
+  text-align: center; padding: 2.5rem 1rem;
+  color: var(--gray-400); font-size: 0.9rem; display: none;
+}
+.logos-empty.visible { display: block; }
 
 /* ===== CONTACTO ===== */
 #contacto { padding: 6rem 0; background: var(--gray-100); }
@@ -482,6 +506,23 @@ nav a:hover::after { transform: scaleX(1); }
 .contact-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3.5rem; align-items: start; }
 .contact-info h2 { font-size: 1.9rem; color: var(--gray-800); margin-bottom: 0.9rem; }
 .contact-info p  { font-size: 0.94rem; color: var(--gray-600); line-height: 1.7; margin-bottom: 2rem; }
+
+/* imagen hero contacto */
+.contact-img-hero {
+  position: relative; border-radius: var(--radius-lg); overflow: hidden;
+  min-height: 230px; margin-bottom: 1.8rem;
+  background: url('Referencias/Ayudarle.jpg') center/cover no-repeat;
+}
+.contact-img-overlay {
+  position: absolute; inset: 0;
+  background: rgba(11,30,5,0.62);
+}
+.contact-img-content {
+  position: relative; z-index: 1; padding: 2rem 1.8rem;
+}
+.contact-img-content .tag { background: rgba(108,184,39,0.28); color: rgba(255,255,255,0.88); border-color: transparent; }
+.contact-img-content h2 { font-size: 1.9rem; color: #fff; margin-bottom: 0.9rem; }
+.contact-img-content p  { font-size: 0.94rem; color: rgba(255,255,255,0.82); line-height: 1.7; margin-bottom: 0; }
 
 .cinfo-list { display: flex; flex-direction: column; gap: 1rem; }
 .cinfo-item { display: flex; align-items: center; gap: 1rem; }
@@ -674,6 +715,10 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 .wa-fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.45);transition:transform .2s,box-shadow .2s;animation:wa-pulse 2.5s ease-in-out infinite;text-decoration:none}
 .wa-fab:hover{transform:scale(1.08);box-shadow:0 6px 22px rgba(37,211,102,.6);animation:none}
 @keyframes wa-pulse{0%,100%{box-shadow:0 4px 16px rgba(37,211,102,.45)}50%{box-shadow:0 4px 24px rgba(37,211,102,.7),0 0 0 8px rgba(37,211,102,.1)}}
+/* Facebook FAB */
+.fb-fab{position:fixed;bottom:7rem;right:1.5rem;z-index:9999;width:56px;height:56px;border-radius:50%;background:#1877F2;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(24,119,242,.45);transition:transform .2s,box-shadow .2s;animation:fb-pulse 2.5s ease-in-out infinite;text-decoration:none}
+.fb-fab:hover{transform:scale(1.08);box-shadow:0 6px 22px rgba(24,119,242,.6);animation:none}
+@keyframes fb-pulse{0%,100%{box-shadow:0 4px 16px rgba(24,119,242,.45)}50%{box-shadow:0 4px 24px rgba(24,119,242,.7),0 0 0 8px rgba(24,119,242,.1)}}
 /* Mapa de contacto */
 .contact-map{margin-top:1.5rem;border-radius:12px;overflow:hidden;box-shadow:var(--shadow-sm);height:220px;width:100%}
 #contact-leaflet{height:100%;width:100%}
@@ -800,51 +845,51 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 
       <!-- Cards side -->
       <div class="hero-cards">
-        <div class="hero-pcard">
+        <a href="#prod-ahorro" class="hero-pcard">
           <div class="hero-pcard-icon icon-green">
             <svg width="22" height="22" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
               <path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M7 10h2l2 5 2-10 2 5h2"/>
             </svg>
           </div>
           <div>
-            <div class="hero-pcard-title">Planes de Ahorro</div>
+            <div class="hero-pcard-title">Ahorro</div>
             <div class="hero-pcard-tags">
               <span class="hero-tag">Capital social</span>
               <span class="hero-tag">Navideño</span>
               <span class="hero-tag">Marchamo</span>
             </div>
           </div>
-        </div>
-        <div class="hero-pcard">
+        </a>
+        <a href="#prod-creditos" class="hero-pcard">
           <div class="hero-pcard-icon icon-orange">
             <svg width="22" height="22" fill="none" stroke="#E84E0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
               <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
             </svg>
           </div>
           <div>
-            <div class="hero-pcard-title">Líneas de Crédito</div>
+            <div class="hero-pcard-title">Créditos</div>
             <div class="hero-pcard-tags">
               <span class="hero-tag">Especial</span>
               <span class="hero-tag">Refundición</span>
               <span class="hero-tag">Sobre ahorro</span>
             </div>
           </div>
-        </div>
-        <div class="hero-pcard">
+        </a>
+        <a href="#prod-seguros" class="hero-pcard">
           <div class="hero-pcard-icon icon-teal">
             <svg width="22" height="22" fill="none" stroke="#38BDA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
           </div>
           <div>
-            <div class="hero-pcard-title">Pólizas de Seguro</div>
+            <div class="hero-pcard-title">Seguros</div>
             <div class="hero-pcard-tags">
               <span class="hero-tag">Fondo Mutual</span>
               <span class="hero-tag">Vida Colectiva</span>
               <span class="hero-tag">Saldos Deudores</span>
             </div>
           </div>
-        </div>
+        </a>
       </div>
 
     </div>
@@ -885,8 +930,8 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
     </div>
     <div class="products-grid">
 
-      <!-- Ahorros -->
-      <div class="prod-card prod-card--orange fade-up">
+      <!-- Ahorro -->
+      <div id="prod-ahorro" class="prod-card prod-card--orange fade-up">
         <div class="prod-top prod-top-orange">
           <div class="prod-deco1"></div><div class="prod-deco2"></div>
           <div class="prod-icon">
@@ -895,7 +940,7 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
               <path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h3"/>
             </svg>
           </div>
-          <div class="prod-name">Ahorros</div>
+          <div class="prod-name">Ahorro</div>
           <div class="prod-sub">Hacé crecer tu patrimonio</div>
         </div>
         <div class="prod-body">
@@ -937,7 +982,7 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       </div>
 
       <!-- Créditos -->
-      <div class="prod-card prod-card--green fade-up" style="transition-delay:.14s">
+      <div id="prod-creditos" class="prod-card prod-card--green fade-up" style="transition-delay:.14s">
         <div class="prod-top prod-top-green">
           <div class="prod-deco1"></div><div class="prod-deco2"></div>
           <div class="prod-icon">
@@ -1011,7 +1056,7 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       </div>
 
       <!-- Seguros -->
-      <div class="prod-card prod-card--dark fade-up" style="transition-delay:.28s">
+      <div id="prod-seguros" class="prod-card prod-card--dark fade-up" style="transition-delay:.28s">
         <div class="prod-top prod-top-dark">
           <div class="prod-deco1"></div><div class="prod-deco2"></div>
           <div class="prod-icon">
@@ -1155,122 +1200,95 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <h2 class="section-title">Convenios comerciales y de servicios</h2>
       <p class="section-desc">Como asociado tenés acceso a una red de establecimientos con tarifas y condiciones preferenciales en distintas categorías.</p>
     </div>
-    <div class="convenios-grid">
-
-      <div class="conv-card fade-up">
-        <div class="conv-icon">
-          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/>
-            <line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/>
-          </svg>
-        </div>
-        <div>
-          <div class="conv-title">Ópticas y salud visual</div>
-          <div class="conv-desc">Descuentos y facilidades de pago en ópticas asociadas a nivel nacional.</div>
-        </div>
-      </div>
-
-      <div class="conv-card fade-up" style="transition-delay:.08s">
-        <div class="conv-icon">
-          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          </svg>
-        </div>
-        <div>
-          <div class="conv-title">Clínicas médicas</div>
-          <div class="conv-desc">Red de centros de salud con tarifas preferenciales para asociados y familia.</div>
-        </div>
-      </div>
-
-      <div class="conv-card fade-up" style="transition-delay:.16s">
-        <div class="conv-icon">
-          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <rect x="2" y="3" width="20" height="14" rx="2"/>
-            <path d="M8 21h8M12 17v4"/>
-          </svg>
-        </div>
-        <div>
-          <div class="conv-title">Electrodomésticos</div>
-          <div class="conv-desc">Tecnología y línea blanca con planes de pago convenientes para asociados.</div>
-        </div>
-      </div>
-
-      <div class="conv-card fade-up" style="transition-delay:.04s">
-        <div class="conv-icon">
-          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <path d="M22 10v6M2 10l10-5 10 5"/>
-            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-          </svg>
-        </div>
-        <div>
-          <div class="conv-title">Universidades</div>
-          <div class="conv-desc">Educación superior con tarifas especiales y financiamiento para asociados.</div>
-        </div>
-      </div>
-
-      <div class="conv-card fade-up" style="transition-delay:.12s">
-        <div class="conv-icon">
-          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <path d="M16 10a4 4 0 0 1-8 0"/>
-          </svg>
-        </div>
-        <div>
-          <div class="conv-title">Comercios variados</div>
-          <div class="conv-desc">Alianzas con establecimientos comerciales en diferentes categorías de consumo.</div>
-        </div>
-      </div>
-
-      <div class="conv-card fade-up" style="transition-delay:.2s">
-        <div class="conv-icon">
-          <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-          </svg>
-        </div>
-        <div>
-          <div class="conv-title">CENECOOP</div>
-          <div class="conv-desc">Acceso a la plataforma de capacitación del Centro Nacional de Educación Cooperativa.</div>
-        </div>
-      </div>
-
+    <div class="conv-filters fade-up">
+      <button class="conv-filter" data-filter="salud">
+        <svg width="16" height="16" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        Salud
+      </button>
+      <button class="conv-filter" data-filter="electrodomesticos">
+        <svg width="16" height="16" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Electrodomésticos
+      </button>
+      <button class="conv-filter" data-filter="universidades">
+        <svg width="16" height="16" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        Universidades
+      </button>
+      <button class="conv-filter" data-filter="funerarias">
+        <svg width="16" height="16" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22V12M12 12C12 7 8 4 4 4"/><path d="M12 12C12 7 16 4 20 4"/><circle cx="12" cy="4" r="2"/></svg>
+        Funerarias
+      </button>
+      <button class="conv-filter" data-filter="comercios">
+        <svg width="16" height="16" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        Comercios variados
+      </button>
+      <button class="conv-filter" data-filter="cenecoop">
+        <svg width="16" height="16" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        CENECOOP
+      </button>
     </div>
 
     <!-- Logos carrusel -->
     <div class="logos-track-wrap fade-up">
+      <div class="logos-empty" id="logos-empty">No hay convenios en esta categoría aún.</div>
       <div class="logos-track" id="logos-track">
-        <div class="logo-card"><img src="Convenios/asembis.png" alt="Asembis"></div>
-        <div class="logo-card"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
-        <div class="logo-card"><img src="Convenios/Monge.jpg" alt="Monge"></div>
-        <div class="logo-card"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
-        <div class="logo-card"><img src="Convenios/polini.jpg" alt="Polini"></div>
-        <div class="logo-card"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
-        <div class="logo-card"><img src="Convenios/uia.png" alt="UIA"></div>
-        <div class="logo-card"><img src="Convenios/cococo.png" alt="Cococo"></div>
-        <div class="logo-card"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
-        <div class="logo-card"><img src="Convenios/Clinica mana.jpg" alt="Clínica Maná"></div>
-        <div class="logo-card"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
-        <div class="logo-card"><img src="Convenios/mapache renta car.jpg" alt="Mapache Renta Car"></div>
-        <div class="logo-card"><img src="Convenios/castro carazo.png" alt="Castro Carazo"></div>
-        <div class="logo-card"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
-        <div class="logo-card"><img src="Convenios/El verdugo.png" alt="El Verdugo"></div>
-        <!-- Duplicado para loop continuo -->
-        <div class="logo-card"><img src="Convenios/asembis.png" alt="Asembis"></div>
-        <div class="logo-card"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
-        <div class="logo-card"><img src="Convenios/Monge.jpg" alt="Monge"></div>
-        <div class="logo-card"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
-        <div class="logo-card"><img src="Convenios/polini.jpg" alt="Polini"></div>
-        <div class="logo-card"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
-        <div class="logo-card"><img src="Convenios/uia.png" alt="UIA"></div>
-        <div class="logo-card"><img src="Convenios/cococo.png" alt="Cococo"></div>
-        <div class="logo-card"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
-        <div class="logo-card"><img src="Convenios/Clinica mana.jpg" alt="Clínica Maná"></div>
-        <div class="logo-card"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
-        <div class="logo-card"><img src="Convenios/mapache renta car.jpg" alt="Mapache Renta Car"></div>
-        <div class="logo-card"><img src="Convenios/castro carazo.png" alt="Castro Carazo"></div>
-        <div class="logo-card"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
-        <div class="logo-card"><img src="Convenios/El verdugo.png" alt="El Verdugo"></div>
+        <!-- salud -->
+        <div class="logo-card" data-category="salud"><img src="Convenios/Clinica mana.jpg" alt="Clínica Maná"></div>
+        <div class="logo-card" data-category="salud"><img src="Convenios/asembis.png" alt="Asembis"></div>
+        <div class="logo-card" data-category="salud"><img src="Convenios/Asodent.png" alt="Asodent"></div>
+        <div class="logo-card" data-category="salud"><img src="Convenios/Odontologia empresarial.jpeg" alt="Odontología Empresarial"></div>
+        <div class="logo-card" data-category="salud"><img src="Convenios/Optica Comunal.jpg" alt="Óptica Comunal"></div>
+        <div class="logo-card" data-category="salud"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
+        <!-- electrodomesticos -->
+        <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/cococo.png" alt="Cococo"></div>
+        <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/El verdugo.png" alt="El Verdugo"></div>
+        <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
+        <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/Monge.jpg" alt="Monge"></div>
+        <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/Unimart.jpg" alt="Unimart"></div>
+        <!-- universidades -->
+        <div class="logo-card" data-category="universidades"><img src="Convenios/uia.png" alt="UIA"></div>
+        <div class="logo-card" data-category="universidades"><img src="Convenios/Universidad  castro carazo.png" alt="Castro Carazo"></div>
+        <div class="logo-card" data-category="universidades"><img src="Convenios/Universidad de ciencias y el arte.png" alt="Universidad de Ciencias y el Arte"></div>
+        <div class="logo-card" data-category="universidades"><img src="Convenios/universidad interamericana.png" alt="Universidad Interamericana"></div>
+        <div class="logo-card" data-category="universidades"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
+        <div class="logo-card" data-category="universidades"><img src="Convenios/Universidad San Marcos.jpg" alt="Universidad San Marcos"></div>
+        <!-- funerarias -->
+        <div class="logo-card" data-category="funerarias"><img src="Convenios/Funerales vida.jpg" alt="Funerales Vida"></div>
+        <div class="logo-card" data-category="funerarias"><img src="Convenios/Memorial pets.png" alt="Memorial Pets"></div>
+        <div class="logo-card" data-category="funerarias"><img src="Convenios/polini.jpg" alt="Polini"></div>
+        <div class="logo-card" data-category="funerarias"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
+        <div class="logo-card" data-category="funerarias"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
+        <!-- comercios -->
+        <div class="logo-card" data-category="comercios"><img src="Convenios/Ekono.jpg" alt="Ekono"></div>
+        <div class="logo-card" data-category="comercios"><img src="Convenios/mapache renta car.jpg" alt="Mapache Renta Car"></div>
+        <div class="logo-card" data-category="comercios"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
+        <div class="logo-card" data-category="comercios"><img src="Convenios/Vacacionando.jpg" alt="Vacacionando"></div>
+        <!-- Duplicados para loop continuo -->
+        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Clinica mana.jpg" alt="Clínica Maná"></div>
+        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/asembis.png" alt="Asembis"></div>
+        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Asodent.png" alt="Asodent"></div>
+        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Odontologia empresarial.jpeg" alt="Odontología Empresarial"></div>
+        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Optica Comunal.jpg" alt="Óptica Comunal"></div>
+        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/cococo.png" alt="Cococo"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/El verdugo.png" alt="El Verdugo"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/Monge.jpg" alt="Monge"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/Unimart.jpg" alt="Unimart"></div>
+        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/uia.png" alt="UIA"></div>
+        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/Universidad  castro carazo.png" alt="Castro Carazo"></div>
+        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/Universidad de ciencias y el arte.png" alt="Universidad de Ciencias y el Arte"></div>
+        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/universidad interamericana.png" alt="Universidad Interamericana"></div>
+        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
+        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/Universidad San Marcos.jpg" alt="Universidad San Marcos"></div>
+        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Funerales vida.jpg" alt="Funerales Vida"></div>
+        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Memorial pets.png" alt="Memorial Pets"></div>
+        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/polini.jpg" alt="Polini"></div>
+        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
+        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
+        <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Ekono.jpg" alt="Ekono"></div>
+        <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/mapache renta car.jpg" alt="Mapache Renta Car"></div>
+        <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
+        <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Vacacionando.jpg" alt="Vacacionando"></div>
       </div>
     </div>
 
@@ -1317,9 +1335,14 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
     <div class="contact-layout">
 
       <div class="contact-info fade-up">
-        <span class="tag tag--green">Contacto</span>
-        <h2>Estamos aquí para ayudarte</h2>
-        <p>Nuestro equipo está disponible para orientarte sobre cualquier producto o servicio. Visitanos o escribinos.</p>
+        <div class="contact-img-hero">
+          <div class="contact-img-overlay"></div>
+          <div class="contact-img-content">
+            <span class="tag tag--green">Contacto</span>
+            <h2>Estamos aquí para ayudarte</h2>
+            <p>Nuestro equipo está disponible para orientarte sobre cualquier producto o servicio. Visitanos o escribinos.</p>
+          </div>
+        </div>
         <div class="cinfo-list">
           <div class="cinfo-item">
             <div class="cinfo-icon">
@@ -1447,7 +1470,7 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <div class="footer-col">
         <h4>Productos</h4>
         <ul>
-          <li><a href="#productos">Ahorros</a></li>
+          <li><a href="#productos">Ahorro</a></li>
           <li><a href="#productos">Créditos</a></li>
           <li><a href="#productos">Seguros</a></li>
           <li><a href="#bienestar">Bienestar social</a></li>
@@ -1481,12 +1504,6 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <div class="social-row">
         <a href="https://www.facebook.com/profile.php?id=100023787157363" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
           <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        </a>
-        <a href="#" class="social-btn" aria-label="Instagram">
-          <svg width="15" height="15" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </a>
-        <a href="#" class="social-btn" aria-label="LinkedIn">
-          <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
       </div>
     </div>
@@ -1529,6 +1546,56 @@ document.querySelectorAll('.prod-toggle').forEach(btn => {
     if (!wasOpen) card.classList.add('expanded');
   });
 });
+
+// ===== CONVENIOS FILTER =====
+(function() {
+  var track   = document.getElementById('logos-track');
+  var empty   = document.getElementById('logos-empty');
+  var filters = document.querySelectorAll('.conv-filter');
+  if (!track || !filters.length) return;
+
+  var activeFilter = null;
+
+  filters.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var cat = btn.getAttribute('data-filter');
+      if (activeFilter === cat) {
+        // deselect → show all
+        activeFilter = null;
+        btn.classList.remove('active');
+        showAll();
+      } else {
+        activeFilter = cat;
+        filters.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        filterTo(cat);
+      }
+    });
+  });
+
+  function showAll() {
+    track.querySelectorAll('.logo-card').forEach(function(c) { c.classList.remove('hidden'); });
+    track.style.animationPlayState = 'running';
+    empty.classList.remove('visible');
+  }
+
+  function filterTo(cat) {
+    var visible = 0;
+    track.querySelectorAll('.logo-card:not([data-dup])').forEach(function(c) {
+      if (c.getAttribute('data-category') === cat) { c.classList.remove('hidden'); visible++; }
+      else c.classList.add('hidden');
+    });
+    // hide all duplicates when filtered
+    track.querySelectorAll('.logo-card[data-dup]').forEach(function(c) { c.classList.add('hidden'); });
+    if (visible === 0) {
+      track.style.animationPlayState = 'paused';
+      empty.classList.add('visible');
+    } else {
+      track.style.animationPlayState = 'paused';
+      empty.classList.remove('visible');
+    }
+  }
+})();
 
 // Scroll-triggered fade-up
 const io = new IntersectionObserver(entries => {
@@ -1674,8 +1741,8 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 (function(){
   var DATA=[
     {title:'Inicio',desc:'Página principal de Coopesipe R.L.',link:'index.html#hero'},
-    {title:'Productos financieros',desc:'Ahorros, créditos, seguros y servicios para asociados',link:'index.html#productos'},
-    {title:'Ahorros',desc:'Tipos de ahorro disponibles para los asociados',link:'index.html#productos'},
+    {title:'Productos financieros',desc:'Ahorro, créditos, seguros y servicios para asociados',link:'index.html#productos'},
+    {title:'Ahorro',desc:'Tipos de ahorro disponibles para los asociados',link:'index.html#productos'},
     {title:'Créditos',desc:'Créditos personales y con respaldo de ahorro',link:'index.html#productos'},
     {title:'Seguros',desc:'Seguros de vida y protección familiar para asociados',link:'index.html#productos'},
     {title:'Anuncios',desc:'Novedades y promociones de Coopesipe R.L.',link:'index.html#anuncios'},
@@ -1727,6 +1794,10 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
   });
 })();
 </script>
+<!-- Facebook FAB -->
+<a href="https://www.facebook.com/profile.php?id=100023787157363" class="fb-fab" target="_blank" rel="noopener noreferrer" aria-label="Visitar Facebook de Coopesipe">
+  <svg width="24" height="24" fill="#fff" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+</a>
 <!-- WhatsApp FAB -->
 <a href="https://wa.me/50662690309?text=Hola+Coopesipe+R.L.%2C+me+gustar%C3%ADa+obtener+informaci%C3%B3n+sobre+sus+productos+y+servicios.+%C2%BFMe+pueden+ayudar%3F" class="wa-fab" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
