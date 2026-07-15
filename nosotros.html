@@ -87,7 +87,7 @@ h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.2; font-weight:
 
 .header-logo { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
 .header-logo img { height: 52px; width: auto; }
-.header-logo-name { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.2rem; color: #fff; line-height: 1.1; display: flex; flex-direction: column; }
+.header-logo-name { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.2rem; color: #fff; line-height: 1.2; display: flex; flex-direction: column; gap: 0.18rem; }
 .header-logo-name span { font-size: 0.72rem; font-weight: 400; color: rgba(255,255,255,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
 
 nav { display: flex; align-items: center; }
@@ -426,6 +426,7 @@ nav a:hover::after, nav a.active::after { transform: scaleX(1); }
 .member-photo { width: 110px; height: 118px; border-radius: 50%; object-fit: cover; object-position: center top; margin: 0 auto 0.55rem; display: block; }
 .member-name { font-family: 'Sora',sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--gray-800); line-height: 1.25; }
 .member-role { font-size: 0.73rem; color: var(--green-mid); font-weight: 600; margin-top: 0.2rem; }
+.member-period { font-size: 0.68rem; color: var(--gray-400); font-weight: 500; margin-top: 0.15rem; }
 .modal-section-hd { font-size: 0.73rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-400); padding-top: 1.1rem; margin-bottom: 0.6rem; border-top: 1px solid var(--gray-100); }
 
 /* ===== FOOTER ===== */
@@ -775,14 +776,9 @@ Asamblea General</button>
 
       <div class="ot-v"></div>
 
-      <!-- 4. Auditoría ←dashed→ Comisión Cobro (con línea central que pasa) -->
-      <div class="ot-lateral">
+      <!-- 4. Auditoría Externa -->
+      <div class="ot-row">
         <button class="ot-node ot-ghost" data-modal="auditoria">Auditoría<br>Externa</button>
-        <div class="ot-lateral-mid">
-          <div class="lv"></div>
-          <div class="lh"></div>
-        </div>
-        <button class="ot-node" data-modal="cobro">Comisión de Cobro<br>Administrativo</button>
       </div>
 
       <div class="ot-v"></div>
@@ -901,17 +897,17 @@ const modalData = {
   vigilancia: {
     title: 'Comité de Vigilancia',
     img: null,
-    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/jorge-flores.png" class="member-photo" alt="Jorge Flores Gutiérrez"><div class="member-name">Jorge Flores Gutiérrez</div><div class="member-role">Presidente</div></div><div class="member-card"><img src="Referencias/oscar-brenes.png" class="member-photo" alt="Oscar Brenes"><div class="member-name">Oscar Brenes</div><div class="member-role">Vicepresidente</div></div><div class="member-card"><img src="Referencias/rolando-fonseca.png" class="member-photo" alt="Rolando Fonseca Gutiérrez"><div class="member-name">Rolando Fonseca Gutiérrez</div><div class="member-role">Secretario</div></div></div><div class="modal-section-hd">Funciones</div><p>Compuesto por <strong>3 dirigentes electos más 2 suplentes</strong> por un período de 2 años. Se encarga del examen y fiscalización de todas las cuentas y transacciones de la Cooperativa.</p><ul><li>Verificar balances y estados financieros</li><li>Revisar la contabilidad cada dos meses</li><li>Supervisar el cumplimiento de leyes y del estatuto</li><li>Informar a la Asamblea General sobre sus hallazgos</li><li>Atender denuncias de los asociados</li></ul>'
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/jorge-flores.png" class="member-photo" alt="Jorge Flores Gutiérrez"><div class="member-name">Jorge Flores Gutiérrez</div><div class="member-role">Presidente</div><div class="member-period">2026–2027</div></div><div class="member-card"><img src="Referencias/oscar-brenes.png" class="member-photo" alt="Oscar Brenes Mena"><div class="member-name">Oscar Brenes Mena</div><div class="member-role">Vicepresidente</div><div class="member-period">2026–2028</div></div><div class="member-card"><img src="Referencias/rolando-fonseca.png" class="member-photo" alt="Rolando Fonseca Gutiérrez"><div class="member-name">Rolando Fonseca Gutiérrez</div><div class="member-role">Secretario</div><div class="member-period">2025–2027</div></div></div><div class="modal-section-hd">Funciones</div><p>Compuesto por <strong>3 dirigentes electos más 2 suplentes</strong> por un período de 2 años. Se encarga del examen y fiscalización de todas las cuentas y transacciones de la Cooperativa.</p><ul><li>Verificar balances y estados financieros</li><li>Revisar la contabilidad cada dos meses</li><li>Supervisar el cumplimiento de leyes y del estatuto</li><li>Informar a la Asamblea General sobre sus hallazgos</li><li>Atender denuncias de los asociados</li></ul>'
   },
   consejo: {
     title: 'Consejo de Administración',
     img: null,
-    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/ronald-varela.png" class="member-photo" alt="Ronald Varela Salas"><div class="member-name">Ronald Varela Salas</div><div class="member-role">Presidente</div></div><div class="member-card"><img src="Referencias/ana-alvarado.png" class="member-photo" alt="Ana Victoria Alvarado Quesada"><div class="member-name">Ana Victoria Alvarado Quesada</div><div class="member-role">Vicepresidenta</div></div><div class="member-card"><img src="Referencias/melvin-soto.png" class="member-photo" alt="Melvin Soto Villegas"><div class="member-name">Melvin Soto Villegas</div><div class="member-role">Vocal 1</div></div><div class="member-card"><img src="Referencias/vanessa-solano.png" class="member-photo" alt="Vanessa Solano Trejos"><div class="member-name">Vanessa Solano Trejos</div><div class="member-role">Secretaria</div></div><div class="member-card"><img src="Referencias/mayela-gamboa.png" class="member-photo" alt="Mayela Gamboa Monge"><div class="member-name">Mayela Gamboa Monge</div><div class="member-role">Vocal 2</div></div></div><div class="modal-section-hd">Funciones</div><p>Compuesto por <strong>5 miembros propietarios más 2 suplentes</strong> elegidos por 2 años. Sesiona en forma ordinaria dos veces por mes.</p><ul><li>Establecer las políticas crediticias y de ahorro</li><li>Nombrar y remover al Gerente (con voto mínimo de 4 miembros)</li><li>Enviar informes periódicos a INFOCOOP y SUGEF</li><li>Aprobar el presupuesto y plan anual operativo</li><li>Supervisar la ejecución de acuerdos institucionales</li></ul>'
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/ronald-varela.png" class="member-photo" alt="Ronald Varela Salas"><div class="member-name">Ronald Varela Salas</div><div class="member-role">Presidente</div><div class="member-period">2026–2027</div></div><div class="member-card"><img src="Referencias/ana-alvarado.png" class="member-photo" alt="Ana Victoria Alvarado Quesada"><div class="member-name">Ana Victoria Alvarado Quesada</div><div class="member-role">Vicepresidenta</div><div class="member-period">2026–2027</div></div><div class="member-card"><img src="Referencias/melvin-soto.png" class="member-photo" alt="Melvin Soto Villegas"><div class="member-name">Melvin Soto Villegas</div><div class="member-role">Vocal 1</div><div class="member-period">2026–2027</div></div><div class="member-card"><img src="Referencias/vanessa-solano.png" class="member-photo" alt="Vanessa Solano Trejos"><div class="member-name">Vanessa Solano Trejos</div><div class="member-role">Secretaria</div><div class="member-period">2026–2027</div></div><div class="member-card"><img src="Referencias/mayela-gamboa.png" class="member-photo" alt="Mayela Gamboa Monge"><div class="member-name">Mayela Gamboa Monge</div><div class="member-role">Vocal 2</div><div class="member-period">2026–2028</div></div></div><div class="modal-section-hd">Funciones</div><p>Compuesto por <strong>5 miembros propietarios más 2 suplentes</strong> elegidos por 2 años. Sesiona en forma ordinaria dos veces por mes.</p><ul><li>Establecer las políticas crediticias y de ahorro</li><li>Nombrar y remover al Gerente (con voto mínimo de 4 miembros)</li><li>Enviar informes periódicos a INFOCOOP y SUGEF</li><li>Aprobar el presupuesto y plan anual operativo</li><li>Supervisar la ejecución de acuerdos institucionales</li></ul>'
   },
   educacion: {
     title: 'Comité de Educación y Bienestar Social',
     img: null,
-    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/maylee-sanchez.png" class="member-photo" alt="Maylee Sánchez Murillo"><div class="member-name">Maylee Sánchez Murillo</div><div class="member-role">Presidenta</div></div><div class="member-card"><img src="Referencias/jocksan-obando.png" class="member-photo" alt="Jocksan Obando Bonilla"><div class="member-name">Jocksan Obando Bonilla</div><div class="member-role">Vicepresidente</div></div><div class="member-card"><img src="Referencias/sonia-vargas.png" class="member-photo" alt="Sonia Vargas"><div class="member-name">Sonia Vargas</div><div class="member-role">Secretaria</div></div></div><div class="modal-section-hd">Funciones</div><p>Conformado por un <strong>mínimo de 3 dirigentes</strong> por período de 2 años (2 en años pares, 1 en años impares). Coordina los programas educativos y de bienestar para los asociados.</p><ul><li>Coordinar programas de capacitación cooperativa</li><li>Supervisar el uso correcto de la Reserva para Educación</li><li>Gestionar actividades de bienestar y solidaridad</li><li>Promover la cultura cooperativa entre los asociados</li><li>Organizar actividades formativas con CENECOOP</li></ul>'
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/maylee-sanchez.png" class="member-photo" alt="Maylee Sánchez Murillo"><div class="member-name">Maylee Sánchez Murillo</div><div class="member-role">Presidenta</div><div class="member-period">2026–2028</div></div><div class="member-card"><img src="Referencias/jocksan-obando.png" class="member-photo" alt="Jocksan Obando Bonilla"><div class="member-name">Jocksan Obando Bonilla</div><div class="member-role">Vicepresidente</div><div class="member-period">2026–2027</div></div><div class="member-card"><img src="Referencias/sonia-vargas.png" class="member-photo" alt="Sonia Vargas Araya"><div class="member-name">Sonia Vargas Araya</div><div class="member-role">Secretaria</div><div class="member-period">2026–2028</div></div></div><div class="modal-section-hd">Funciones</div><p>Conformado por un <strong>mínimo de 3 dirigentes</strong> por período de 2 años (2 en años pares, 1 en años impares). Coordina los programas educativos y de bienestar para los asociados.</p><ul><li>Coordinar programas de capacitación cooperativa</li><li>Supervisar el uso correcto de la Reserva para Educación</li><li>Gestionar actividades de bienestar y solidaridad</li><li>Promover la cultura cooperativa entre los asociados</li><li>Organizar actividades formativas con CENECOOP</li></ul>'
   },
   auditoria: {
     title: 'Auditoría Externa',
@@ -926,7 +922,7 @@ const modalData = {
   gerencia: {
     title: 'Gerencia',
     img: null,
-    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Marcela.png" class="member-photo" alt="Marcela Zúñiga Chavarría"><div class="member-name">Marcela Zúñiga Chavarría</div><div class="member-role">Gerenta General</div></div></div><div class="modal-section-hd">Funciones</div><p>La Gerencia es nombrada y removida por el Consejo de Administración con el voto mínimo de 4 miembros propietarios. Es el órgano ejecutivo de la cooperativa.</p><ul><li>Ejecutar los acuerdos del Consejo de Administración</li><li>Presentar informes mensuales de operaciones y finanzas</li><li>Supervisar los registros contables y el control interno</li><li>Firmar cheques y documentos autorizados por el Consejo</li><li>Gestionar el talento humano de la organización</li></ul>'
+    html: '<div class="member-grid"><div class="member-card"><img src="Referencias/Marcela.png" class="member-photo" alt="Marcela Zúñiga Chavarría"><div class="member-name">Marcela Zúñiga Chavarría</div><div class="member-role">Gerente General</div></div></div><div class="modal-section-hd">Funciones</div><p>La Gerencia es nombrada y removida por el Consejo de Administración con el voto mínimo de 4 miembros propietarios. Es el órgano ejecutivo de la cooperativa.</p><ul><li>Ejecutar los acuerdos del Consejo de Administración</li><li>Presentar informes mensuales de operaciones y finanzas</li><li>Supervisar los registros contables y el control interno</li><li>Firmar cheques y documentos autorizados por el Consejo</li><li>Gestionar el talento humano de la organización</li></ul>'
   },
   coordinacion: {
     title: 'Coordinación Administrativa',
