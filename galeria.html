@@ -72,112 +72,12 @@ nav a:hover::after,nav a.active::after{transform:scaleX(1)}
 .page-hero h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:#fff;margin-bottom:.8rem}
 .page-hero p{font-size:1rem;color:rgba(255,255,255,.58);max-width:500px;line-height:1.65;font-weight:300}
 
-/* PAGE TABS */
-.page-tabs{background:var(--white);border-bottom:1px solid var(--gray-100);position:sticky;top:68px;z-index:500;overflow-x:auto}
-.tabs-inner{display:flex;gap:0;min-width:max-content}
-.tab-link{padding:1rem 1.4rem;font-family:'Sora',sans-serif;font-size:.84rem;font-weight:600;color:var(--gray-600);white-space:nowrap;border-bottom:2px solid transparent;transition:all .25s var(--ease);cursor:pointer;background:none;border:none;border-bottom:2px solid transparent}
-.tab-link:hover{color:var(--green-mid)}
-.tab-link.active{color:var(--green-mid);border-bottom-color:var(--green)}
 
-/* ALBUM SECTIONS */
-.album-section{padding:5rem 0;border-bottom:1px solid var(--gray-100)}
-.album-section:nth-child(even){background:var(--off-white)}
-.album-section:last-of-type{border-bottom:none}
-
-.album-header{margin-bottom:2.5rem}
-.album-meta{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-.album-title{font-size:clamp(1.5rem,2.5vw,2rem);color:var(--gray-800);margin-bottom:.5rem}
-.album-count{font-size:.8rem;font-weight:600;color:var(--gray-400);background:var(--gray-100);padding:.25rem .7rem;border-radius:100px}
-
-/* PHOTO GRID */
-.photo-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
-  gap:.8rem;
-}
-.photo-item{
-  position:relative;overflow:hidden;border-radius:var(--radius);
-  cursor:pointer;background:var(--gray-100);
-  aspect-ratio:4/3;
-}
-.photo-item img{
-  width:100%;height:100%;object-fit:cover;
-  transition:transform .4s var(--ease),filter .3s var(--ease);
-  filter:brightness(.95) saturate(.9);
-}
-.photo-item:hover img{transform:scale(1.06);filter:brightness(1) saturate(1)}
-.photo-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(0deg,rgba(11,30,5,.65) 0%,transparent 60%);
-  opacity:0;transition:opacity .3s var(--ease);
-  display:flex;align-items:flex-end;padding:.9rem;
-}
-.photo-item:hover .photo-overlay{opacity:1}
-.photo-zoom{
-  width:36px;height:36px;border-radius:50%;
-  background:rgba(255,255,255,.15);backdrop-filter:blur(6px);
-  border:1px solid rgba(255,255,255,.3);
-  display:flex;align-items:center;justify-content:center;
-  margin-left:auto;
-  transition:background .25s var(--ease);
-}
-.photo-item:hover .photo-zoom{background:rgba(255,255,255,.25)}
-.photo-num{
-  font-family:'Sora',sans-serif;font-size:.72rem;font-weight:600;
-  color:rgba(255,255,255,.7);
-}
-
-/* LIGHTBOX */
-.lightbox{
-  position:fixed;inset:0;z-index:9000;
-  background:rgba(0,0,0,.93);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;pointer-events:none;
-  transition:opacity .3s var(--ease);
-}
-.lightbox.open{opacity:1;pointer-events:auto}
-.lb-inner{position:relative;max-width:92vw;max-height:90vh;display:flex;flex-direction:column;align-items:center;gap:1rem}
-.lb-img-wrap{position:relative;display:flex;align-items:center;justify-content:center}
-.lb-img{
-  max-width:88vw;max-height:78vh;
-  border-radius:8px;object-fit:contain;
-  box-shadow:0 32px 80px rgba(0,0,0,.5);
-  transition:opacity .25s var(--ease);
-}
-.lb-img.loading{opacity:.3}
-.lb-meta{color:rgba(255,255,255,.6);font-size:.82rem;text-align:center}
-.lb-counter{font-family:'Sora',sans-serif;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.06em}
-
-.lb-close{
-  position:fixed;top:1.5rem;right:1.5rem;
-  width:44px;height:44px;border-radius:50%;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:background .25s var(--ease);color:#fff;
-}
-.lb-close:hover{background:rgba(255,255,255,.2)}
-
-.lb-nav{
-  position:fixed;top:50%;transform:translateY(-50%);
-  width:48px;height:48px;border-radius:50%;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:background .25s var(--ease);color:#fff;
-}
-.lb-nav:hover{background:rgba(255,255,255,.2)}
-.lb-nav--prev{left:1.5rem}
-.lb-nav--next{right:1.5rem}
-.lb-nav:disabled{opacity:.25;cursor:default}
-
-/* Spinner for loading */
-.lb-spinner{
-  width:40px;height:40px;border-radius:50%;
-  border:3px solid rgba(255,255,255,.1);
-  border-top-color:var(--green);
-  animation:spin .7s linear infinite;
-  position:absolute;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
+/* GALERÍA EN PREPARACIÓN */
+.gallery-prep{padding:6rem 0;text-align:center;background:var(--off-white)}
+.gallery-prep-icon{width:80px;height:80px;border-radius:50%;background:var(--green-pale);display:flex;align-items:center;justify-content:center;margin:0 auto 1.8rem}
+.gallery-prep h2{font-size:clamp(1.6rem,3vw,2.4rem);color:var(--gray-800);margin-bottom:.9rem}
+.gallery-prep p{font-size:1rem;color:var(--gray-600);max-width:460px;margin:0 auto;line-height:1.7}
 
 /* FOOTER */
 footer{background:var(--green-deep);color:rgba(255,255,255,.6);padding:4rem 0 2rem}
@@ -305,71 +205,15 @@ footer{background:var(--green-deep);color:rgba(255,255,255,.6);padding:4rem 0 2r
   </div>
 </section>
 
-<!-- TABS -->
-<div class="page-tabs">
-  <div class="container">
-    <div class="tabs-inner">
-      <a href="#aniversario" class="tab-link active">50 Aniversario</a>
-      <a href="#gobierno" class="tab-link">Gobierno Cooperativo 2014</a>
-    </div>
+<!-- GALERÍA EN PREPARACIÓN -->
+<section class="gallery-prep fade-up">
+  <div class="gallery-prep-icon">
+    <svg width="38" height="38" fill="none" stroke="#6CB827" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
   </div>
-</div>
-
-<!-- ÁLBUM 1: 50 Aniversario -->
-<section id="aniversario" class="album-section">
-  <div class="container">
-    <div class="album-header fade-up">
-      <span class="tag tag--orange">Celebración histórica</span>
-      <div class="album-meta">
-        <h2 class="album-title">50 Aniversario Coopesipe</h2>
-        <span class="album-count">21 fotografías</span>
-      </div>
-      <p style="font-size:.93rem;color:var(--gray-600);margin-top:.6rem;line-height:1.65">Fotografías de la celebración del 50 aniversario de Coopesipe R.L., conmemorando más de cinco décadas al servicio de los empleados del Sistema Penitenciario Nacional.</p>
-    </div>
-    <div class="photo-grid" id="grid-aniversario">
-      <!-- Photos rendered by JS -->
-    </div>
-  </div>
+  <span class="tag tag--green">Próximamente</span>
+  <h2>Galería en preparación</h2>
+  <p>Estamos organizando nuestro archivo fotográfico. Pronto podrás ver imágenes de los eventos y momentos más importantes de Coopesipe R.L.</p>
 </section>
-
-<!-- ÁLBUM 2: Gobierno Cooperativo 2014 -->
-<section id="gobierno" class="album-section">
-  <div class="container">
-    <div class="album-header fade-up">
-      <span class="tag tag--green">Capacitación cooperativa</span>
-      <div class="album-meta">
-        <h2 class="album-title">Curso Gobierno Cooperativo 2014</h2>
-        <span class="album-count">21 fotografías</span>
-      </div>
-      <p style="font-size:.93rem;color:var(--gray-600);margin-top:.6rem;line-height:1.65">Registro fotográfico del Curso de Gobierno Cooperativo 2014, actividad de formación para los miembros del Consejo de Administración y líderes cooperativos.</p>
-    </div>
-    <div class="photo-grid" id="grid-gobierno">
-      <!-- Photos rendered by JS -->
-    </div>
-  </div>
-</section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de fotos">
-  <button class="lb-close" id="lb-close" aria-label="Cerrar">
-    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-  </button>
-  <button class="lb-nav lb-nav--prev" id="lb-prev" aria-label="Anterior">
-    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>
-  <div class="lb-inner">
-    <div class="lb-img-wrap">
-      <div class="lb-spinner" id="lb-spinner"></div>
-      <img id="lb-img" class="lb-img" src="" alt="Foto de galería">
-    </div>
-    <div class="lb-meta">
-      <div class="lb-counter" id="lb-counter"></div>
-    </div>
-  </div>
-  <button class="lb-nav lb-nav--next" id="lb-next" aria-label="Siguiente">
-    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-  </button>
-</div>
 
 <!-- FOOTER -->
 <footer>
@@ -405,152 +249,12 @@ footer{background:var(--green-deep);color:rgba(255,255,255,.6);padding:4rem 0 2r
         <a href="https://www.facebook.com/profile.php?id=100023787157363" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
           <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
         </a>
-        <a href="#" class="social-btn" aria-label="Instagram">
-          <svg width="15" height="15" fill="none" stroke="rgba(255,255,255,0.65)" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </a>
-        <a href="#" class="social-btn" aria-label="LinkedIn">
-          <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-const BASE = 'https://www.coopesipe.fi.cr';
-
-// Photo data
-const albums = {
-  aniversario: {
-    grid: 'grid-aniversario',
-    label: '50 Aniversario',
-    photos: [
-      '/images/speasyimagegallery/albums/1/images/p1000809.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000808.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000807.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000805.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000806.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000804.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000803.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000801.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000797.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000802.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000798.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000799.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000800.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000796.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000795.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000747.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000744.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000745.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000743.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000748.jpg',
-      '/images/speasyimagegallery/albums/1/images/p1000749.jpg'
-    ]
-  },
-  gobierno: {
-    grid: 'grid-gobierno',
-    label: 'Gobierno Cooperativo 2014',
-    photos: [
-      '/images/speasyimagegallery/albums/2/images/dsc00533.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00534.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc005341.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00528.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00526.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00527.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00523.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00524.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00525.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00522.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00521.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00519.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00517.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00518.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00520.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00516.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00512.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00511.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00513.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00515.jpg',
-      '/images/speasyimagegallery/albums/2/images/dsc00514.jpg'
-    ]
-  }
-};
-
-// Build grids
-function buildGrid(albumKey) {
-  const album = albums[albumKey];
-  const grid = document.getElementById(album.grid);
-  album.photos.forEach((path, i) => {
-    const url = BASE + path;
-    const item = document.createElement('div');
-    item.className = 'photo-item fade-up';
-    item.style.transitionDelay = (i * 0.04) + 's';
-    item.dataset.album = albumKey;
-    item.dataset.index = i;
-    item.innerHTML = `
-      <img src="${url}" alt="${album.label} - Foto ${i+1}" loading="lazy">
-      <div class="photo-overlay">
-        <span class="photo-num">Foto ${i+1}</span>
-        <div class="photo-zoom">
-          <svg width="16" height="16" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
-        </div>
-      </div>
-    `;
-    item.addEventListener('click', () => openLightbox(albumKey, i));
-    grid.appendChild(item);
-  });
-}
-buildGrid('aniversario');
-buildGrid('gobierno');
-
-// Lightbox
-const lb       = document.getElementById('lightbox');
-const lbImg    = document.getElementById('lb-img');
-const lbSpin   = document.getElementById('lb-spinner');
-const lbCntr   = document.getElementById('lb-counter');
-const lbPrev   = document.getElementById('lb-prev');
-const lbNext   = document.getElementById('lb-next');
-let curAlbum = '', curIdx = 0;
-
-function openLightbox(albumKey, idx) {
-  curAlbum = albumKey;
-  curIdx   = idx;
-  lb.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  loadLbImg();
-}
-function closeLightbox() {
-  lb.classList.remove('open');
-  document.body.style.overflow = '';
-}
-function loadLbImg() {
-  const album = albums[curAlbum];
-  lbSpin.style.display = 'block';
-  lbImg.classList.add('loading');
-  const url = BASE + album.photos[curIdx];
-  lbImg.onload = () => { lbSpin.style.display = 'none'; lbImg.classList.remove('loading'); };
-  lbImg.onerror = () => { lbSpin.style.display = 'none'; lbImg.classList.remove('loading'); };
-  lbImg.src = url;
-  lbImg.alt = album.label + ' — Foto ' + (curIdx + 1);
-  lbCntr.textContent = (curIdx + 1) + ' / ' + album.photos.length;
-  lbPrev.disabled = curIdx === 0;
-  lbNext.disabled = curIdx === album.photos.length - 1;
-}
-function prevPhoto() { if (curIdx > 0) { curIdx--; loadLbImg(); } }
-function nextPhoto() { if (curIdx < albums[curAlbum].photos.length - 1) { curIdx++; loadLbImg(); } }
-
-document.getElementById('lb-close').addEventListener('click', closeLightbox);
-lbPrev.addEventListener('click', prevPhoto);
-lbNext.addEventListener('click', nextPhoto);
-lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
-document.addEventListener('keydown', e => {
-  if (!lb.classList.contains('open')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') prevPhoto();
-  if (e.key === 'ArrowRight') nextPhoto();
-});
-
 // Header scroll
 window.addEventListener('scroll', () => document.getElementById('header').classList.toggle('scrolled', scrollY > 40), { passive: true });
 
@@ -567,14 +271,6 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.c
 // Fade-up
 const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-
-// Tab active on scroll
-const secs = ['aniversario','gobierno'], tabs = document.querySelectorAll('.tab-link');
-window.addEventListener('scroll', () => {
-  let cur = '';
-  secs.forEach(id => { const el = document.getElementById(id); if (el && el.getBoundingClientRect().top <= 160) cur = id; });
-  tabs.forEach(t => t.classList.toggle('active', t.getAttribute('href') === '#' + cur));
-}, { passive: true });
 </script>
 <!-- Buscador overlay -->
 <div class="search-overlay" id="search-overlay" aria-hidden="true">
