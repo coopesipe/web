@@ -351,6 +351,7 @@ nav a:hover::after { transform: scaleX(1); }
   font-size: 0.79rem; padding: 0.12rem 0.46rem; border-radius: 4px;
   background: rgba(0,0,0,0.07); color: var(--gray-600); font-weight: 600;
 }
+.badge--green { background: rgba(108,184,39,0.15); color: var(--green-mid); }
 .prod-detail-desc { font-size: 0.92rem; color: var(--gray-600); line-height: 1.55; }
 
 /* ===== BIENESTAR ===== */
@@ -870,9 +871,10 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
           <div>
             <div class="hero-pcard-title">Créditos</div>
             <div class="hero-pcard-tags">
+              <span class="hero-tag">Sobre Ahorro</span>
               <span class="hero-tag">Especial</span>
               <span class="hero-tag">Refundición</span>
-              <span class="hero-tag">Sobre ahorro</span>
+              <span class="hero-tag">Para el Hogar</span>
             </div>
           </div>
         </a>
@@ -885,9 +887,9 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
           <div>
             <div class="hero-pcard-title">Seguros</div>
             <div class="hero-pcard-tags">
-              <span class="hero-tag">Fondo Mutual</span>
-              <span class="hero-tag">Vida Colectiva</span>
-              <span class="hero-tag">Saldos Deudores</span>
+              <span class="hero-tag">Saldo Deudor</span>
+              <span class="hero-tag">Vida 147</span>
+              <span class="hero-tag">Vida 173</span>
             </div>
           </div>
         </a>
@@ -998,10 +1000,14 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         </div>
         <div class="prod-body">
           <ul class="prod-list">
-            <li>Crédito Especial</li>
             <li>Crédito sobre el Ahorro</li>
+            <li>Crédito Especial</li>
             <li>Crédito Refundición</li>
             <li>Crédito para el Hogar</li>
+            <li>Crédito sobre Ahorro Navideño</li>
+            <li>Crédito Revolutivo</li>
+            <li>Crédito Educación</li>
+            <li>Crédito Gastos Médicos</li>
           </ul>
           <button class="prod-link prod-toggle">
             Ver líneas de crédito
@@ -1070,9 +1076,9 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         </div>
         <div class="prod-body">
           <ul class="prod-list">
-            <li>Seguro de vida grupal</li>
-            <li>Póliza individual / natural</li>
-            <li>Seguro de defunción</li>
+            <li>Póliza Saldo Deudor</li>
+            <li>Póliza Colectiva Vida 147</li>
+            <li>Póliza Colectiva Vida 173</li>
           </ul>
           <button class="prod-link prod-toggle">
             Ver pólizas
@@ -1082,18 +1088,20 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
             <div class="prod-expand-divider"></div>
             <div class="prod-detail">
               <div class="prod-detail-item">
-                <div class="prod-detail-name">Póliza Colectiva de Vida</div>
-                <div class="prod-detail-badges"><span class="badge">INS N° 0116VIC000241-00</span></div>
-                <div class="prod-detail-desc">Cobertura por fallecimiento (₡3.000.000), doble indemnización por muerte accidental, desmembramiento, incapacidad total o permanente y enfermedad terminal (₡1.500.000). Protección para el asociado, cónyuge (50%) e hijos (25%).</div>
+                <div class="prod-detail-name">Póliza Saldo Deudor</div>
+                <div class="prod-detail-badges"><span class="badge">Monto Original</span></div>
+                <div class="prod-detail-desc">El asociado va creando un fondo con sus abonos mensuales. En caso de muerte, la diferencia de la deuda se entrega a los beneficiarios designados. En caso de incapacidad total y permanente (BI-1), la diferencia se le otorga al asegurado.</div>
+                <div class="prod-detail-desc" style="margin-top:.5rem"><strong>Coberturas:</strong> Muerte accidental y no accidental · BI-1 Incapacidad Total y Permanente en un solo pago.</div>
               </div>
               <div class="prod-detail-item">
-                <div class="prod-detail-name">Fondo de Mutualidad</div>
-                <div class="prod-detail-badges"><span class="badge">INS 01 16 VTM 19 00</span></div>
-                <div class="prod-detail-desc">Provisión financiera solidaria que cubre el fallecimiento del asociado, cónyuge e hijos. Brinda apoyo económico inmediato a la familia en momentos difíciles.</div>
+                <div class="prod-detail-name">Póliza Colectiva Vida 147</div>
+                <div class="prod-detail-badges"><span class="badge">Contributiva</span><span class="badge badge--green">₡3.000.000</span></div>
+                <div class="prod-detail-desc"><strong>Coberturas:</strong> Muerte Plus Nivelada — Muerte natural (₡3.000.000) · Doble indemnización por muerte accidental (₡6.000.000).</div>
               </div>
               <div class="prod-detail-item">
-                <div class="prod-detail-name">Condiciones de cobertura</div>
-                <div class="prod-detail-desc">La cobertura es válida hasta los 74 años (muerte) y 69 años (enfermedad terminal). Finaliza en caso de término de relación laboral, falta de pago de prima o cancelación de póliza.</div>
+                <div class="prod-detail-name">Póliza Colectiva Vida 173</div>
+                <div class="prod-detail-badges"><span class="badge">Contributiva</span><span class="badge badge--green">₡3.000.000</span></div>
+                <div class="prod-detail-desc"><strong>Coberturas:</strong> Muerte accidental y no accidental.</div>
               </div>
             </div>
           </div>
