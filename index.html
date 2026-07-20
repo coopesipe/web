@@ -449,16 +449,19 @@ nav a:hover::after { transform: scaleX(1); }
 .conv-desc  { font-size: 0.8rem; color: var(--gray-600); line-height: 1.55; }
 
 /* ===== LOGOS CONVENIOS CARRUSEL ===== */
-.logos-track-wrap { overflow: hidden; margin-top: 2.5rem; position: relative; }
+.logos-track-wrap {
+  overflow: hidden; margin-top: 2rem; position: relative;
+  padding: 1rem 5vw;
+}
 .logos-track-wrap::before,
 .logos-track-wrap::after {
-  content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
+  content: ''; position: absolute; top: 0; bottom: 0; width: 6vw; z-index: 2; pointer-events: none;
 }
-.logos-track-wrap::before { left: 0; background: linear-gradient(to right, var(--white), transparent); }
-.logos-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--white), transparent); }
+.logos-track-wrap::before { left: 0; background: linear-gradient(to right, var(--white) 30%, transparent); }
+.logos-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--white) 30%, transparent); }
 .logos-track {
-  display: flex; gap: 1.2rem; width: max-content;
-  animation: logos-scroll 30s linear infinite;
+  display: flex; gap: 1.5rem; width: max-content;
+  animation: logos-scroll 45s linear infinite;
 }
 .logos-track:hover { animation-play-state: paused; }
 @keyframes logos-scroll {
@@ -466,15 +469,15 @@ nav a:hover::after { transform: scaleX(1); }
   100% { transform: translateX(-50%); }
 }
 .logo-card {
-  flex-shrink: 0; width: 160px; height: 120px;
+  flex-shrink: 0; width: 230px; height: 160px;
   background: var(--white); border: 1px solid var(--gray-100);
   border-radius: var(--radius); display: flex; align-items: center; justify-content: center;
-  padding: 1rem; box-shadow: var(--shadow-sm);
+  padding: 1.5rem; box-shadow: var(--shadow-sm);
   transition: box-shadow 0.3s, transform 0.3s, width 0.3s, height 0.3s;
 }
 .logo-card:hover {
-  box-shadow: var(--shadow-md); transform: translateY(-5px) scale(1.12);
-  width: 185px; height: 140px; z-index: 2; position: relative;
+  box-shadow: var(--shadow-md); transform: translateY(-5px) scale(1.08);
+  width: 252px; height: 176px; z-index: 2; position: relative;
 }
 .logo-card img { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(40%); transition: filter 0.3s; }
 .logo-card:hover img { filter: grayscale(0%); }
@@ -1234,9 +1237,10 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         CENECOOP
       </button>
     </div>
+  </div><!-- /container -->
 
-    <!-- Logos carrusel -->
-    <div class="logos-track-wrap fade-up">
+  <!-- Logos carrusel -->
+  <div class="logos-track-wrap fade-up">
       <div class="logos-empty" id="logos-empty">No hay convenios en esta categoría aún.</div>
       <div class="logos-track" id="logos-track">
         <!-- salud -->
@@ -1298,9 +1302,8 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
         <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Vacacionando.jpg" alt="Vacacionando"></div>
       </div>
-    </div>
-
   </div>
+
 </section>
 
 <!-- ===== ANUNCIOS ===== -->
