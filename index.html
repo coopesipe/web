@@ -482,6 +482,7 @@ nav a:hover::after { transform: scaleX(1); }
 .logo-card img { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(40%); transition: filter 0.3s; }
 .logo-card:hover img { filter: grayscale(0%); }
 .logo-card.hidden { display: none; }
+.logos-track--filtered { width: 100% !important; justify-content: center; flex-wrap: wrap; gap: 1.5rem; padding: 0.5rem 0; }
 
 /* ===== CONV FILTROS ===== */
 .conv-filters {
@@ -952,7 +953,7 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
           <ul class="prod-list">
             <li>Aportes de capital</li>
             <li>Ahorro navideño</li>
-            <li>Ahorro de vacaciones</li>
+            <li>Ahorro Vacacional</li>
             <li>Ahorro para marchamo</li>
           </ul>
           <button class="prod-link prod-toggle">
@@ -1244,7 +1245,6 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <div class="logos-empty" id="logos-empty">No hay convenios en esta categoría aún.</div>
       <div class="logos-track" id="logos-track">
         <!-- salud -->
-        <div class="logo-card" data-category="salud"><img src="Convenios/Clinica mana.jpg" alt="Clínica Maná"></div>
         <div class="logo-card" data-category="salud"><img src="Convenios/asembis.png" alt="Asembis"></div>
         <div class="logo-card" data-category="salud"><img src="Convenios/Asodent.png" alt="Asodent"></div>
         <div class="logo-card" data-category="salud"><img src="Convenios/Odontologia empresarial.jpeg" alt="Odontología Empresarial"></div>
@@ -1252,7 +1252,6 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         <div class="logo-card" data-category="salud"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
         <!-- electrodomesticos -->
         <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/cococo.png" alt="Cococo"></div>
-        <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/El verdugo.png" alt="El Verdugo"></div>
         <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
         <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/Monge.jpg" alt="Monge"></div>
         <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/Unimart.jpg" alt="Unimart"></div>
@@ -1271,18 +1270,15 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         <div class="logo-card" data-category="funerarias"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
         <!-- comercios -->
         <div class="logo-card" data-category="comercios"><img src="Convenios/Ekono.jpg" alt="Ekono"></div>
-        <div class="logo-card" data-category="comercios"><img src="Convenios/mapache renta car.jpg" alt="Mapache Renta Car"></div>
         <div class="logo-card" data-category="comercios"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
         <div class="logo-card" data-category="comercios"><img src="Convenios/Vacacionando.jpg" alt="Vacacionando"></div>
         <!-- Duplicados para loop continuo -->
-        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Clinica mana.jpg" alt="Clínica Maná"></div>
         <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/asembis.png" alt="Asembis"></div>
         <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Asodent.png" alt="Asodent"></div>
         <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Odontologia empresarial.jpeg" alt="Odontología Empresarial"></div>
         <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Optica Comunal.jpg" alt="Óptica Comunal"></div>
         <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
         <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/cococo.png" alt="Cococo"></div>
-        <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/El verdugo.png" alt="El Verdugo"></div>
         <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
         <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/Monge.jpg" alt="Monge"></div>
         <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/Unimart.jpg" alt="Unimart"></div>
@@ -1298,7 +1294,6 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
         <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
         <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Ekono.jpg" alt="Ekono"></div>
-        <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/mapache renta car.jpg" alt="Mapache Renta Car"></div>
         <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
         <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Vacacionando.jpg" alt="Vacacionando"></div>
       </div>
@@ -1586,6 +1581,7 @@ document.querySelectorAll('.prod-toggle').forEach(btn => {
 
   function showAll() {
     track.querySelectorAll('.logo-card').forEach(function(c) { c.classList.remove('hidden'); });
+    track.classList.remove('logos-track--filtered');
     track.style.animationPlayState = 'running';
     empty.classList.remove('visible');
   }
@@ -1596,13 +1592,12 @@ document.querySelectorAll('.prod-toggle').forEach(btn => {
       if (c.getAttribute('data-category') === cat) { c.classList.remove('hidden'); visible++; }
       else c.classList.add('hidden');
     });
-    // hide all duplicates when filtered
     track.querySelectorAll('.logo-card[data-dup]').forEach(function(c) { c.classList.add('hidden'); });
+    track.classList.add('logos-track--filtered');
+    track.style.animationPlayState = 'paused';
     if (visible === 0) {
-      track.style.animationPlayState = 'paused';
       empty.classList.add('visible');
     } else {
-      track.style.animationPlayState = 'paused';
       empty.classList.remove('visible');
     }
   }
