@@ -81,6 +81,72 @@ h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.2; font-weight:
 .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.65s var(--ease), transform 0.65s var(--ease); }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 
+/* ===== MODAL PROMO ===== */
+.promo-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+}
+.promo-overlay.open { opacity: 1; pointer-events: all; }
+.promo-modal {
+  display: flex; width: min(860px, 92vw); max-height: 90vh;
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.3);
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.4s var(--ease);
+}
+.promo-overlay.open .promo-modal { transform: translateY(0) scale(1); }
+.promo-close {
+  position: absolute; top: 0.85rem; right: 0.85rem;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: #fff; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gray-800); font-size: 1.2rem; line-height: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background 0.2s, transform 0.2s; z-index: 10;
+}
+.promo-close:hover { background: var(--gray-100); transform: scale(1.1); }
+.promo-left {
+  width: 50%; flex-shrink: 0; position: relative;
+}
+.promo-left img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.promo-right {
+  width: 50%; background: #F2FAE8;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding: 2.5rem 2rem; gap: 1rem;
+  position: relative;
+}
+.promo-logo { width: 130px; height: auto; margin-bottom: 0.5rem; }
+.promo-form { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; }
+.promo-form input {
+  width: 100%; padding: 0.72rem 1rem;
+  border: 1.5px solid var(--gray-100); border-radius: 8px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem;
+  color: var(--gray-800); background: #fff;
+  outline: none; transition: border-color 0.2s;
+}
+.promo-form input:focus { border-color: var(--green); }
+.promo-form input::placeholder { color: var(--gray-400); }
+.promo-form input.input-error { border-color: var(--orange); background: #fff5f2; }
+.promo-form .field-msg { font-size: 0.72rem; color: var(--orange); margin-top: -0.4rem; display: none; }
+.promo-form .field-msg.visible { display: block; }
+.promo-form button {
+  width: 100%; padding: 0.78rem;
+  background: #6CB827; color: #fff; border: none;
+  border-radius: 8px; font-family: 'Sora', sans-serif;
+  font-weight: 600; font-size: 0.9rem; cursor: pointer;
+  transition: background 0.22s, transform 0.22s;
+  margin-top: 0.25rem;
+}
+.promo-form button:hover { background: #5AA020; transform: translateY(-2px); }
+@media (max-width: 600px) {
+  .promo-modal { flex-direction: column; max-height: 95vh; overflow-y: auto; }
+  .promo-left, .promo-right { width: 100%; }
+  .promo-left { height: 200px; }
+}
+
 /* ===== HEADER ===== */
 #header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
@@ -483,6 +549,9 @@ nav a:hover::after { transform: scaleX(1); }
 .logo-card:hover img { filter: grayscale(0%); }
 .logo-card.hidden { display: none; }
 .logos-track--filtered { width: 100% !important; justify-content: center; flex-wrap: wrap; gap: 1.5rem; padding: 0.5rem 0; }
+.logos-wrap--filtered::before,
+.logos-wrap--filtered::after { display: none; }
+.logos-wrap--filtered { display: flex; justify-content: center; padding: 1rem 0; }
 
 /* ===== CONV FILTROS ===== */
 .conv-filters {
@@ -579,6 +648,8 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 
 .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+.footer-visits { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-visits img { height: 18px; opacity: 0.7; }
 .social-row { display: flex; gap: 0.6rem; }
 .social-btn {
   width: 34px; height: 34px; border-radius: 7px;
@@ -835,15 +906,15 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         </div>
         <div class="hero-metrics">
           <div>
-            <div class="hero-metric-val">+290K</div>
+            <div class="hero-metric-val countup" data-target="290" data-prefix="+" data-suffix="K">+290K</div>
             <div class="hero-metric-lbl">Visitas registradas</div>
           </div>
           <div>
-            <div class="hero-metric-val">4</div>
+            <div class="hero-metric-val countup" data-target="4">4</div>
             <div class="hero-metric-lbl">Tipos de ahorro</div>
           </div>
           <div>
-            <div class="hero-metric-val">100%</div>
+            <div class="hero-metric-val countup" data-target="100" data-suffix="%">100%</div>
             <div class="hero-metric-lbl">Cooperativa nacional</div>
           </div>
         </div>
@@ -908,19 +979,19 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
   <div class="container">
     <div class="stats-row">
       <div class="stat-cell fade-up">
-        <div class="stat-val">4+</div>
+        <div class="stat-val countup" data-target="4" data-suffix="+">4+</div>
         <div class="stat-lbl">Opciones de ahorro</div>
       </div>
       <div class="stat-cell fade-up" style="transition-delay:.1s">
-        <div class="stat-val">4</div>
+        <div class="stat-val countup" data-target="4">4</div>
         <div class="stat-lbl">Líneas de crédito</div>
       </div>
       <div class="stat-cell fade-up" style="transition-delay:.2s">
-        <div class="stat-val">3</div>
+        <div class="stat-val countup" data-target="3">3</div>
         <div class="stat-lbl">Pólizas de seguro</div>
       </div>
       <div class="stat-cell fade-up" style="transition-delay:.3s">
-        <div class="stat-val">6+</div>
+        <div class="stat-val countup" data-target="6" data-suffix="+">6+</div>
         <div class="stat-lbl">Categorías de convenios</div>
       </div>
     </div>
@@ -982,6 +1053,12 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
                 <div class="prod-detail-badges"><span class="badge">Reintegro: noviembre</span></div>
                 <div class="prod-detail-desc">Planifique con anticipación el pago del marchamo vehicular. Los fondos se reintegran en noviembre, antes del vencimiento.</div>
               </div>
+            </div>
+            <div style="text-align:center; margin-top:1.5rem;">
+              <a href="documentacion.html#formularios" class="btn btn-orange">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                Ver formularios
+              </a>
             </div>
           </div>
         </div>
@@ -1263,11 +1340,11 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         <div class="logo-card" data-category="universidades"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
         <div class="logo-card" data-category="universidades"><img src="Convenios/Universidad San Marcos.jpg" alt="Universidad San Marcos"></div>
         <!-- funerarias -->
-        <div class="logo-card" data-category="funerarias"><img src="Convenios/Funerales vida.jpg" alt="Funerales Vida"></div>
+        <div class="logo-card" data-category="funerarias"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
         <div class="logo-card" data-category="funerarias"><img src="Convenios/Memorial pets.png" alt="Memorial Pets"></div>
+        <div class="logo-card" data-category="funerarias"><img src="Convenios/Funerales vida.jpg" alt="Funerales Vida"></div>
         <div class="logo-card" data-category="funerarias"><img src="Convenios/polini.jpg" alt="Polini"></div>
         <div class="logo-card" data-category="funerarias"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
-        <div class="logo-card" data-category="funerarias"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
         <!-- comercios -->
         <div class="logo-card" data-category="comercios"><img src="Convenios/Ekono.jpg" alt="Ekono"></div>
         <div class="logo-card" data-category="comercios"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
@@ -1288,11 +1365,11 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/universidad interamericana.png" alt="Universidad Interamericana"></div>
         <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
         <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/Universidad San Marcos.jpg" alt="Universidad San Marcos"></div>
-        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Funerales vida.jpg" alt="Funerales Vida"></div>
+        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
         <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Memorial pets.png" alt="Memorial Pets"></div>
+        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Funerales vida.jpg" alt="Funerales Vida"></div>
         <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/polini.jpg" alt="Polini"></div>
         <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
-        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
         <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Ekono.jpg" alt="Ekono"></div>
         <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
         <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Vacacionando.jpg" alt="Vacacionando"></div>
@@ -1505,6 +1582,9 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
     <hr class="footer-divider">
     <div class="footer-bottom">
       <p>© 2026 Coopesipe R.L. — Todos los derechos reservados. Supervisada por SUGEF.</p>
+      <div class="footer-visits">
+        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fwww.coopesipe.fi.cr&count_bg=%236CB827&title_bg=%230B1E05&icon=eye&icon_color=%23FFFFFF&title=Visitas&edge_flat=true" alt="Contador de visitas">
+      </div>
       <div class="social-row">
         <a href="https://www.facebook.com/profile.php?id=100023787157363" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
           <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -1513,6 +1593,33 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
     </div>
   </div>
 </footer>
+
+<!-- ===== MODAL PROMO ===== -->
+<div class="promo-overlay" id="promo-overlay">
+  <div class="promo-modal" role="dialog" aria-modal="true">
+    <button class="promo-close" id="promo-close" aria-label="Cerrar">✕</button>
+    <div class="promo-left">
+      <img src="Referencias/BannerPromo.png" alt="Promoción Coopesipe">
+    </div>
+    <div class="promo-right">
+      <img src="icono.png" alt="Logo Coopesipe" class="promo-logo">
+      <form class="promo-form" id="promo-form" onsubmit="return false;">
+        <input type="text"  name="nombre"   placeholder="Nombre completo"       required>
+        <span class="field-msg" id="msg-nombre">Este campo es requerido.</span>
+        <input type="text"  name="cedula"   placeholder="Cédula"                required>
+        <span class="field-msg" id="msg-cedula">Este campo es requerido.</span>
+        <input type="tel"   name="movil"    placeholder="Teléfono móvil"         required inputmode="numeric" maxlength="20">
+        <span class="field-msg" id="msg-movil">Este campo es requerido y solo permite números.</span>
+        <input type="tel"   name="hab"      placeholder="Teléfono de habitación" inputmode="numeric" maxlength="20">
+        <span class="field-msg" id="msg-hab">Solo se permiten números.</span>
+        <input type="email" name="correo"   placeholder="Correo electrónico"     required>
+        <span class="field-msg" id="msg-correo">Ingresá un correo válido (ej: nombre@correo.com).</span>
+        <span class="field-msg" id="msg-correo-req">Este campo es requerido.</span>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 <!-- ===== SCRIPTS ===== -->
 <script>
@@ -1554,6 +1661,7 @@ document.querySelectorAll('.prod-toggle').forEach(btn => {
 // ===== CONVENIOS FILTER =====
 (function() {
   var track   = document.getElementById('logos-track');
+  var wrap    = track ? track.closest('.logos-track-wrap') : null;
   var empty   = document.getElementById('logos-empty');
   var filters = document.querySelectorAll('.conv-filter');
   if (!track || !filters.length) return;
@@ -1580,6 +1688,7 @@ document.querySelectorAll('.prod-toggle').forEach(btn => {
   function showAll() {
     track.querySelectorAll('.logo-card').forEach(function(c) { c.classList.remove('hidden'); });
     track.classList.remove('logos-track--filtered');
+    if (wrap) wrap.classList.remove('logos-wrap--filtered');
     track.style.animationPlayState = 'running';
     empty.classList.remove('visible');
   }
@@ -1592,6 +1701,7 @@ document.querySelectorAll('.prod-toggle').forEach(btn => {
     });
     track.querySelectorAll('.logo-card[data-dup]').forEach(function(c) { c.classList.add('hidden'); });
     track.classList.add('logos-track--filtered');
+    if (wrap) wrap.classList.add('logos-wrap--filtered');
     track.style.animationPlayState = 'paused';
     if (visible === 0) {
       empty.classList.add('visible');
@@ -1599,6 +1709,130 @@ document.querySelectorAll('.prod-toggle').forEach(btn => {
       empty.classList.remove('visible');
     }
   }
+})();
+
+// ===== MODAL PROMO =====
+(function() {
+  var overlay = document.getElementById('promo-overlay');
+  var closeBtn = document.getElementById('promo-close');
+  function openModal()  { overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  setTimeout(openModal, 3000);
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+  // Teléfonos: solo números en tiempo real
+  ['movil','hab'].forEach(function(name) {
+    var input = document.querySelector('#promo-form [name="' + name + '"]');
+    input.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+  });
+
+  // Validación al enviar
+  document.getElementById('promo-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form    = this;
+    var valid   = true;
+
+    function setError(input, msgId, show) {
+      input.classList.toggle('input-error', show);
+      var el = document.getElementById(msgId);
+      if (el) el.classList.toggle('visible', show);
+    }
+
+    // Nombre
+    var nombre = form.querySelector('[name="nombre"]');
+    var nombreErr = !nombre.value.trim();
+    setError(nombre, 'msg-nombre', nombreErr);
+    if (nombreErr) valid = false;
+
+    // Cédula
+    var cedula = form.querySelector('[name="cedula"]');
+    var cedulaErr = !cedula.value.trim();
+    setError(cedula, 'msg-cedula', cedulaErr);
+    if (cedulaErr) valid = false;
+
+    // Teléfono móvil (requerido + solo números)
+    var movil = form.querySelector('[name="movil"]');
+    var movilErr = !movil.value.trim() || /[^0-9]/.test(movil.value);
+    setError(movil, 'msg-movil', movilErr);
+    if (movilErr) valid = false;
+
+    // Teléfono habitación (opcional, pero si tiene valor solo números)
+    var hab = form.querySelector('[name="hab"]');
+    var habErr = hab.value.length > 0 && /[^0-9]/.test(hab.value);
+    setError(hab, 'msg-hab', habErr);
+    if (habErr) valid = false;
+
+    // Correo
+    var correo = form.querySelector('[name="correo"]');
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var correoVacio = !correo.value.trim();
+    var correoInvalido = !correoVacio && !emailRe.test(correo.value);
+    setError(correo, 'msg-correo-req', correoVacio);
+    setError(correo, 'msg-correo', correoInvalido);
+    if (correoVacio || correoInvalido) valid = false;
+
+    if (valid) {
+      var btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      var params = new URLSearchParams({
+        nombre: form.querySelector('[name="nombre"]').value.trim(),
+        cedula: form.querySelector('[name="cedula"]').value.trim(),
+        movil:  form.querySelector('[name="movil"]').value.trim(),
+        hab:    form.querySelector('[name="hab"]').value.trim(),
+        correo: form.querySelector('[name="correo"]').value.trim()
+      });
+      fetch('https://script.google.com/macros/s/AKfycbz18h-SQBpnW5qJpB_A8fZ-VTMWbGhs_TM8JzrYxSi5_VtLGa6IYjundupOsdX1GSZ8/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      })
+      .then(function() {
+        btn.textContent = '¡Enviado!';
+        setTimeout(function() { closeModal(); }, 1200);
+      })
+      .catch(function() {
+        btn.textContent = 'Error al enviar. Intentá de nuevo.';
+        btn.disabled = false;
+      });
+    }
+  });
+})();
+
+// ===== COUNT-UP ANIMATION =====
+(function() {
+  function animateCountUp(el) {
+    var target  = parseInt(el.getAttribute('data-target'), 10);
+    var prefix  = el.getAttribute('data-prefix') || '';
+    var suffix  = el.getAttribute('data-suffix') || '';
+    var duration = 1600;
+    var start   = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = prefix + Math.floor(ease * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = prefix + target + suffix;
+    }
+    requestAnimationFrame(step);
+  }
+  var counted = new Set();
+  var ioCount = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !counted.has(e.target)) {
+        counted.add(e.target);
+        animateCountUp(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.countup').forEach(function(el) { ioCount.observe(el); });
 })();
 
 // Scroll-triggered fade-up
