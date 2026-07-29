@@ -538,20 +538,44 @@ nav a:hover::after { transform: scaleX(1); }
   flex-shrink: 0; width: 230px; height: 160px;
   background: var(--white); border: 1px solid var(--gray-100);
   border-radius: var(--radius); display: flex; align-items: center; justify-content: center;
-  padding: 1.5rem; box-shadow: var(--shadow-sm);
+  padding: 0.6rem; box-shadow: var(--shadow-sm);
   transition: box-shadow 0.3s, transform 0.3s, width 0.3s, height 0.3s;
 }
 .logo-card:hover {
   box-shadow: var(--shadow-md); transform: translateY(-5px) scale(1.08);
   width: 252px; height: 176px; z-index: 2; position: relative;
 }
-.logo-card img { max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(40%); transition: filter 0.3s; }
+.logo-card img { width: 100%; height: 100%; object-fit: contain; filter: grayscale(40%); transition: filter 0.3s; }
 .logo-card:hover img { filter: grayscale(0%); }
+.logo-card[data-url] { cursor: pointer; }
+.logo-card[data-url]::after {
+  content: 'Visitar sitio →';
+  position: absolute; inset: 0; border-radius: var(--radius);
+  background: rgba(11,30,5,0.72);
+  color: #fff; font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.25s var(--ease);
+}
+.logo-card[data-url]:hover::after { opacity: 1; }
+.logo-card { position: relative; }
 .logo-card.hidden { display: none; }
-.logos-track--filtered { width: 100% !important; justify-content: center; flex-wrap: wrap; gap: 1.5rem; padding: 0.5rem 0; }
+.logos-track--filtered {
+  width: auto !important;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 0.5rem 0;
+  margin: 0 auto;
+  animation: none !important;
+}
+.logos-wrap--filtered {
+  overflow: visible !important;
+  display: flex !important;
+  justify-content: center !important;
+  padding: 1rem 0 !important;
+}
 .logos-wrap--filtered::before,
-.logos-wrap--filtered::after { display: none; }
-.logos-wrap--filtered { display: flex; justify-content: center; padding: 1rem 0; }
+.logos-wrap--filtered::after { display: none !important; }
 
 /* ===== CONV FILTROS ===== */
 .conv-filters {
@@ -1310,9 +1334,9 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         <svg width="16" height="16" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         Comercios variados
       </button>
-      <button class="conv-filter" data-filter="cenecoop">
-        <svg width="16" height="16" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        CENECOOP
+      <button class="conv-filter" data-filter="vacaciones">
+        <svg width="16" height="16" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9z"/></svg>
+        Vacaciones
       </button>
     </div>
   </div><!-- /container -->
@@ -1322,57 +1346,61 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <div class="logos-empty" id="logos-empty">No hay convenios en esta categoría aún.</div>
       <div class="logos-track" id="logos-track">
         <!-- salud -->
-        <div class="logo-card" data-category="salud"><img src="Convenios/asembis.png" alt="Asembis"></div>
-        <div class="logo-card" data-category="salud"><img src="Convenios/Asodent.png" alt="Asodent"></div>
-        <div class="logo-card" data-category="salud"><img src="Convenios/Odontologia empresarial.jpeg" alt="Odontología Empresarial"></div>
-        <div class="logo-card" data-category="salud"><img src="Convenios/Optica Comunal.jpg" alt="Óptica Comunal"></div>
-        <div class="logo-card" data-category="salud"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
+        <div class="logo-card" data-category="salud" data-url="https://asembis.org/"><img src="Convenios/asembis.png" alt="Asembis"></div>
+        <div class="logo-card" data-category="salud" data-url="http://www.asodent.org"><img src="Convenios/Asodent.png" alt="Asodent"></div>
+        <div class="logo-card" data-category="salud" data-url="http://www.odontologiaempresarial.com"><img src="Convenios/Odontologia empresarial.jpeg" alt="Odontología Empresarial"></div>
+        <div class="logo-card" data-category="salud" data-url="https://www.facebook.com/opticacomunalsj/?locale=es_LA"><img src="Convenios/Optica Comunal.jpg" alt="Óptica Comunal"></div>
+        <div class="logo-card" data-category="salud" data-url="https://www.opticasvision.co.cr"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
         <!-- electrodomesticos -->
-        <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/cococo.png" alt="Cococo"></div>
-        <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
-        <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/Monge.jpg" alt="Monge"></div>
-        <div class="logo-card" data-category="electrodomesticos"><img src="Convenios/Unimart.jpg" alt="Unimart"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-url="https://cococo.co.cr"><img src="Convenios/cococo.png" alt="Cococo"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-url="https://www.gollo.com"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-url="https://www.tiendamonge.com"><img src="Convenios/Monge.jpg" alt="Monge"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-url="https://www.unimart.com"><img src="Convenios/Unimart.jpg" alt="Unimart"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-url="https://www.bienestarhome.cr/"><img src="Convenios/Bienestar Home.png" alt="Bienestar Home"></div>
         <!-- universidades -->
-        <div class="logo-card" data-category="universidades"><img src="Convenios/uia.png" alt="UIA"></div>
-        <div class="logo-card" data-category="universidades"><img src="Convenios/Universidad  castro carazo.png" alt="Castro Carazo"></div>
-        <div class="logo-card" data-category="universidades"><img src="Convenios/Universidad de ciencias y el arte.png" alt="Universidad de Ciencias y el Arte"></div>
+        <div class="logo-card" data-category="universidades" data-url="https://uia.ac.cr"><img src="Convenios/uia.png" alt="UIA"></div>
+        <div class="logo-card" data-category="universidades" data-url="https://www.castrocarazo.ac.cr"><img src="Convenios/Universidad  castro carazo.png" alt="Castro Carazo"></div>
+        <div class="logo-card" data-category="universidades" data-url="https://udelascienciasyelarte.ac.cr"><img src="Convenios/Universidad de ciencias y el arte.png" alt="Universidad de Ciencias y el Arte"></div>
         <div class="logo-card" data-category="universidades"><img src="Convenios/universidad interamericana.png" alt="Universidad Interamericana"></div>
-        <div class="logo-card" data-category="universidades"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
-        <div class="logo-card" data-category="universidades"><img src="Convenios/Universidad San Marcos.jpg" alt="Universidad San Marcos"></div>
+        <div class="logo-card" data-category="universidades" data-url="https://www.upi.ac.cr"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
+        <div class="logo-card" data-category="universidades" data-url="https://www.usanmarcos.ac.cr"><img src="Convenios/Universidad San Marcos.jpg" alt="Universidad San Marcos"></div>
         <!-- funerarias -->
-        <div class="logo-card" data-category="funerarias"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
-        <div class="logo-card" data-category="funerarias"><img src="Convenios/Memorial pets.png" alt="Memorial Pets"></div>
-        <div class="logo-card" data-category="funerarias"><img src="Convenios/Funerales vida.jpg" alt="Funerales Vida"></div>
-        <div class="logo-card" data-category="funerarias"><img src="Convenios/polini.jpg" alt="Polini"></div>
-        <div class="logo-card" data-category="funerarias"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
+        <div class="logo-card" data-category="funerarias" data-url="https://www.valledepazcr.com"><img src="Convenios/Valle de Paz.png" alt="Valle de Paz"></div>
+        <div class="logo-card" data-category="funerarias" data-url="https://www.memorialpets.cr"><img src="Convenios/Memorial pets.png" alt="Memorial Pets"></div>
+        <div class="logo-card" data-category="vacaciones" data-url="https://escapaditas.com/"><img src="Convenios/Escapaditas.png" alt="Escapaditas"></div>
+        <div class="logo-card" data-category="funerarias" data-url="https://funeralesvida.com"><img src="Convenios/Funerales vida.jpg" alt="Funerales Vida"></div>
+        <div class="logo-card" data-category="funerarias" data-url="https://www.funerariapolini.com"><img src="Convenios/polini.jpg" alt="Polini"></div>
+        <div class="logo-card" data-category="funerarias" data-url="https://previplan.cr/"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
         <!-- comercios -->
-        <div class="logo-card" data-category="comercios"><img src="Convenios/Ekono.jpg" alt="Ekono"></div>
-        <div class="logo-card" data-category="comercios"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
-        <div class="logo-card" data-category="comercios"><img src="Convenios/Vacacionando.jpg" alt="Vacacionando"></div>
+        <div class="logo-card" data-category="comercios" data-url="https://www.tiendasekono.com"><img src="Convenios/Ekono.jpg" alt="Ekono"></div>
+        <div class="logo-card" data-category="comercios" data-url="https://www.pricesmart.com/es-cr"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
+        <div class="logo-card" data-category="vacaciones" data-url="https://www.vacacionandocr.com"><img src="Convenios/Vacacionando.jpg" alt="Vacacionando"></div>
         <!-- Duplicados para loop continuo -->
-        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/asembis.png" alt="Asembis"></div>
-        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Asodent.png" alt="Asodent"></div>
-        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Odontologia empresarial.jpeg" alt="Odontología Empresarial"></div>
-        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/Optica Comunal.jpg" alt="Óptica Comunal"></div>
-        <div class="logo-card" data-category="salud" data-dup="true"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
-        <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/cococo.png" alt="Cococo"></div>
-        <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
-        <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/Monge.jpg" alt="Monge"></div>
-        <div class="logo-card" data-category="electrodomesticos" data-dup="true"><img src="Convenios/Unimart.jpg" alt="Unimart"></div>
-        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/uia.png" alt="UIA"></div>
-        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/Universidad  castro carazo.png" alt="Castro Carazo"></div>
-        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/Universidad de ciencias y el arte.png" alt="Universidad de Ciencias y el Arte"></div>
+        <div class="logo-card" data-category="salud" data-url="https://asembis.org/" data-dup="true"><img src="Convenios/asembis.png" alt="Asembis"></div>
+        <div class="logo-card" data-category="salud" data-url="http://www.asodent.org" data-dup="true"><img src="Convenios/Asodent.png" alt="Asodent"></div>
+        <div class="logo-card" data-category="salud" data-url="http://www.odontologiaempresarial.com" data-dup="true"><img src="Convenios/Odontologia empresarial.jpeg" alt="Odontología Empresarial"></div>
+        <div class="logo-card" data-category="salud" data-url="https://www.facebook.com/opticacomunalsj/?locale=es_LA" data-dup="true"><img src="Convenios/Optica Comunal.jpg" alt="Óptica Comunal"></div>
+        <div class="logo-card" data-category="salud" data-url="https://www.opticasvision.co.cr" data-dup="true"><img src="Convenios/opticas vision.jpg" alt="Ópticas Visión"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-url="https://cococo.co.cr" data-dup="true"><img src="Convenios/cococo.png" alt="Cococo"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-url="https://www.gollo.com" data-dup="true"><img src="Convenios/gollo.jpg" alt="Gollo"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-url="https://www.tiendamonge.com" data-dup="true"><img src="Convenios/Monge.jpg" alt="Monge"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-url="https://www.unimart.com" data-dup="true"><img src="Convenios/Unimart.jpg" alt="Unimart"></div>
+        <div class="logo-card" data-category="electrodomesticos" data-url="https://www.bienestarhome.cr/" data-dup="true"><img src="Convenios/Bienestar Home.png" alt="Bienestar Home"></div>
+        <div class="logo-card" data-category="universidades" data-url="https://uia.ac.cr" data-dup="true"><img src="Convenios/uia.png" alt="UIA"></div>
+        <div class="logo-card" data-category="universidades" data-url="https://www.castrocarazo.ac.cr" data-dup="true"><img src="Convenios/Universidad  castro carazo.png" alt="Castro Carazo"></div>
+        <div class="logo-card" data-category="universidades" data-url="https://udelascienciasyelarte.ac.cr" data-dup="true"><img src="Convenios/Universidad de ciencias y el arte.png" alt="Universidad de Ciencias y el Arte"></div>
         <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/universidad interamericana.png" alt="Universidad Interamericana"></div>
-        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
-        <div class="logo-card" data-category="universidades" data-dup="true"><img src="Convenios/Universidad San Marcos.jpg" alt="Universidad San Marcos"></div>
-        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Valle de Paz.jpg" alt="Valle de Paz"></div>
-        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Memorial pets.png" alt="Memorial Pets"></div>
-        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/Funerales vida.jpg" alt="Funerales Vida"></div>
-        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/polini.jpg" alt="Polini"></div>
-        <div class="logo-card" data-category="funerarias" data-dup="true"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
-        <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Ekono.jpg" alt="Ekono"></div>
-        <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
-        <div class="logo-card" data-category="comercios" data-dup="true"><img src="Convenios/Vacacionando.jpg" alt="Vacacionando"></div>
+        <div class="logo-card" data-category="universidades" data-url="https://www.upi.ac.cr" data-dup="true"><img src="Convenios/Universidad politecnica.jpg" alt="Universidad Politécnica"></div>
+        <div class="logo-card" data-category="universidades" data-url="https://www.usanmarcos.ac.cr" data-dup="true"><img src="Convenios/Universidad San Marcos.jpg" alt="Universidad San Marcos"></div>
+        <div class="logo-card" data-category="funerarias" data-url="https://www.valledepazcr.com" data-dup="true"><img src="Convenios/Valle de Paz.png" alt="Valle de Paz"></div>
+        <div class="logo-card" data-category="funerarias" data-url="https://www.memorialpets.cr" data-dup="true"><img src="Convenios/Memorial pets.png" alt="Memorial Pets"></div>
+        <div class="logo-card" data-category="vacaciones" data-url="https://escapaditas.com/" data-dup="true"><img src="Convenios/Escapaditas.png" alt="Escapaditas"></div>
+        <div class="logo-card" data-category="funerarias" data-url="https://funeralesvida.com" data-dup="true"><img src="Convenios/Funerales vida.jpg" alt="Funerales Vida"></div>
+        <div class="logo-card" data-category="funerarias" data-url="https://www.funerariapolini.com" data-dup="true"><img src="Convenios/polini.jpg" alt="Polini"></div>
+        <div class="logo-card" data-category="funerarias" data-url="https://previplan.cr/" data-dup="true"><img src="Convenios/previplan.jpg" alt="Previplan"></div>
+        <div class="logo-card" data-category="comercios" data-url="https://www.tiendasekono.com" data-dup="true"><img src="Convenios/Ekono.jpg" alt="Ekono"></div>
+        <div class="logo-card" data-category="comercios" data-url="https://www.pricesmart.com/es-cr" data-dup="true"><img src="Convenios/Pricesmart.png" alt="PriceSmart"></div>
+        <div class="logo-card" data-category="vacaciones" data-url="https://www.vacacionandocr.com" data-dup="true"><img src="Convenios/Vacacionando.jpg" alt="Vacacionando"></div>
       </div>
   </div>
 
@@ -1717,7 +1745,7 @@ document.querySelectorAll('.prod-toggle').forEach(btn => {
   var closeBtn = document.getElementById('promo-close');
   function openModal()  { overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
   function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
-  setTimeout(openModal, 3000);
+  // setTimeout(openModal, 3000); // PENDIENTE: activar cuando esté listo para publicar
   closeBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
@@ -1804,6 +1832,13 @@ document.querySelectorAll('.prod-toggle').forEach(btn => {
     }
   });
 })();
+
+// ===== CONVENIOS LINKS =====
+document.querySelectorAll('.logo-card[data-url]').forEach(function(card) {
+  card.addEventListener('click', function() {
+    window.open(this.getAttribute('data-url'), '_blank', 'noopener noreferrer');
+  });
+});
 
 // ===== COUNT-UP ANIMATION =====
 (function() {
