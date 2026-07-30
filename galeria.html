@@ -30,10 +30,9 @@ button{font-family:inherit}
 h1,h2,h3{font-family:'Sora',sans-serif;line-height:1.2;font-weight:700}
 .container{max-width:1200px;margin:0 auto;padding:0 2rem}
 
-.tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .85rem;border-radius:100px;margin-bottom:1rem}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.3rem .85rem;border-radius:100px;margin-bottom:.6rem}
 .tag--green{background:var(--green-pale);color:var(--green-mid)}
 .tag--orange{background:var(--orange-pale);color:var(--orange)}
-.tag--ghost{background:rgba(255,255,255,.12);color:rgba(255,255,255,.85)}
 
 .fade-up{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
 .fade-up.visible{opacity:1;transform:translateY(0)}
@@ -72,12 +71,126 @@ nav a:hover::after,nav a.active::after{transform:scaleX(1)}
 .page-hero h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;color:#fff;margin-bottom:.8rem}
 .page-hero p{font-size:1rem;color:rgba(255,255,255,.58);max-width:500px;line-height:1.65;font-weight:300}
 
+/* ===== GALLERY NAV ===== */
+.gallery-nav {
+  background: #fff;
+  border-bottom: 1px solid var(--gray-100);
+  position: sticky; top: 72px; z-index: 100;
+  padding: .75rem 0;
+}
+.gallery-nav-inner {
+  display: flex; align-items: center; gap: .6rem;
+  overflow-x: auto; padding: 0 2rem;
+  max-width: 1200px; margin: 0 auto;
+  scrollbar-width: none;
+}
+.gallery-nav-inner::-webkit-scrollbar { display: none; }
+.gnav-btn {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .45rem 1.1rem; border-radius: 100px;
+  font-size: .78rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; white-space: nowrap;
+  border: 1.5px solid var(--gray-100); background: #fff;
+  color: var(--gray-600); cursor: pointer;
+  transition: all .2s var(--ease); text-decoration: none;
+}
+.gnav-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-pale); }
+.gnav-btn.active { background: var(--green); border-color: var(--green); color: #fff; }
 
-/* GALERÍA EN PREPARACIÓN */
-.gallery-prep{padding:6rem 0;text-align:center;background:var(--off-white)}
-.gallery-prep-icon{width:80px;height:80px;border-radius:50%;background:var(--green-pale);display:flex;align-items:center;justify-content:center;margin:0 auto 1.8rem}
-.gallery-prep h2{font-size:clamp(1.6rem,3vw,2.4rem);color:var(--gray-800);margin-bottom:.9rem}
-.gallery-prep p{font-size:1rem;color:var(--gray-600);max-width:460px;margin:0 auto;line-height:1.7}
+/* ===== GALLERY MAIN ===== */
+.gallery-main { padding: 4rem 0 6rem; background: var(--off-white); }
+
+.gal-section { margin-bottom: 4.5rem; }
+.gal-section:last-child { margin-bottom: 0; }
+
+.gal-section-hd { margin-bottom: 1.8rem; }
+.gal-section-hd h2 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--gray-800); margin-top: .2rem; }
+
+.album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.4rem; }
+
+.album-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .2s;
+  border: 2px solid transparent;
+}
+.album-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.album-card.active { border-color: var(--green); box-shadow: 0 0 0 4px rgba(108,184,39,.12); }
+
+.album-thumb { position: relative; height: 190px; overflow: hidden; background: var(--gray-100); }
+.album-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease); }
+.album-card:hover .album-thumb img { transform: scale(1.06); }
+
+.album-count-badge {
+  position: absolute; bottom: .55rem; right: .55rem;
+  background: rgba(0,0,0,.6); color: #fff;
+  font-size: .7rem; font-weight: 600; padding: .2rem .5rem;
+  border-radius: 100px; backdrop-filter: blur(4px);
+}
+
+.album-info { padding: .9rem 1.1rem 1.1rem; }
+.album-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: .88rem; color: var(--gray-800); line-height: 1.4; margin-bottom: .3rem; }
+.album-date { font-size: .75rem; color: var(--gray-400); display: flex; align-items: center; gap: .3rem; }
+
+/* Empty card */
+.album-card--empty { cursor: default; opacity: .75; }
+.album-card--empty:hover { transform: none; box-shadow: var(--shadow-sm); border-color: transparent; }
+.album-empty-thumb {
+  height: 190px; background: var(--gray-100);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem;
+  color: var(--gray-400);
+}
+.album-empty-thumb svg { opacity: .45; }
+.album-empty-label { font-size: .78rem; color: var(--gray-400); font-weight: 500; }
+
+/* Album viewer */
+.album-viewer {
+  display: none;
+  margin-top: 1.2rem;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid rgba(108,184,39,.35);
+}
+.album-viewer.open { display: block; animation: viewer-in .3s var(--ease); }
+@keyframes viewer-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.viewer-header {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--gray-100);
+  background: var(--green-pale);
+}
+.viewer-header-text { display: flex; flex-direction: column; gap: .3rem; flex: 1; }
+.viewer-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: .92rem; color: var(--green-dark); }
+.viewer-desc { font-size: .8rem; color: var(--gray-600); line-height: 1.6; max-width: 780px; }
+.viewer-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--gray-600); display: flex; padding: .25rem;
+  border-radius: 6px; transition: background .2s, color .2s;
+}
+.viewer-close:hover { background: rgba(108,184,39,.15); color: var(--green-dark); }
+
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 3px; padding: 3px; }
+.photo-item { aspect-ratio: 4/3; overflow: hidden; cursor: zoom-in; }
+.photo-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s var(--ease); }
+.photo-item:hover img { transform: scale(1.08); }
+
+/* Lightbox */
+.lb { position: fixed; inset: 0; z-index: 3000; background: rgba(0,0,0,.95); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.lb.open { opacity: 1; pointer-events: all; }
+.lb-img { max-width: 90vw; max-height: 86vh; border-radius: 6px; object-fit: contain; box-shadow: 0 32px 64px rgba(0,0,0,.5); }
+.lb-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,.12); border: none; color: #fff; width: 42px; height: 42px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+.lb-close:hover { background: rgba(255,255,255,.25); }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.12); border: none; color: #fff; width: 46px; height: 46px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+.lb-nav:hover { background: rgba(255,255,255,.28); }
+.lb-nav--prev { left: 1.2rem; }
+.lb-nav--next { right: 1.2rem; }
+.lb-counter { position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.5); font-size: .8rem; background: rgba(0,0,0,.4); padding: .25rem .75rem; border-radius: 100px; }
 
 /* FOOTER */
 footer{background:var(--green-deep);color:rgba(255,255,255,.6);padding:4rem 0 2rem}
@@ -96,6 +209,14 @@ footer{background:var(--green-deep);color:rgba(255,255,255,.6);padding:4rem 0 2r
 .social-btn:hover{background:var(--green);transform:translateY(-2px)}
 .footer-wa-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.82rem;color:rgba(255,255,255,.45);transition:color .22s}
 .footer-wa-link:hover{color:#25D366}
+.footer-visits { display: flex; align-items: center; gap: 0.9rem; font-size: 0.75rem; color: rgba(255,255,255,0.25); flex-wrap: wrap; justify-content: center; }
+.footer-visits > img { height: 20px; opacity: 0.75; }
+.footer-devby { display: flex; align-items: center; gap: 0.35rem; text-decoration: none; color: rgba(255,255,255,0.35); font-size: 0.78rem; transition: color 0.2s; }
+.footer-devby:hover { color: rgba(255,255,255,0.6); }
+.footer-devby img { height: 22px; }
+.footer-devby strong { font-weight: 700; }
+.footer-devby .p360-prisma { color: #ffffff; }
+.footer-devby .p360-num { color: #3dd6fc; }
 
 /* RESPONSIVE */
 @media(max-width:1200px){nav a{font-size:.78rem;padding:.38rem .65rem}}
@@ -112,7 +233,8 @@ footer{background:var(--green-deep);color:rgba(255,255,255,.6);padding:4rem 0 2r
   #header,#header.scrolled{backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
 }
 @media(max-width:768px){
-  .photo-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.6rem}
+  .album-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .photo-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
   .footer-grid{grid-template-columns:1fr}
   .footer-bottom{flex-direction:column;text-align:center}
   .lb-nav--prev{left:.5rem}
@@ -121,13 +243,13 @@ footer{background:var(--green-deep);color:rgba(255,255,255,.6);padding:4rem 0 2r
 @media(max-width:500px){
   .container{padding:0 1.2rem}
   .page-hero h1{font-size:1.9rem}
-  .photo-grid{grid-template-columns:repeat(2,1fr);gap:.5rem}
-  .lb-img{max-width:96vw}
+  .album-grid { grid-template-columns: 1fr 1fr; gap: .8rem; }
+  .photo-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 430px) {
-  .header-logo-name { display: none; }
-  .header-actions   { gap: 0.4rem; }
-  .container        { padding: 0 1rem; }
+@media(max-width:430px){
+  .header-logo-name{display:none}
+  .header-actions{gap:.4rem}
+  .container{padding:0 1rem}
 }
 /* WhatsApp FAB */
 .wa-fab{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;width:56px;height:56px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.45);transition:transform .2s,box-shadow .2s;animation:wa-pulse 2.5s ease-in-out infinite;text-decoration:none}
@@ -200,20 +322,196 @@ footer{background:var(--green-deep);color:rgba(255,255,255,.6);padding:4rem 0 2r
     <div class="page-hero-inner">
       <div class="breadcrumb"><a href="index.html">Inicio</a><span>/</span><strong>Galería</strong></div>
       <h1>Galería Fotográfica</h1>
-      <p>Momentos que reflejan la historia y los valores cooperativos de Coopesipe R.L. a través de los años.</p>
+      <p>Momentos que reflejan la historia, el crecimiento y los valores cooperativos de Coopesipe R.L.</p>
     </div>
   </div>
 </section>
 
-<!-- GALERÍA EN PREPARACIÓN -->
-<section class="gallery-prep fade-up">
-  <div class="gallery-prep-icon">
-    <svg width="38" height="38" fill="none" stroke="#6CB827" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+<!-- NAV CATEGORÍAS -->
+<nav class="gallery-nav" aria-label="Categorías de galería">
+  <div class="gallery-nav-inner">
+    <a href="#asambleas"   class="gnav-btn">Asambleas</a>
+    <a href="#capacitaciones" class="gnav-btn">Capacitaciones</a>
+    <a href="#actividades" class="gnav-btn">Actividades</a>
+    <a href="#asociados"   class="gnav-btn">Asociados destacados</a>
   </div>
-  <span class="tag tag--green">Próximamente</span>
-  <h2>Galería en preparación</h2>
-  <p>Estamos organizando nuestro archivo fotográfico. Pronto podrás ver imágenes de los eventos y momentos más importantes de Coopesipe R.L.</p>
-</section>
+</nav>
+
+<!-- GALERÍA -->
+<main class="gallery-main">
+  <div class="container">
+
+    <!-- 1. ASAMBLEAS -->
+    <section class="gal-section fade-up" id="asambleas">
+      <div class="gal-section-hd">
+        <h2>Asambleas</h2>
+      </div>
+      <div class="album-grid">
+        <div class="album-card album-card--empty">
+          <div class="album-empty-thumb">
+            <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <span class="album-empty-label">Próximamente</span>
+          </div>
+          <div class="album-info">
+            <div class="album-title" style="color:var(--gray-400)">Contenido en preparación</div>
+            <div class="album-date">Las fotos de asambleas estarán disponibles pronto</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. CAPACITACIONES -->
+    <section class="gal-section fade-up" id="capacitaciones" style="transition-delay:.1s">
+      <div class="gal-section-hd">
+        <h2>Capacitaciones</h2>
+      </div>
+      <div class="album-grid">
+
+        <div class="album-card"
+          data-album-id="trabajo"
+          data-folder="Trabajo%20en%20Equipo_4jul26"
+          data-count="5"
+          data-desc="El pasado sábado 04 de julio de 2026, el Comité de Educación de COOPESIPE R.L., en coordinación con INFOCOOP, llevó a cabo la capacitación &quot;Trabajo en Equipo&quot; realizada en el Edificio Cooperativo, una valiosa jornada de aprendizaje y fortalecimiento institucional.">
+          <div class="album-thumb">
+            <img src="Galerias/Trabajo%20en%20Equipo_4jul26/1.jpg" alt="Trabajo en Equipo" loading="lazy">
+            <span class="album-count-badge">5 fotos</span>
+          </div>
+          <div class="album-info">
+            <div class="album-title">Trabajo en Equipo</div>
+            <div class="album-date">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              4 de julio, 2026
+            </div>
+          </div>
+        </div>
+
+        <div class="album-card"
+          data-album-id="cuidarme"
+          data-folder="Taller%20Cuidarme%20para%20cuidar%20en%20Liberia_20set25"
+          data-count="6"
+          data-desc="Taller dirigido a los asociados de Coopesipe de la zona de Liberia. Un esfuerzo del Comité de Educación y Bienestar Social.">
+          <div class="album-thumb">
+            <img src="Galerias/Taller%20Cuidarme%20para%20cuidar%20en%20Liberia_20set25/1.jpg" alt="Taller Cuidarme para cuidar en Liberia" loading="lazy">
+            <span class="album-count-badge">6 fotos</span>
+          </div>
+          <div class="album-info">
+            <div class="album-title">Taller Cuidarme para cuidar en Liberia</div>
+            <div class="album-date">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              20 de setiembre, 2025
+            </div>
+          </div>
+        </div>
+
+        <div class="album-card"
+          data-album-id="insercion"
+          data-folder="La%20inserci%C3%B3n%20social%20como%20estrategia%20humanista_8nov24"
+          data-count="4"
+          data-desc="El pasado 8 de noviembre, nuestra cooperativa tuvo el honor de participar y ser patrocinadora del foro &quot;La inserción social como estrategia humanista&quot;, organizado por el Centro de Atención Semi-institucional de Liberia.">
+          <div class="album-thumb">
+            <img src="Galerias/La%20inserci%C3%B3n%20social%20como%20estrategia%20humanista_8nov24/1.jpg" alt="La inserción social como estrategia humanista" loading="lazy">
+            <span class="album-count-badge">4 fotos</span>
+          </div>
+          <div class="album-info">
+            <div class="album-title">La inserción social como estrategia humanista</div>
+            <div class="album-date">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              8 de noviembre, 2024
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="album-viewer" id="viewer-capacitaciones">
+        <div class="viewer-header">
+          <div class="viewer-header-text">
+            <span class="viewer-title"></span>
+            <span class="viewer-desc"></span>
+          </div>
+          <button class="viewer-close" aria-label="Cerrar galería">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="photo-grid"></div>
+      </div>
+    </section>
+
+    <!-- 3. ACTIVIDADES -->
+    <section class="gal-section fade-up" id="actividades" style="transition-delay:.2s">
+      <div class="gal-section-hd">
+        <h2>Actividades</h2>
+      </div>
+      <div class="album-grid">
+
+        <div class="album-card"
+          data-album-id="triatlon"
+          data-folder="Triatl%C3%B3n%20Policial%202024_23oct24"
+          data-count="12"
+          data-desc="¡Triatlón Policial 2024, una jornada llena de energía y competencia! Agradecemos a la Dirección de la Policía por la invitación y por hacer posible este evento tan especial.">
+          <div class="album-thumb">
+            <img src="Galerias/Triatl%C3%B3n%20Policial%202024_23oct24/1.jpg" alt="Triatlón Policial 2024" loading="lazy">
+            <span class="album-count-badge">12 fotos</span>
+          </div>
+          <div class="album-info">
+            <div class="album-title">Triatlón Policial 2024</div>
+            <div class="album-date">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              23 de octubre, 2024
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="album-viewer" id="viewer-actividades">
+        <div class="viewer-header">
+          <div class="viewer-header-text">
+            <span class="viewer-title"></span>
+            <span class="viewer-desc"></span>
+          </div>
+          <button class="viewer-close" aria-label="Cerrar galería">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="photo-grid"></div>
+      </div>
+    </section>
+
+    <!-- 4. ASOCIADOS DESTACADOS -->
+    <section class="gal-section fade-up" id="asociados" style="transition-delay:.3s">
+      <div class="gal-section-hd">
+        <h2>Asociados Destacados</h2>
+      </div>
+      <div class="album-grid">
+        <div class="album-card album-card--empty">
+          <div class="album-empty-thumb">
+            <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="album-empty-label">Próximamente</span>
+          </div>
+          <div class="album-info">
+            <div class="album-title" style="color:var(--gray-400)">Contenido en preparación</div>
+            <div class="album-date">Los perfiles de asociados destacados estarán disponibles pronto</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visualizador de fotos">
+  <button class="lb-close" id="lb-close" aria-label="Cerrar">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <button class="lb-nav lb-nav--prev" id="lb-prev" aria-label="Foto anterior">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <img class="lb-img" id="lb-img" src="" alt="Foto ampliada">
+  <button class="lb-nav lb-nav--next" id="lb-next" aria-label="Foto siguiente">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <span class="lb-counter" id="lb-counter"></span>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -245,6 +543,14 @@ footer{background:var(--green-deep);color:rgba(255,255,255,.6);padding:4rem 0 2r
     <hr class="footer-divider">
     <div class="footer-bottom">
       <p>© 2026 Coopesipe R.L. — Todos los derechos reservados. Supervisada por SUGEF.</p>
+      <div class="footer-visits">
+        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fwww.coopesipe.fi.cr&count_bg=%236CB827&title_bg=%230B1E05&icon=eye&icon_color=%23FFFFFF&title=Visitas&edge_flat=true" alt="Contador de visitas">
+      </div>
+      <a href="https://prisma360.co.cr/" target="_blank" rel="noopener noreferrer" class="footer-devby">
+        <span>Developed by</span>
+        <img src="Referencias/Los Prisma360 con sombra.png" alt="Prisma360">
+        <strong><span class="p360-prisma">Prisma</span><span class="p360-num">360</span></strong>
+      </a>
       <div class="social-row">
         <a href="https://www.facebook.com/profile.php?id=100023787157363" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
           <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -271,7 +577,125 @@ nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nav.c
 // Fade-up
 const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// ===== GALLERY =====
+(function() {
+  var lbEl      = document.getElementById('lb');
+  var lbImgEl   = document.getElementById('lb-img');
+  var lbClose   = document.getElementById('lb-close');
+  var lbPrev    = document.getElementById('lb-prev');
+  var lbNext    = document.getElementById('lb-next');
+  var lbCounter = document.getElementById('lb-counter');
+  var curPhotos = [];
+  var curIdx    = 0;
+
+  function openLb(photos, idx) {
+    curPhotos = photos;
+    curIdx    = idx;
+    showLbPhoto();
+    lbEl.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function showLbPhoto() {
+    lbImgEl.src = curPhotos[curIdx];
+    lbCounter.textContent = (curIdx + 1) + ' / ' + curPhotos.length;
+  }
+  function closeLb() {
+    lbEl.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  lbClose.addEventListener('click', closeLb);
+  lbEl.addEventListener('click', function(e) { if (e.target === lbEl) closeLb(); });
+  lbPrev.addEventListener('click', function() { curIdx = (curIdx - 1 + curPhotos.length) % curPhotos.length; showLbPhoto(); });
+  lbNext.addEventListener('click', function() { curIdx = (curIdx + 1) % curPhotos.length; showLbPhoto(); });
+  document.addEventListener('keydown', function(e) {
+    if (!lbEl.classList.contains('open')) return;
+    if (e.key === 'Escape')      closeLb();
+    if (e.key === 'ArrowLeft')  { curIdx = (curIdx - 1 + curPhotos.length) % curPhotos.length; showLbPhoto(); }
+    if (e.key === 'ArrowRight') { curIdx = (curIdx + 1) % curPhotos.length; showLbPhoto(); }
+  });
+
+  // Album cards
+  document.querySelectorAll('.album-card[data-album-id]').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var section  = this.closest('.gal-section');
+      var viewer   = section.querySelector('.album-viewer');
+      var grid     = viewer.querySelector('.photo-grid');
+      var titleEl  = viewer.querySelector('.viewer-title');
+      var isActive = this.classList.contains('active');
+
+      section.querySelectorAll('.album-card').forEach(function(c) { c.classList.remove('active'); });
+
+      if (isActive) {
+        viewer.classList.remove('open');
+        return;
+      }
+
+      this.classList.add('active');
+
+      var folder   = this.dataset.folder;
+      var count    = parseInt(this.dataset.count);
+      var title    = this.querySelector('.album-title').textContent;
+      var desc     = this.dataset.desc || '';
+      var descEl   = viewer.querySelector('.viewer-desc');
+      if (titleEl) titleEl.textContent = title;
+      if (descEl)  { descEl.innerHTML = desc; descEl.style.display = desc ? '' : 'none'; }
+
+      var photos = [];
+      var html   = '';
+      for (var i = 1; i <= count; i++) {
+        var src = 'Galerias/' + folder + '/' + i + '.jpg';
+        photos.push(src);
+        html += '<div class="photo-item" data-idx="' + (i - 1) + '"><img src="' + src + '" alt="Foto ' + i + '" loading="lazy"></div>';
+      }
+      grid.innerHTML = html;
+
+      var snap = photos.slice();
+      grid.querySelectorAll('.photo-item').forEach(function(item) {
+        item.addEventListener('click', function() { openLb(snap, parseInt(this.dataset.idx)); });
+      });
+
+      viewer.classList.add('open');
+      setTimeout(function() { viewer.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 80);
+    });
+  });
+
+  // Viewer close buttons
+  document.querySelectorAll('.viewer-close').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var section = this.closest('.gal-section');
+      this.closest('.album-viewer').classList.remove('open');
+      section.querySelectorAll('.album-card').forEach(function(c) { c.classList.remove('active'); });
+    });
+  });
+
+  // Auto-expand first album in each section that has real albums
+  document.querySelectorAll('.gal-section').forEach(function(section) {
+    var firstCard = section.querySelector('.album-card[data-album-id]');
+    if (firstCard) firstCard.click();
+  });
+})();
+
+// Gallery nav active state on scroll
+(function() {
+  var sections = document.querySelectorAll('.gal-section[id]');
+  var navBtns  = document.querySelectorAll('.gnav-btn');
+  function updateNav() {
+    var scrollY = window.scrollY + 160;
+    var active = null;
+    sections.forEach(function(s) {
+      if (s.offsetTop <= scrollY) active = s.id;
+    });
+    navBtns.forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('href') === '#' + active);
+    });
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+})();
 </script>
+
 <!-- Buscador overlay -->
 <div class="search-overlay" id="search-overlay" aria-hidden="true">
   <div class="search-box">
@@ -297,25 +721,12 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
     {title:'Convenios comerciales',desc:'Empresas aliadas con descuentos exclusivos para asociados',link:'index.html#convenios'},
     {title:'Contacto',desc:'Teléfonos, correo electrónico, horario y formulario',link:'index.html#contacto'},
     {title:'Nosotros',desc:'Historia, misión, visión y estructura de Coopesipe R.L.',link:'nosotros.html'},
-    {title:'Quiénes somos',desc:'Historia y trayectoria de Coopesipe R.L.',link:'nosotros.html#quienes-somos'},
-    {title:'Misión, Visión y Valores',desc:'Propósito, dirección y principios de la cooperativa',link:'nosotros.html#mision-vision'},
-    {title:'Estructura Administrativa',desc:'Órganos directivos y comités de Coopesipe',link:'nosotros.html#estructura'},
     {title:'Galería',desc:'Fotos y eventos de Coopesipe R.L.',link:'galeria.html'},
+    {title:'Asambleas',desc:'Fotografías de asambleas de Coopesipe R.L.',link:'galeria.html#asambleas'},
+    {title:'Capacitaciones',desc:'Fotos de eventos de capacitación y formación',link:'galeria.html#capacitaciones'},
+    {title:'Actividades',desc:'Actividades deportivas y recreativas de asociados',link:'galeria.html#actividades'},
+    {title:'Asociados destacados',desc:'Reconocimientos a asociados de Coopesipe R.L.',link:'galeria.html#asociados'},
     {title:'Documentación',desc:'Estatutos, reglamentos, leyes y formularios descargables',link:'documentacion.html'},
-    {title:'Estados Financieros',desc:'Informes financieros anuales de la cooperativa',link:'documentacion.html#estados'},
-    {title:'Estatutos y Reglamentos',desc:'Documentos oficiales de regulación interna',link:'documentacion.html#estatutos'},
-    {title:'Leyes',desc:'Leyes cooperativas de Costa Rica aplicables a Coopesipe',link:'documentacion.html#leyes'},
-    {title:'Formularios',desc:'Boletas y formularios para trámites de los asociados',link:'documentacion.html#formularios'},
-    {title:'Estatuto Social de Coopesipe R.L. — Versión 2019',desc:'Estatuto oficial de la cooperativa, versión 2019',link:'documentacion.html#estatutos'},
-    {title:'Estatuto Social Coopesipe — Versión 2023',desc:'Versión actualizada del Estatuto Social de Coopesipe',link:'documentacion.html#estatutos'},
-    {title:'Reglamento para uso de la Reserva de Educación',desc:'Normativa interna para el fondo de educación cooperativa',link:'documentacion.html#estatutos'},
-    {title:'Ley de Asociación de Cooperativas',desc:'Marco legal costarricense para asociaciones cooperativas',link:'documentacion.html#leyes'},
-    {title:'Ley de Regulación de la Actividad de Intermediación Financiera',desc:'Ley que regula la intermediación financiera de organizaciones cooperativas',link:'documentacion.html#leyes'},
-    {title:'Ley de Asociaciones Cooperativas',desc:'Legislación cooperativa de Costa Rica',link:'documentacion.html#leyes'},
-    {title:'Boleta de Afiliación para Autoconsulta',desc:'Formulario para afiliación y autoconsulta de datos',link:'documentacion.html#formularios'},
-    {title:'Boleta de Ahorro Navideño',desc:'Formulario para inscripción en el ahorro navideño',link:'documentacion.html#formularios'},
-    {title:'Boleta de Ahorro Vacacional',desc:'Formulario para el plan de ahorro vacacional',link:'documentacion.html#formularios'},
-    {title:'Boleta de Ahorro de Marchamo',desc:'Formulario para el ahorro destinado al pago de marchamo',link:'documentacion.html#formularios'},
   ];
   var overlay=document.getElementById('search-overlay'),inp=document.getElementById('search-input'),res=document.getElementById('search-results'),btn=document.getElementById('search-btn'),cls=document.getElementById('search-close');
   function open(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');setTimeout(function(){inp.focus();},60);}
@@ -332,6 +743,7 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
   });
 })();
 </script>
+
 <!-- Facebook FAB -->
 <a href="https://www.facebook.com/profile.php?id=100023787157363" class="fb-fab" target="_blank" rel="noopener noreferrer" aria-label="Visitar Facebook de Coopesipe">
   <svg width="24" height="24" fill="#fff" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
