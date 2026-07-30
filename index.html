@@ -672,8 +672,14 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 
 .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
-.footer-visits { display: flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.25); }
-.footer-visits img { height: 18px; opacity: 0.7; }
+.footer-visits { display: flex; align-items: center; gap: 0.9rem; font-size: 0.75rem; color: rgba(255,255,255,0.25); flex-wrap: wrap; justify-content: center; }
+.footer-visits > img { height: 20px; opacity: 0.75; }
+.footer-devby { display: flex; align-items: center; gap: 0.35rem; text-decoration: none; color: rgba(255,255,255,0.35); font-size: 0.78rem; transition: color 0.2s; }
+.footer-devby:hover { color: rgba(255,255,255,0.6); }
+.footer-devby img { height: 22px; }
+.footer-devby strong { font-weight: 700; }
+.footer-devby .p360-prisma { color: #ffffff; }
+.footer-devby .p360-num { color: #3dd6fc; }
 .social-row { display: flex; gap: 0.6rem; }
 .social-btn {
   width: 34px; height: 34px; border-radius: 7px;
@@ -1613,6 +1619,11 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
       <div class="footer-visits">
         <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fwww.coopesipe.fi.cr&count_bg=%236CB827&title_bg=%230B1E05&icon=eye&icon_color=%23FFFFFF&title=Visitas&edge_flat=true" alt="Contador de visitas">
       </div>
+      <a href="https://prisma360.co.cr/" target="_blank" rel="noopener noreferrer" class="footer-devby">
+        <span>Developed by</span>
+        <img src="Referencias/Los Prisma360 con sombra.png" alt="Prisma360">
+        <strong><span class="p360-prisma">Prisma</span><span class="p360-num">360</span></strong>
+      </a>
       <div class="social-row">
         <a href="https://www.facebook.com/profile.php?id=100023787157363" class="social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
           <svg width="15" height="15" fill="rgba(255,255,255,0.65)" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
