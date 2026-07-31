@@ -227,17 +227,16 @@ nav a:hover::after, nav a.active::after { transform: scaleX(1); }
 .mv-card--vision::before  { background: linear-gradient(90deg, var(--orange), transparent); }
 
 .mv-card-icon {
-  width: 52px; height: 52px; border-radius: 13px;
-  display: flex; align-items: center; justify-content: center; margin-bottom: 1.4rem;
+  width: 52px; height: 52px; border-radius: 13px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
 .mv-card--mission .mv-card-icon { background: rgba(108,184,39,0.18); }
 .mv-card--vision  .mv-card-icon { background: rgba(232,78,15,0.2); }
 
-.mv-card-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.8rem; }
-.mv-card--mission .mv-card-label { color: var(--green); }
-.mv-card--vision  .mv-card-label { color: var(--orange); }
+.mv-card-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.4rem; }
+.mv-card-name { font-size: 1.5rem; font-weight: 800; color: #fff; }
 
-.mv-card h3   { font-size: 1.35rem; color: #fff; margin-bottom: 1rem; font-weight: 800; }
+.mv-card h3   { font-size: 1.12rem; color: #fff; margin-bottom: 1rem; font-weight: 400; }
 .mv-card p    { font-size: 0.9rem; color: rgba(255,255,255,0.62); line-height: 1.72; font-weight: 300; }
 
 /* Values row */
@@ -699,12 +698,14 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
     <div class="mv-grid">
       <!-- Misión -->
       <div class="mv-card mv-card--mission fade-up">
-        <div class="mv-card-icon">
-          <svg width="26" height="26" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/>
-          </svg>
+        <div class="mv-card-top">
+          <div class="mv-card-icon">
+            <svg width="26" height="26" fill="none" stroke="#6CB827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/>
+            </svg>
+          </div>
+          <span class="mv-card-name">Misión</span>
         </div>
-        <div class="mv-card-label">Misión</div>
         <h3>¿Para qué existimos?</h3>
         <p>
           Brindar un servicio rápido y oportuno que nos permita ser una de las mejores cooperativas de ahorro y crédito a nivel nacional, apoyando el desarrollo integral de nuestros asociados mediante calidad, tecnología y eficiencia.
@@ -713,12 +714,14 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 
       <!-- Visión -->
       <div class="mv-card mv-card--vision fade-up" style="transition-delay:.15s">
-        <div class="mv-card-icon">
-          <svg width="26" height="26" fill="none" stroke="#E84E0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-          </svg>
+        <div class="mv-card-top">
+          <div class="mv-card-icon">
+            <svg width="26" height="26" fill="none" stroke="#E84E0F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <span class="mv-card-name">Visión</span>
         </div>
-        <div class="mv-card-label">Visión</div>
         <h3>¿Hacia dónde vamos?</h3>
         <p>
           Ser una cooperativa de ahorro y crédito capaz de brindar a cada asociado un servicio eficiente y eficaz, posicionándonos como referente de excelencia cooperativa dentro del Sistema Penitenciario Nacional de Costa Rica.
