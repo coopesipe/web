@@ -118,7 +118,9 @@ h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.2; font-weight:
   justify-content: center; padding: 2.5rem 2rem; gap: 1rem;
   position: relative;
 }
-.promo-logo { width: 130px; height: auto; margin-bottom: 0.5rem; }
+.promo-logo { width: 110px; height: auto; margin-bottom: 0.25rem; }
+.promo-title { font-family: 'Sora', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--green-dark); text-align: center; line-height: 1.25; }
+.promo-sub { font-size: 0.78rem; color: rgba(0,0,0,0.45); text-align: center; margin-bottom: 0.25rem; }
 .promo-form { display: flex; flex-direction: column; gap: 0.75rem; width: 100%; }
 .promo-form input {
   width: 100%; padding: 0.72rem 1rem;
@@ -1654,6 +1656,8 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
     </div>
     <div class="promo-right">
       <img src="icono.png" alt="Logo Coopesipe" class="promo-logo">
+      <p class="promo-title">¡Participá en el sorteo!</p>
+      <p class="promo-sub">31 de agosto de 2026 · 3:00 p.m.</p>
       <form class="promo-form" id="promo-form" onsubmit="return false;">
         <input type="text"  name="nombre"   placeholder="Nombre completo"       required>
         <span class="field-msg" id="msg-nombre">Este campo es requerido.</span>
@@ -1666,7 +1670,7 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
         <input type="email" name="correo"   placeholder="Correo electrónico"     required>
         <span class="field-msg" id="msg-correo">Ingresá un correo válido (ej: nombre@correo.com).</span>
         <span class="field-msg" id="msg-correo-req">Este campo es requerido.</span>
-        <button type="submit">Enviar</button>
+        <button type="submit">Participar en el sorteo</button>
       </form>
     </div>
   </div>
@@ -1768,7 +1772,7 @@ document.querySelectorAll('.prod-toggle').forEach(btn => {
   var closeBtn = document.getElementById('promo-close');
   function openModal()  { overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
   function closeModal() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
-  // setTimeout(openModal, 3000); // PENDIENTE: activar cuando esté listo para publicar
+  setTimeout(openModal, 3000);
   closeBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
