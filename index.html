@@ -749,6 +749,7 @@ footer { background: var(--green-deep); color: rgba(255,255,255,0.6); padding: 4
 #lb { position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.93); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.9rem; padding:1rem; opacity:0; pointer-events:none; transition:opacity 0.25s; }
 #lb.open { opacity:1; pointer-events:auto; }
 #lb img { max-width:92vw; max-height:84vh; object-fit:contain; border-radius:var(--radius); box-shadow:0 0 60px rgba(0,0,0,0.6); }
+#lb img.lb-large { max-width:98vw; max-height:95vh; }
 #lb-catalog-btn { display:none; align-items:center; gap:.45rem; background:var(--green); color:#fff; font-family:var(--font-body); font-size:.88rem; font-weight:700; border:none; border-radius:100px; padding:.6rem 1.6rem; cursor:pointer; text-decoration:none; transition:background .2s; flex-shrink:0; }
 #lb-catalog-btn:hover { background:#5aa820; }
 #lb-close { position:absolute; top:1.2rem; right:1.2rem; width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.12); border:none; cursor:pointer; color:#fff; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
@@ -1975,6 +1976,7 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
     s.querySelector('img').addEventListener('click', function(e) {
       if (s.getAttribute('data-pos') === '0') {
         lbImg.src = e.target.src;
+        lbImg.classList.toggle('lb-large', idx === 0);
         lb.classList.add('open');
         document.body.style.overflow = 'hidden';
         if (lbCatalogBtn) lbCatalogBtn.style.display = (idx === 1) ? 'flex' : 'none';
